@@ -1,0 +1,25 @@
+version: "3"
+services:
+  frontend:
+    build: 
+      dockerfile: ./Dockerfile
+    image: jonthnm/frontendgeosoft
+    volumes:
+     - "/public/backend/predictions/:/app/backend/predictions/"
+    ports:
+      - 3000:3000 # forward webserver on 3000-http port
+    container_name: frontend
+    depends_on:
+      - backend
+
+#imagename://servicename:zweiterPort
+
+  backend:
+    build: 
+      dockerfile: /public/backend/Dockerfile
+    image: jonthnm/backendgeosoft
+    volumes:
+     - "/public/backend/predictions/:/R/backend/predictions/"
+    container_name: backend
+    ports:
+      - 8000:8000
