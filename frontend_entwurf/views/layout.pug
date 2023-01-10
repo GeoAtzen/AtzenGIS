@@ -43,7 +43,7 @@ html
     script(src="https://cdn.jsdelivr.net/npm/leaflet-geotiff") <!-- Skript for Geotiff Import -->
     script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js") <!-- Skript for Geotiff Import -->
     script(src="https://unpkg.com/georaster")
-    <script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js">
+    script(src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js")
     script(src='https://unpkg.com/geotiff@1.0.0-beta.7/dist/geotiff.bundle.js')
     script(src="//d3js.org/d3.v4.min.js")
     script(src="//npmcdn.com/geotiff@0.3.6/dist/geotiff.js")
@@ -51,6 +51,10 @@ html
     // Shapefule plugin
     script(src="/javascripts/shp.js")
     script(src='/javascripts/leaflet.shpfile.js')
+
+    // File System plugin
+    script(src='https://unpkg.com/file-system@2.2.2/file-system.js')
+
 
   // Navbar
   .w3-top

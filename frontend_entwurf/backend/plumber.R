@@ -63,6 +63,25 @@ calculatePrediction <- function(sentinel, model){
   
   writeRaster(prediction_terra, "/usr/src/app/data/prediction.tif", overwrite = TRUE)
   plot(prediction_terra)
+
+  # Zum schneller machen
+  cl <- makeCluster(4) 
+  registerDoParallel(cl) 
+  
+  # Berechnung AOA (dauert sehr lange)
+  AOA <- aoa(sentinel,model,cl=cl)
+
+  #crs(AOA$AOA) <- "EPSG:32632"
+
+  # Grau ist außerhalb von AOA
+  #spplot(prediction_terra, col.regions=viridis(100),main="prediction for AOA")
+  #  spplot(AOA$AOA, col.regions=c("grey", "transparent"))
+
+  AOAPlot <- AOA$AOA
+  crs(AOAPlot) <- "EPSG:32632"
+  writeRaster(AOAPlot, "/usr/src/app/data/aoa.tif", overwrite = TRUE)
+  print("Fertig mit AOA")
+
 }
 
 ######################################################################################################################################################################

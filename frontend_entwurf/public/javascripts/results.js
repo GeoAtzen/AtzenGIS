@@ -220,7 +220,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
 });
 
 // add GeoJSON to map
-var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -318,7 +318,7 @@ fetch("http://localhost:3000/uploads/usersentineldata.tif")
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
     // link ändern
-    fetch('http://localhost:3000/uploads/predictionlegende.png')
+    fetch('./public/uploads/predictionlegende.png')
     	.then(function(data){
         return data.blob();
       })
@@ -326,8 +326,91 @@ function loadprediction() {
       	var legende = URL.createObjectURL(img);
         $('img').attr('src', legende);
       })
+    /* link ändern lokal (geht nicht)
+    fs.readFile("/public/uploads/prediction.tif", (error, data) => {
+    parseGeoraster(data).then(georaster => {
+      console.log("georaster:", georaster);
+
+                var predictiongeotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                predictiongeotiffdata.addTo(map);
+
+                map.fitBounds(predictiongeotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
+            });
+        });
+        
     // link ändern
     fetch("http://localhost:3000/uploads/prediction.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
+
+                var predictiongeotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                predictiongeotiffdata.addTo(map);
+
+                map.fitBounds(predictiongeotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
+            });
+        });
+        
+       fetch("http://localhost:8000/uploads/prediction.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
+
+                var predictiongeotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                predictiongeotiffdata.addTo(map);
+
+                map.fitBounds(predictiongeotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
+            });
+        });
+        
+        fetch("http://backend:8000/usr/src/app/data/prediction.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
+
+                var predictiongeotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    //pixelValuesToColorFn,
+                    resolution: 512
+                });
+                // direktes hinzufügen zur Karte
+                predictiongeotiffdata.addTo(map);
+
+                map.fitBounds(predictiongeotiffdata.getBounds());
+
+                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
+                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
+            });
+        });
+        */
+       fetch("http://backend:8000/public/uploads/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -350,7 +433,7 @@ function loadprediction() {
 }
 
 function loadaoa() {
-    fetch("/R/data/aoa.tif")
+    fetch("/usr/src/app/data/aoa.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -419,7 +502,7 @@ var baseMaps = {
 var overlayMaps = {
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
-    "GeoJSON": geodrawnpolygonsjson,
+    "GeoJSON": geojsondata,
     "Eigene Polygone": drawnItems
 };
 
