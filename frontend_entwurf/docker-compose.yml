@@ -1,0 +1,28 @@
+version: "3"
+services:
+  frontend:
+    build: 
+      dockerfile: ./Dockerfile
+    image: jonthnm/frontendgeosoft
+    # schreibt alle Daten die in Docker im Workingdirectory gespeichert werden (auch?) lokal in den ordner /public/uploads
+    volumes:
+     - ./public/uploads:/usr/src/app/data
+    ports:
+      - 3000:3000 # forward webserver on 3000-http port
+    container_name: frontend
+    depends_on:
+      - backendgeoatzen
+
+#imagename://servicename:zweiterPort
+
+  backendgeoatzen:
+    build: 
+      dockerfile: ./backend/Dockerfile
+    image: jonthnm/backendgeosoft
+    # schreibt alle Daten die in Docker im Workingdirectory gespeichert werden (auch?) lokal in den ordner /public/uploads
+    volumes:
+     - ./public/uploads:/usr/src/app/data
+    container_name: backendgeoatzen
+    ports:
+      - 8000:8000
+
