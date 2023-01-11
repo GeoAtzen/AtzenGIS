@@ -9,13 +9,13 @@ library(sf)
 library(randomForest)
 library(cowplot)
 library(tidyterra)
-#library(geojsonR)
-#library(doParallel)
-#library(parallel)
-#library(viridis)
-#library(latticeExtra)
-#library(tmap)
-#library(CAST)
+library(geojsonR)
+library(doParallel)
+library(parallel)
+library(viridis)
+library(latticeExtra)
+library(tmap)
+library(CAST)
 
 
 ######################################################################################################################################################################
@@ -64,25 +64,29 @@ calculatePrediction <- function(sentinel, model){
   crs(prediction_terra) <- "EPSG:32632"
   
   terra::writeRaster(prediction_terra, "mydockerdata/prediction.tif", overwrite = TRUE)
-  #plot(prediction_terra)
 
   # Zum schneller machen
-  #cl <- makeCluster(4) 
-  #registerDoParallel(cl) 
+  cl <- makeCluster(4) 
+  registerDoParallel(cl) 
   
   # Berechnung AOA (dauert sehr lange)
-  #AOA <- aoa(sentinel,model,cl=cl)
-
-  #crs(AOA$AOA) <- "EPSG:32632"
+  AOA <- aoa(sentinel,model,cl=cl)
 
   # Grau ist außerhalb von AOA
-  #spplot(prediction_terra, col.regions=viridis(100),main="prediction for AOA")
-  #  spplot(AOA$AOA, col.regions=c("grey", "transparent"))
-
-  #AOAPlot <- AOA$AOA
-  #crs(AOAPlot) <- "EPSG:32632"
-  #writeRaster(AOAPlot, "mydockerdata/aoa.tif", overwrite = TRUE)
+  AOAPlot <- AOA$AOA
+  cellValue <- c(1, 0)
+  colorV <- c("#d3d3d3", rgb(0,0,0,0))
+  colorD <- data.frame(cellValue = cellValue, color = colorV)
+  coltab(AOAPlot) <- colorD
+  plot(AOAPlot)
+  crs(AOAPlot) <- "EPSG:32632"
+  terra::writeRaster(AOAPlot, "mydockerdata/aoa.tif", overwrite = TRUE)
   print("Fertig mit AOA")
+
+  #DIPlot <- AOA$DI
+  #crs(DIPlot) <- "EPSG:32632"
+  #writeRaster(DIPlot, "./data/DI.tif", overwrite = TRUE)
+  #print("Fertig mit DI")
 
 }
 

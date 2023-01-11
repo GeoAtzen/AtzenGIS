@@ -348,9 +348,9 @@ function loadprediction() {
             });
         });
 }
-/*
+
 function loadaoa() {
-    fetch("mydockerdata/usertrainingspolygonegjson.geojson/aoa.tif")
+    fetch("http://localhost:3000/aoa.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -371,7 +371,7 @@ function loadaoa() {
             });
         });
 }
-*/
+
 /*
 function loadDI() {
     fetch("/R/data/DI.tif")
