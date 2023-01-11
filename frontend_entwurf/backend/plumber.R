@@ -26,10 +26,12 @@ library(tidyterra)
 # Geopackage oder Shapefile schon weiterverarbeitet wurden und trainiert 
 # nun mit dem Tif ein Model
 trainModel <- function(Referenzdaten){
-  url <- ("http://frontend:3000/uploads/usersentineldata.tif")
-  geotiff_file <- tempfile(fileext='.tif')
-  httr::GET(url,httr::write_disk(path=geotiff_file))
-  sentinel <- rast(geotiff_file)
+  #url <- ("http://frontend:3000/usersentineldata.tif")
+  #geotiff_file <- tempfile(fileext='.tif')
+  #httr::GET(url,httr::write_disk(path=geotiff_file))
+  #sentinel <- rast(geotiff_file)
+
+  sentinel <- rast("mydockerdata/usersentineldata.tif")
   predictors <- names(sentinel)
   
   Referenzdaten <- st_transform(Referenzdaten, crs(sentinel))
@@ -61,15 +63,15 @@ calculatePrediction <- function(sentinel, model){
   
   crs(prediction_terra) <- "EPSG:32632"
   
-  writeRaster(prediction_terra, "/usr/src/app/data/prediction.tif", overwrite = TRUE)
-  plot(prediction_terra)
+  terra::writeRaster(prediction_terra, "mydockerdata/prediction.tif", overwrite = TRUE)
+  #plot(prediction_terra)
 
   # Zum schneller machen
-  cl <- makeCluster(4) 
-  registerDoParallel(cl) 
+  #cl <- makeCluster(4) 
+  #registerDoParallel(cl) 
   
   # Berechnung AOA (dauert sehr lange)
-  AOA <- aoa(sentinel,model,cl=cl)
+  #AOA <- aoa(sentinel,model,cl=cl)
 
   #crs(AOA$AOA) <- "EPSG:32632"
 
@@ -77,9 +79,9 @@ calculatePrediction <- function(sentinel, model){
   #spplot(prediction_terra, col.regions=viridis(100),main="prediction for AOA")
   #  spplot(AOA$AOA, col.regions=c("grey", "transparent"))
 
-  AOAPlot <- AOA$AOA
-  crs(AOAPlot) <- "EPSG:32632"
-  writeRaster(AOAPlot, "/usr/src/app/data/aoa.tif", overwrite = TRUE)
+  #AOAPlot <- AOA$AOA
+  #crs(AOAPlot) <- "EPSG:32632"
+  #writeRaster(AOAPlot, "mydockerdata/aoa.tif", overwrite = TRUE)
   print("Fertig mit AOA")
 
 }
@@ -101,7 +103,7 @@ getLegend <- function(prediction_terra, colors){
   
   Legend <- get_legend(legendPlot)
   
-  png(filename="./data/predictionlegende.png")
+  png(filename="mydockerdata/predictionlegende.png")
   plot(Legend)
   dev.off()
   
@@ -172,7 +174,7 @@ setColor <- function(prediction_terra){
 #* @serializer png
 #* @get /tiffgjson
 function(){
-  Referenzdaten <- st_read("http://frontend:3000/uploads/usertrainingspolygonegjson.geojson")
+  Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
   trainModel(Referenzdaten)
 }
 
@@ -180,7 +182,7 @@ function(){
 #* @serializer png
 #* @get /tiffgpkg
 function(){
-  Referenzdaten <- st_read("http://frontend:3000/uploads/usertrainingspolygonegpkg.gpkg")
+  Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
   trainModel(Referenzdaten)
 }
 
@@ -188,7 +190,7 @@ function(){
 #* @serializer png
 #* @get /tiffshape
 function(){
-  download.file("http://frontend:3000/uploads/usertrainingsdatashp.zip", destfile = "Classification.zip")
+  download.file("http://frontend:3000/mydockerdata/usertrainingsdatashp.zip", destfile = "Classification.zip")
   system("unzip Classification.zip")
   Referenzdaten <- st_read("usertrainingspolygoneshp.shp")
   trainModel(Referenzdaten)
@@ -198,13 +200,15 @@ function(){
 #* @serializer png
 #* @get /tiffmodel
 function(){
-  url <- ("http://frontend:3000/uploads/usersentineldata.tif")
-  geotiff_file <- tempfile(fileext='.tif')
-  httr::GET(url,httr::write_disk(path=geotiff_file))
-  sentinel <- rast(geotiff_file)
+  #url <- ("http://frontend:3000/mydockerdata/usersentineldata.tif")
+  #geotiff_file <- tempfile(fileext='.tif')
+  #httr::GET(url,httr::write_disk(path=geotiff_file))
+  #sentinel <- rast(geotiff_file)
   
-  model_download <- ("http://frontend:3000/uploads/usertrainedmodel")
-  model <- readRDS(url(model_download))
+  sentinel <- rast("mydockerdata/usersentineldata.tif")
+
+  #model_download <- ("http://frontend:3000/usertrainedmodel.rds")
+  model <- readRDS("mydockerdata/usertrainedmodel.rds")
   
   calculatePrediction(sentinel, model)
 }

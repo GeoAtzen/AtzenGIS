@@ -82,7 +82,7 @@ map.on(L.Draw.Event.CREATED, function(e) {
  */
 function exportGeoJSON() {
 
-    fetch("/uploads/usertrainingspolygonegjson.geojson")
+    fetch("http://localhost:3000/usertrainingspolygonegjson.geojson")
         .then((response) => response.json())
         .then((json) => {
             console.log(json)
@@ -119,7 +119,7 @@ function exportGeoJSON() {
 }
 
 // Anzeigen der hochgeladenen Shapefile
-var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
+var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -170,7 +170,7 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
 // Anzeigen des hochgeladenen geopackages
 // Anmerkung: Layer MUSS layer1 heißen
 var usergeopackage = new L.geoPackageFeatureLayer([], {
-    geoPackageUrl: '/uploads/usertrainingspolygonegpkg.gpkg',
+    geoPackageUrl: 'http://localhost:3000/usertrainingspolygonegpkg.gpkg',
     layerName: 'layer1',
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
@@ -220,7 +220,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
 });
 
 // add GeoJSON to map
-var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -269,7 +269,7 @@ var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojso
 });
 
 // hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("http://localhost:3000/uploads/usersentineldata.tif")
+fetch("http://localhost:3000/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {
@@ -318,7 +318,7 @@ fetch("http://localhost:3000/uploads/usersentineldata.tif")
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
     // link ändern
-    fetch('./public/uploads/predictionlegende.png')
+    fetch('http://localhost:3000/predictionlegende.png')
     	.then(function(data){
         return data.blob();
       })
@@ -326,91 +326,8 @@ function loadprediction() {
       	var legende = URL.createObjectURL(img);
         $('img').attr('src', legende);
       })
-    /* link ändern lokal (geht nicht)
-    fs.readFile("/public/uploads/prediction.tif", (error, data) => {
-    parseGeoraster(data).then(georaster => {
-      console.log("georaster:", georaster);
-
-                var predictiongeotiffdata = new GeoRasterLayer({
-                    georaster: georaster,
-                    //pixelValuesToColorFn,
-                    resolution: 512
-                });
-                // direktes hinzufügen zur Karte
-                predictiongeotiffdata.addTo(map);
-
-                map.fitBounds(predictiongeotiffdata.getBounds());
-
-                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
-                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
-            });
-        });
-        
-    // link ändern
-    fetch("http://localhost:3000/uploads/prediction.tif")
-        .then((response) => response.arrayBuffer())
-        .then((arrayBuffer) => {
-            parseGeoraster(arrayBuffer).then((georaster) => {
-                console.log("georaster:", georaster);
-
-                var predictiongeotiffdata = new GeoRasterLayer({
-                    georaster: georaster,
-                    //pixelValuesToColorFn,
-                    resolution: 512
-                });
-                // direktes hinzufügen zur Karte
-                predictiongeotiffdata.addTo(map);
-
-                map.fitBounds(predictiongeotiffdata.getBounds());
-
-                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
-                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
-            });
-        });
-        
-       fetch("http://localhost:8000/uploads/prediction.tif")
-        .then((response) => response.arrayBuffer())
-        .then((arrayBuffer) => {
-            parseGeoraster(arrayBuffer).then((georaster) => {
-                console.log("georaster:", georaster);
-
-                var predictiongeotiffdata = new GeoRasterLayer({
-                    georaster: georaster,
-                    //pixelValuesToColorFn,
-                    resolution: 512
-                });
-                // direktes hinzufügen zur Karte
-                predictiongeotiffdata.addTo(map);
-
-                map.fitBounds(predictiongeotiffdata.getBounds());
-
-                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
-                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
-            });
-        });
-        
-        fetch("http://backend:8000/usr/src/app/data/prediction.tif")
-        .then((response) => response.arrayBuffer())
-        .then((arrayBuffer) => {
-            parseGeoraster(arrayBuffer).then((georaster) => {
-                console.log("georaster:", georaster);
-
-                var predictiongeotiffdata = new GeoRasterLayer({
-                    georaster: georaster,
-                    //pixelValuesToColorFn,
-                    resolution: 512
-                });
-                // direktes hinzufügen zur Karte
-                predictiongeotiffdata.addTo(map);
-
-                map.fitBounds(predictiongeotiffdata.getBounds());
-
-                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
-                layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
-            });
-        });
-        */
-       fetch("http://backend:8000/public/uploads/prediction.tif")
+      // link ändern
+    fetch("http://localhost:3000/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -431,9 +348,9 @@ function loadprediction() {
             });
         });
 }
-
+/*
 function loadaoa() {
-    fetch("/usr/src/app/data/aoa.tif")
+    fetch("mydockerdata/usertrainingspolygonegjson.geojson/aoa.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -454,7 +371,7 @@ function loadaoa() {
             });
         });
 }
-
+*/
 /*
 function loadDI() {
     fetch("/R/data/DI.tif")
@@ -482,7 +399,7 @@ function loadDI() {
 */
 
 // add GeoJSON to map
-var geodrawnpolygonsjson = new L.GeoJSON.AJAX("/R/data/samplingLocationsOutput.geojson", {
+var geodrawnpolygonsjson = new L.GeoJSON.AJAX("http://localhost:3000/samplingLocationsOutput.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {

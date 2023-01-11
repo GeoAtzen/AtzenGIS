@@ -8,6 +8,7 @@ const http = require("http");
 const multer = require("multer");
 const decompress = require("decompress");
 var geojsonMerge = require('@mapbox/geojson-merge');
+var cors = require("cors");
 
 
 var app = express();
@@ -37,7 +38,7 @@ const handleError = (err, res) => {
 };
 
 const upload = multer({
-    dest: "/public"
+    dest: "mydockerdata"
         // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 
@@ -47,7 +48,7 @@ app.post(
     (req, res) => {
 
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "/public/uploads/usersentineldata.tif");
+        const targetPath = path.join(__dirname, "mydockerdata/usersentineldata.tif");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
             fs.rename(tempPath, targetPath, err => {
@@ -77,8 +78,8 @@ app.post(
     upload.single("file"),
     (req, res) => {
         const tempPath = req.file.path;
-        const targetPathgpkg = path.join(__dirname, "public/uploads/usertrainingspolygonegpkg.gpkg");
-        const targetPathgjson = path.join(__dirname, "public/uploads/usertrainingspolygonegjson.geojson");
+        const targetPathgpkg = path.join(__dirname, "mydockerdata/usertrainingspolygonegpkg.gpkg");
+        const targetPathgjson = path.join(__dirname, "mydockerdata/usertrainingspolygonegjson.geojson");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".gpkg") {
             fs.rename(tempPath, targetPathgpkg, err => {
@@ -114,7 +115,7 @@ app.post(
     upload.single("file"),
     (req, res) => {
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usertrainingsdatashp.zip");
+        const targetPath = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
             fs.rename(tempPath, targetPath, err => {
@@ -143,7 +144,7 @@ app.post(
     upload.single("file"),
     (req, res) => {
         const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "public/uploads/usertrainedmodel.rds");
+        const targetPath = path.join(__dirname, "mydockerdata/usertrainedmodel.rds");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".rds") {
             fs.rename(tempPath, targetPath, err => {
@@ -185,6 +186,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "mydockerdata")));
 
 
 //app.use("/ergebnisseite", ergebnisseiteRouter);
@@ -209,5 +211,5 @@ app.use(function(err, req, res, next) {
 });
 
 
-
+app.use(cors());
 module.exports = app;

@@ -38,25 +38,12 @@ RUN R -e "install.packages('tidyterra', dependencies=TRUE, repos='https://cran.u
 #RUN R -e "install.packages('tmap', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 #RUN R -e "install.packages('CAST', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
-# Create an application directory
-#RUN mkdir -p /R
-
-# Set /R directory as working directory
-#WORKDIR /app
 
 # Copy app code source from our local folder into the docker /R working directory
-COPY backend/ /usr/src/app
-COPY backend/predictions/ /usr/src/app
-COPY . .
-COPY . /usr/src/app
+COPY ./backend/ ./
 
-# install plumber
-#RUN R -e "install.packages(c('randomForest', 'terra', 'caret', 'raster', 'RCurl', 'tiff', 'sf','plumber'))"
+# open port 7001 to traffic
+EXPOSE 7001
 
-# open port 8000 to traffic
-EXPOSE 8000
-
-# when the container starts, start the main.R script
-#ENTRYPOINT ["Rscript", "startAPI.R"]
 
 CMD ["plumber.R"]

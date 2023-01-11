@@ -60,7 +60,7 @@ map.on(L.Draw.Event.CREATED, (e) => {
 
 
 // Anzeigen der hochgeladenen Shapefile
-var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
+var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -111,7 +111,7 @@ var usershapefile = new L.Shapefile("/uploads/usertrainingsdatashp.zip", {
 // Anzeigen des hochgeladenen geopackages
 // Anmerkung: Layer MUSS layer1 heißen
 var usergeopackage = new L.geoPackageFeatureLayer([], {
-    geoPackageUrl: '/uploads/usertrainingspolygonegpkg.gpkg',
+    geoPackageUrl: 'http://localhost:3000/usertrainingspolygonegpkg.gpkg',
     layerName: 'layer1',
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
@@ -161,7 +161,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
 });
 
 // add GeoJSON to map
-var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -210,7 +210,7 @@ var geojsondata = new L.GeoJSON.AJAX("/uploads/usertrainingspolygonegjson.geojso
 });
 
 // hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("./predictions/usersentineldata.tif")
+fetch("http://localhost:3000/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {

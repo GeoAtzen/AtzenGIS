@@ -3,7 +3,8 @@ var router = express.Router();
 const decompress = require("decompress");
 const multer = require("multer");
 const fs = require("fs");
-
+var request = require("request");
+const path = require("path");
 // error handler
 const handleError = (err, res) => {
     res
@@ -12,10 +13,6 @@ const handleError = (err, res) => {
         .end("Oops! Something went wrong!");
 };
 
-const upload = multer({
-    dest: "/public"
-        // you might also want to set some limits: https://github.com/expressjs/multer#limits
-});
 
 /**
  * GET Befehl für die Messungen ansehen Seite
@@ -27,31 +24,60 @@ router.get("/", function (req, res, next) {
 
 router.post("/ergebnisseitemodel", function (req, res, next) {
   // Code zum ausführen des R Skripts
+  url = "http://172.17.0.1:7001/tiffmodel";
 
-  
-  res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffmodel" })
+  request(url, { json: true }, (err, res2, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render("ergebnisseite", { title: "Ergebnisseite" });
+  });
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffmodel" })
   
 });
 
 router.post("/ergebnisseitegpkg", function (req, res, next) {
+  // Code zum ausführen des R Skripts
+  url = "http://172.17.0.1:7001/tiffgpkg";
 
-  res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgpkg" })
+  request(url, { json: true }, (err, res2, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render("ergebnisseite", { title: "Ergebnisseite" });
+  });
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffgpkg" })
   
 });
 
 router.post("/ergebnisseiteshape", function (req, res, next) {
   // Code zum ausführen des R Skripts
-
   
-  res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffshape" })
+  url = "http://172.17.0.1:7001/tiffshape";
+
+  request(url, { json: true }, (err, res2, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render("ergebnisseite", { title: "Ergebnisseite" });
+  });
+  
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffshape" })
   
 });
 
 router.post("/ergebnisseitegjson", function (req, res, next) {
   // Code zum ausführen des R Skripts
+  url = "http://172.17.0.1:7001/tiffgjson";
 
+  request(url, { json: true }, (err, res2, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.render("ergebnisseite", { title: "Ergebnisseite" });
+  });
   
-  res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://localhost:8000/tiffgjson" })
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffgjson" })
   
 });
 
