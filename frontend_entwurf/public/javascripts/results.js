@@ -319,14 +319,14 @@ fetch("http://localhost:3000/usersentineldata.tif")
 function loadprediction() {
     // link ändern
     fetch('http://localhost:3000/predictionlegende.png')
-    	.then(function(data){
-        return data.blob();
-      })
-      .then(function(img){
-      	var legende = URL.createObjectURL(img);
-        $('img').attr('src', legende);
-      })
-      // link ändern
+        .then(function(data) {
+            return data.blob();
+        })
+        .then(function(img) {
+            var legende = URL.createObjectURL(img);
+            $('img').attr('src', legende);
+        })
+        // link ändern
     fetch("http://localhost:3000/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
@@ -396,10 +396,10 @@ function loadDI() {
         });
 }
 
-*/
+
 
 // add GeoJSON to map
-var geodrawnpolygonsjson = new L.GeoJSON.AJAX("http://localhost:3000/samplingLocationsOutput.geojson", {
+var geodrawnpolygonsjson = new L.GeoJSON.AJAX("http://localhost:3000/userdrawnpolygons.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -410,6 +410,29 @@ var geodrawnpolygonsjson = new L.GeoJSON.AJAX("http://localhost:3000/samplingLoc
         }
     }
 });
+*/
+
+// adding sampling locations to map via shapefile
+var samplingshp = new L.Shapefile("http://localhost:3000/samples", {
+    onEachFeature: function(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                return k + ": " + feature.properties[k];
+            }).join("<br />"), {
+                maxHeight: 200
+            });
+        }
+    },
+    style: function(feature) {
+        switch (feature.properties.DI) {
+            case "1":
+                return { color: "#d18b2c" };
+            default:
+                return { color: "#000000" };
+        }
+    },
+});
+
 // Layer Control
 var baseMaps = {
     "OpenStreetMap": osm,
@@ -417,6 +440,7 @@ var baseMaps = {
 };
 
 var overlayMaps = {
+    "Sampling Locations": samplingshp,
     "Shapefile": usershapefile,
     "Geopackage": usergeopackage,
     "GeoJSON": geojsondata,

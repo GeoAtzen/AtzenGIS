@@ -88,6 +88,12 @@ calculatePrediction <- function(sentinel, model){
   #writeRaster(DIPlot, "./data/DI.tif", overwrite = TRUE)
   #print("Fertig mit DI")
 
+  DIGanz <- as.polygons(selectHighest(AOA$DI, 2000))
+  writeVector(DIGanz, "mydockerdata/samples.shp", overwrite=TRUE)
+  
+
+  print("Fertig mit DI Sampling Locations")
+
 }
 
 ######################################################################################################################################################################
