@@ -39,8 +39,7 @@ RUN R -e "install.packages('CAST', dependencies=TRUE, repos='https://cran.uni-mu
 
 
 # Copy app code source from our local folder into the docker /R working directory
-COPY ./backend/ ./
-
+COPY ./backend/plumber.R ./
 # open port 7001 to traffic
 EXPOSE 7001
 
