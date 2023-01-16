@@ -103,7 +103,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });
@@ -155,7 +155,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });
@@ -204,7 +204,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });

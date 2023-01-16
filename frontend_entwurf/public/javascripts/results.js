@@ -162,7 +162,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });
@@ -214,7 +214,7 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });
@@ -263,7 +263,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
             case "Wiese":
                 return { color: "#00FF00" };
             default:
-                return { color: "##000000" };
+                return { color: "#000000" };
         }
     },
 });
@@ -371,46 +371,6 @@ function loadaoa() {
             });
         });
 }
-
-/*
-function loadDI() {
-    fetch("/R/data/DI.tif")
-        .then((response) => response.arrayBuffer())
-        .then((arrayBuffer) => {
-            parseGeoraster(arrayBuffer).then((georaster) => {
-                console.log("georaster:", georaster);
-
-                var aoageotiffdata = new GeoRasterLayer({
-                    georaster: georaster,
-                    //pixelValuesToColorFn,
-                    resolution: 512
-                });
-                // direktes hinzufügen zur Karte
-                aoageotiffdata.addTo(map);
-
-                map.fitBounds(aoageotiffdata.getBounds());
-
-                // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
-                layerControl.addOverlay(aoageotiffdata, 'AOA');
-            });
-        });
-}
-
-
-
-// add GeoJSON to map
-var geodrawnpolygonsjson = new L.GeoJSON.AJAX("http://localhost:3000/userdrawnpolygons.geojson", {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
-    }
-});
-*/
 
 // adding sampling locations to map via shapefile
 var samplingshp = new L.Shapefile("http://localhost:3000/samples", {
