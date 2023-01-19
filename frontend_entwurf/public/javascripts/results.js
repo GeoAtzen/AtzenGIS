@@ -82,19 +82,12 @@ map.on(L.Draw.Event.CREATED, function(e) {
  */
 function exportGeoJSON() {
 
-    fetch("http://localhost:3000/usertrainingspolygonegjson.geojson")
-        .then((response) => response.json())
-        .then((json) => {
-            console.log(json)
-
             // test GeoJSON validity by logging the data to the console for chacking it 
             console.log(drawnItems.toGeoJSON());
             console.log(JSON.stringify(drawnItems.toGeoJSON()));
 
             // save drawn Polygons as GeoJSON in drawnpolygonsjson
             let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
-            let useruploadedgeojson = JSON.stringify(json);
-            console.log(useruploadedgeojson)
 
             // telling javascript to export drawnpolygonsjson as JSON format
             let dataUri =
@@ -115,7 +108,6 @@ function exportGeoJSON() {
             } else {
                 linkElement.click();
             }
-        })
 }
 
 // Anzeigen der hochgeladenen Shapefile
@@ -317,16 +309,6 @@ fetch("http://localhost:3000/usersentineldata.tif")
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 // hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
-    // link ändern
-    fetch('http://localhost:3000/predictionlegende.png')
-        .then(function(data) {
-            return data.blob();
-        })
-        .then(function(img) {
-            var legende = URL.createObjectURL(img);
-            $('img').attr('src', legende);
-        })
-        // link ändern
     fetch("http://localhost:3000/prediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
@@ -347,6 +329,14 @@ function loadprediction() {
                 layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
             });
         });
+    fetch('http://localhost:3000/predictionlegende.png')
+        .then(function(data) {
+            return data.blob();
+        })
+        .then(function(img) {
+            var legende = URL.createObjectURL(img);
+            $('img').attr('src', legende);
+    })
 }
 
 function loadaoa() {
@@ -375,18 +365,12 @@ function loadaoa() {
 // adding sampling locations to map via shapefile
 var samplingshp = new L.Shapefile("http://localhost:3000/samples", {
     onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
+            layer.bindPopup("Hier im Optimalfall neue trainingspolygone zeichnen!");
     },
     style: function(feature) {
         switch (feature.properties.DI) {
             case "1":
-                return { color: "#d18b2c" };
+                return { color: "#714F84" };
             default:
                 return { color: "#000000" };
         }
