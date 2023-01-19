@@ -35,20 +35,24 @@ block content
                     h4 Trainingsgebiete
                     h5 Ihre eigenen Trainingsdaten:  
                     p Download GeoPackage als .geopackage:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygonegpkg.gpkg', download='usertrainingspolygone.gpkg' style='float: right;')
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingspolygonegpkg.gpkg', download='uploadedtrainingspolygone.gpkg' style='float: right;')
                     p Download Shapefile als .zip:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingsdatashp.zip', download='usertrainingsdatashp.zip' style='float: right;')
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingsdatashp.zip', download='uploadedtrainingsdatashp.zip' style='float: right;')
                     p Download GeoJSON als .geojson:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usertrainingspolygonegjson.geojson', download='usertrainingsdatagjson.geojson' style='float: right;')
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingspolygonegjson.geojson', download='uploadedtrainingsdatagjson.geojson' style='float: right;')
                     p Download selbstgezeichneter Polygone als .geojson:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()' style='float: right;')
                     br                 
                     h4 Gebiete zum Nachtrainieren
-                        
-                    br         
+                    p Benutzen Sie zum Ein- und Ausblenden bitte die Layer Kontrollfunktion auf der Karte oben rechts!   
+                    p Download der Gebiete  als .shapefile:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples', download='samplinglocations' style='float: right;')
                     h4 Sentinel 2 Bild
                     p Download des ursprünglichen Satellitenbildes:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/uploads/usersentineldata.tif', download='usersentineldata.tif' style='float: right;')
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usersentineldata.tif', download='uploadedsentineldata.tif' style='float: right;')
+                    br
+                    p Download des trainierten models:  
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainedmodel.rds', download='uploadedtrainedmodel.rds' style='float: right;')
                     br
                     form(method='post', action='/mergegeojson' style='margin:auto;')
                       button.btn.btn-success() Zurück zur Anwendungsseite

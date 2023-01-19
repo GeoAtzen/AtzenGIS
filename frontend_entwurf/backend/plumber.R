@@ -183,7 +183,11 @@ setColor <- function(prediction_terra){
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffgjson
-function(){
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
+  
+  #maske_raster <- c(xmin, xmax, ymin, ymax)
+  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
   trainModel(Referenzdaten)
 }
@@ -191,7 +195,11 @@ function(){
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffgpkg
-function(){
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
+
+  #maske_raster <- c(xmin, xmax, ymin, ymax)
+  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
   trainModel(Referenzdaten)
 }
@@ -199,9 +207,14 @@ function(){
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffshape
-function(){
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
   download.file("http://frontend:3000/mydockerdata/usertrainingsdatashp.zip", destfile = "Classification.zip")
   system("unzip Classification.zip")
+
+  #maske_raster <- c(xmin, xmax, ymin, ymax)
+  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+
+
   Referenzdaten <- st_read("usertrainingspolygoneshp.shp")
   trainModel(Referenzdaten)
 }
@@ -209,15 +222,13 @@ function(){
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffmodel
-function(){
-  #url <- ("http://frontend:3000/mydockerdata/usersentineldata.tif")
-  #geotiff_file <- tempfile(fileext='.tif')
-  #httr::GET(url,httr::write_disk(path=geotiff_file))
-  #sentinel <- rast(geotiff_file)
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
   
-  sentinel <- rast("mydockerdata/usersentineldata.tif")
+  print(ymin)
+  #maske_raster <- c(xmin, xmax, ymin, ymax)
+  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
 
-  #model_download <- ("http://frontend:3000/usertrainedmodel.rds")
+  sentinel <- rast("mydockerdata/usersentineldata.tif")
   model <- readRDS("mydockerdata/usertrainedmodel.rds")
   
   calculatePrediction(sentinel, model)
