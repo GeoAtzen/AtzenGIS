@@ -1,8 +1,13 @@
 # AOA_Prototyp-Docker
-Du musst einfach Docker Desktop starten, dann bei VSC im Terminal in den Ordner frontend_entwurf rein und dann
 <br>
-docker-compose up
+1. Docker Desktop starten
 <br>
-eingeben!
+2. In VSC im Terminal in den Ordner GeoAtzen navigieren
 <br>
-Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird
+3. $ docker-compose up
+<br>
+
+<br>
+<h4> Achtung!
+<br>
+Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
