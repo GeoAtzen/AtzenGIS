@@ -273,7 +273,6 @@ map.on("draw:created", function (e) {
   console.log(areaofinterestTextmdl.value);
 });
 
-// Löschen des letzten Punkts
 map.on(L.Draw.Event.DRAWSTART, function (e) {
   if (aoimdl != null) {
     map.removeLayer(aoimdl);
@@ -304,7 +303,6 @@ map.on("draw:created", function (e) {
   console.log(areaofinterestTextgpkg.value);
 });
 
-// Löschen des letzten Punkts
 map.on(L.Draw.Event.DRAWSTART, function (e) {
   if (aoigpkg != null) {
     map.removeLayer(aoigpkg);
@@ -335,7 +333,6 @@ map.on("draw:created", function (e) {
   console.log(areaofinterestTextgjson.value);
 });
 
-// Löschen des letzten Punkts
 map.on(L.Draw.Event.DRAWSTART, function (e) {
   if (aoigjson != null) {
     map.removeLayer(aoigjson);
@@ -366,7 +363,6 @@ map.on("draw:created", function (e) {
   console.log(areaofinterestTextshp.value);
 });
 
-// Löschen des letzten Punkts
 map.on(L.Draw.Event.DRAWSTART, function (e) {
   if (aoishp != null) {
     map.removeLayer(aoishp);

@@ -19,7 +19,7 @@ services:
     build: 
       dockerfile: ./backend/Dockerfile
     ports:
-      - 7001:8000
+      - 8000:8000
     # schreibt alle Daten die in Docker im Workingdirectory gespeichert werden (auch?) lokal in den ordner /public/uploads
     volumes:
      - dockerdata:/usr/src/app/mydockerdata

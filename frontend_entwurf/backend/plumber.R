@@ -16,6 +16,7 @@ library(viridis)
 library(latticeExtra)
 library(tmap)
 library(CAST)
+library(s2)
 
 
 ######################################################################################################################################################################
@@ -25,13 +26,9 @@ library(CAST)
 # Diese Funktion nimmt Referenzdaten entgegen, die sowohl vom Typ GeoJson,
 # Geopackage oder Shapefile schon weiterverarbeitet wurden und trainiert 
 # nun mit dem Tif ein Model
-trainModel <- function(Referenzdaten){
-  #url <- ("http://frontend:3000/usersentineldata.tif")
-  #geotiff_file <- tempfile(fileext='.tif')
-  #httr::GET(url,httr::write_disk(path=geotiff_file))
-  #sentinel <- rast(geotiff_file)
+trainModel <- function(Referenzdaten, sentinel){
+  
 
-  sentinel <- rast("mydockerdata/usersentineldata.tif")
   predictors <- names(sentinel)
   
   Referenzdaten <- st_transform(Referenzdaten, crs(sentinel))
@@ -184,12 +181,34 @@ setColor <- function(prediction_terra){
 #* @serializer png
 #* @get /tiffgjson
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
-  
-  #maske_raster <- c(xmin, xmax, ymin, ymax)
-  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
 
+  sentinel <- rast("mydockerdata/usersentineldata.tif")
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
-  trainModel(Referenzdaten)
+
+  # für trainingspolygone
+  trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+  print(trainingsdataaoi)
+  class(trainingsdataaoi) <- "numeric"
+
+  # Daten auf Maske zuschneiden
+  if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
+    # für Sentinel Bilder
+    v <- c(xmin, xmax, ymin, ymax)
+    class(v) <- "numeric"
+    e <- extent(v)
+    rastercordaoi <- as(e,'SpatialPolygons')  
+    proj4string(rastercordaoi) <- CRS("+proj=longlat")
+    # wildcard <- crs(sentinel, describe=TRUE)$code
+    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
+    rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
+    # Zuschneiden
+    sentinel <- crop(sentinel, extent(rastercord.UTM))
+    sf_use_s2(FALSE)
+    Referenzdaten2 <- st_make_valid(Referenzdaten)
+    Referenzdaten <- st_crop(Referenzdaten2, trainingsdataaoi)
+  }
+
+  trainModel(Referenzdaten, sentinel)
 }
 
 #* Calculates LULC Classification
@@ -197,40 +216,104 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
 #* @get /tiffgpkg
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
 
-  #maske_raster <- c(xmin, xmax, ymin, ymax)
-  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
-
+  sentinel <- rast("mydockerdata/usersentineldata.tif")
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
-  trainModel(Referenzdaten)
+
+  # für trainingspolygone
+  trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+  class(trainingsdataaoi) <- "numeric"
+  print(trainingsdataaoi)
+  print("trainingsdataaoi geht")
+  
+  # Daten auf Maske zuschneiden
+  if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
+    # für Sentinel Bilder
+    v <- c(xmin, xmax, ymin, ymax)
+    class(v) <- "numeric"
+    e <- extent(v)
+    rastercordaoi <- as(e,'SpatialPolygons')  
+    proj4string(rastercordaoi) <- CRS("+proj=longlat")
+    # wildcard <- crs(sentinel, describe=TRUE)$code
+    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
+    rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
+    print("sentinel erstellen geht")
+    # Zuschneiden
+    sentinel <- crop(sentinel, extent(rastercord.UTM))
+    print("sentinel zuscneiden geht")
+    
+    sf_use_s2(FALSE)
+    Referenzdaten2 <- st_make_valid(Referenzdaten)
+    print("st_make_valid geht")
+    Referenzdaten <- st_crop(Referenzdaten2, trainingsdataaoi)
+    print("Referenzdaten zuschneiden geht")
+  }
+
+  trainModel(Referenzdaten, sentinel)
 }
 
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffshape
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
-  download.file("http://frontend:3000/mydockerdata/usertrainingsdatashp.zip", destfile = "Classification.zip")
-  system("unzip Classification.zip")
-
-  #maske_raster <- c(xmin, xmax, ymin, ymax)
-  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
-
-
+  sentinel <- rast("mydockerdata/usersentineldata.tif")
+  download.file("http://frontend:3000/usertrainingsdatashp.zip", destfile = "usertrainingsdatashp.zip")
+  system("unzip usertrainingsdatashp.zip")
   Referenzdaten <- st_read("usertrainingspolygoneshp.shp")
-  trainModel(Referenzdaten)
+
+  # für trainingspolygone
+  trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
+  class(trainingsdataaoi) <- "numeric"
+  print("trainingsdataaoi geht")
+
+  # Daten auf Maske zuschneiden
+  if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
+    # für Sentinel Bilder
+    v <- c(xmin, xmax, ymin, ymax)
+    class(v) <- "numeric"
+    e <- extent(v)
+    rastercordaoi <- as(e,'SpatialPolygons')  
+    proj4string(rastercordaoi) <- CRS("+proj=longlat")
+    # wildcard <- crs(sentinel, describe=TRUE)$code
+    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
+    rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
+    print("sentinel erstellen geht")
+    # Zuschneiden
+    sentinel <- crop(sentinel, extent(rastercord.UTM))
+    print("sentinel zuschneiden geht")
+    sf_use_s2(FALSE)
+    Referenzdaten2 <- st_make_valid(Referenzdaten)
+    print("st_make_valid geht")
+    Referenzdaten <- st_crop(Referenzdaten2, rastercord.UTM)
+    print(Referenzdaten)
+    print("Referenzdaten zuschneiden geht")
+  }
+
+  trainModel(Referenzdaten, sentinel)
 }
 
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffmodel
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
-  
-  print(ymin)
-  #maske_raster <- c(xmin, xmax, ymin, ymax)
-  #maske_training <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
 
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   model <- readRDS("mydockerdata/usertrainedmodel.rds")
   
+  # Daten auf Maske zuschneiden
+  if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
+    # für Sentinel Bilder
+    v <- c(xmin, xmax, ymin, ymax)
+    class(v) <- "numeric"
+    e <- extent(v)
+    rastercordaoi <- as(e,'SpatialPolygons')  
+    proj4string(rastercordaoi) <- CRS("+proj=longlat")
+    # wildcard <- crs(sentinel, describe=TRUE)$code
+    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
+    rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
+    # Zuschneiden
+    sentinel <- crop(sentinel, extent(rastercord.UTM))
+  }
+
   calculatePrediction(sentinel, model)
 }
 

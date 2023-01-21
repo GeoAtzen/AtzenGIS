@@ -36,12 +36,13 @@ RUN R -e "install.packages('viridis', dependencies=TRUE, repos='https://cran.uni
 RUN R -e "install.packages('latticeExtra', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('tmap', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 RUN R -e "install.packages('CAST', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
+RUN R -e "install.packages('s2', dependencies=TRUE, repos='https://cran.uni-muenster.de/')"
 
 
 # Copy app code source from our local folder into the docker /R working directory
 COPY ./backend/plumber.R ./
 # open port 7001 to traffic
-EXPOSE 7001
+EXPOSE 8000
 
 
 CMD ["plumber.R"]

@@ -24,7 +24,7 @@ router.get("/", function (req, res, next) {
 
 router.post("/ergebnisseitemodel", function (req, res, next) {
   // Code zum ausführen des R Skripts
-  let url = "http://172.17.0.1:7001/";
+  let url = "http://172.17.0.1:8000/";
 
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbmdl);
@@ -51,13 +51,13 @@ router.post("/ergebnisseitemodel", function (req, res, next) {
     }
     res.render("ergebnisseite", { title: "Ergebnisseite" });
   });
-  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffmodel" })
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:8000/tiffmodel" })
   
 });
 
 router.post("/ergebnisseitegpkg", function (req, res, next) {
   // Code zum ausführen des R Skripts
-  let url = "http://172.17.0.1:7001/";
+  let url = "http://172.17.0.1:8000/";
 
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbgpkg);
@@ -85,14 +85,14 @@ router.post("/ergebnisseitegpkg", function (req, res, next) {
     }
     res.render("ergebnisseite", { title: "Ergebnisseite" });
   });
-  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffgpkg" })
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:8000/tiffgpkg" })
   
 });
 
 router.post("/ergebnisseiteshape", function (req, res, next) {
   // Code zum ausführen des R Skripts
   
-  let url = "http://172.17.0.1:7001/";
+  let url = "http://172.17.0.1:8000/";
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbshp)
 
@@ -101,7 +101,7 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
   }
   aoiSplit != ""
         ? (url +=
-            "tiffshp?ymin=" +
+            "tiffshape?ymin=" +
             aoiSplit[2] +
             "&ymax=" +
             aoiSplit[3] +
@@ -109,7 +109,7 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
             aoiSplit[0] +
             "&xmax=" +
             aoiSplit[1])
-        : (url += "tiffshp");
+        : (url += "tiffshape");
   console.log(url);
 
   request(url, { json: true }, (err, res2, body) => {
@@ -119,13 +119,13 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
     res.render("ergebnisseite", { title: "Ergebnisseite" });
   });
   
-  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffshape" })
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:8000/tiffshape" })
   
 });
 
 router.post("/ergebnisseitegjson", function (req, res, next) {
   // Code zum ausführen des R Skripts
-  let url = "http://172.17.0.1:7001/";
+  let url = "http://172.17.0.1:8000/";
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbgjson);
 
@@ -153,7 +153,7 @@ router.post("/ergebnisseitegjson", function (req, res, next) {
     res.render("ergebnisseite", { title: "Ergebnisseite" });
   });
   
-  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:7001/tiffgjson" })
+  //res.render("ergebnisseite", { title: "Ergebnisseite", ueblink: "http://172.17.0.1:8000/tiffgjson" })
   
 });
 
