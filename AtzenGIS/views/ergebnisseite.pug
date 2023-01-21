@@ -13,9 +13,6 @@ block content
               button.buttonFragezeichen(onclick="document.getElementById('id11').style.display='block'; modal = document.getElementById('id11')" title='Hilfe') ?     
             .card.text-dark.p-4.border-success.cardprediction
                 h2 Ergebnisse und Download
-                br
-                h4 Herunterladen aller Daten als .zip: 
-                  a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/', download='alldata.zip' style='float: right;')
                   br
                   h4 Prediction
                   #puff5.spinner-border.float-end(role='status' style= 'display:block')
@@ -26,8 +23,8 @@ block content
                     a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/prediction.tif', download='prediction.tif' style='float: right;')
                     br
                     h4 AOA
-                    
                     button#buttonAnzeig.btn.btn-success(onclick='loadaoa()') Anzeigen der AOA
+                    br
                     p Download der AOA:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/aoa.tif', download='aoa.tif' style='float: right;')
                     br
@@ -52,6 +49,9 @@ block content
                     br
                     p Download des trainierten models:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainedmodel.rds', download='uploadedtrainedmodel.rds' style='float: right;')
+                    br
+                    h4 Herunterladen aller Daten als .zip: 
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/', download='alldata.zip' style='float: right;')
                     br
                     form(method='post', action='/mergegeojson' style='margin:auto;')
                       button.btn.btn-success() Zurück zur Anwendungsseite
