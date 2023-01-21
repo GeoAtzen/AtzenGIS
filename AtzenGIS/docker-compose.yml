@@ -2,7 +2,7 @@ version: "3"
 services:
   frontend:
     container_name: frontend
-    image: geoatzen/frontendgeosoftware
+    image: geoatzen/frontendatzengis
     build: 
       dockerfile: ./Dockerfile
     ports:
@@ -14,7 +14,7 @@ services:
 #imagename://servicename:zweiterPort
 
   backendgeoatzen:
-    image: geoatzen/backendgeosoftware
+    image: geoatzen/backendatzengis
     container_name: backendgeoatzen
     build: 
       dockerfile: ./backend/Dockerfile

@@ -9,6 +9,7 @@ const multer = require("multer");
 const decompress = require("decompress");
 var geojsonMerge = require('@mapbox/geojson-merge');
 var cors = require("cors");
+var request = require("request");
 
 
 var app = express();
@@ -25,7 +26,9 @@ app.post(
         //console.log(mergedStream)
         //mergedStream.pipe(process.stdout); 
         */
-        res.render("anwendungsseite", { title: "Anwendungsseite" });
+        res.render("anwendungsseite", {
+            title: "Anwendungsseite"
+        });
     }
 );
 
@@ -39,7 +42,7 @@ const handleError = (err, res) => {
 
 const upload = multer({
     dest: "mydockerdata"
-        // you might also want to set some limits: https://github.com/expressjs/multer#limits
+    // you might also want to set some limits: https://github.com/expressjs/multer#limits
 });
 
 app.post(
@@ -56,7 +59,9 @@ app.post(
 
                 res
                     .status(200)
-                    .render("fileupload", { title: "Fileupload" });
+                    .render("fileupload", {
+                        title: "Fileupload"
+                    });
 
             });
         } else {
@@ -65,7 +70,9 @@ app.post(
 
                 res
                     .status(403)
-                    .render("fileuploaderror", { title: "Uploadfehler" });
+                    .render("fileuploaderror", {
+                        title: "Uploadfehler"
+                    });
 
             });
         }
@@ -87,15 +94,28 @@ app.post(
 
                 res
                     .status(200)
-                    .render("fileupload", { title: "Fileupload" })
+                    .render("fileupload", {
+                        title: "Fileupload"
+                    })
             });
+            request(
+                "http://172.17.0.1:8000/gpkgtogjson", {
+                    json: true
+                },
+                (err, res2, body) => {
+                    if (err) {
+                        return console.log(err);
+                    }
+                })
         } else if (path.extname(req.file.originalname).toLowerCase() === ".geojson") {
             fs.rename(tempPath, targetPathgjson, err => {
                 if (err) return handleError(err, res);
 
                 res
                     .status(200)
-                    .render("fileupload", { title: "Fileupload" })
+                    .render("fileupload", {
+                        title: "Fileupload"
+                    })
             });
         } else {
             fs.unlink(tempPath, err => {
@@ -103,7 +123,9 @@ app.post(
 
                 res
                     .status(403)
-                    .render("fileuploaderror", { title: "Uploadfehler" });
+                    .render("fileuploaderror", {
+                        title: "Uploadfehler"
+                    });
             });
         }
     }
@@ -123,7 +145,9 @@ app.post(
 
                 res
                     .status(200)
-                    .render("fileupload", { title: "Fileupload" })
+                    .render("fileupload", {
+                        title: "Fileupload"
+                    })
             });
         } else {
             fs.unlink(tempPath, err => {
@@ -131,7 +155,9 @@ app.post(
 
                 res
                     .status(403)
-                    .render("fileuploaderror", { title: "Uploadfehler" });
+                    .render("fileuploaderror", {
+                        title: "Uploadfehler"
+                    });
             });
         }
     }
@@ -152,7 +178,9 @@ app.post(
 
                 res
                     .status(200)
-                    .render("fileupload", { title: "Fileupload" })
+                    .render("fileupload", {
+                        title: "Fileupload"
+                    })
             });
         } else {
             fs.unlink(tempPath, err => {
@@ -160,14 +188,18 @@ app.post(
 
                 res
                     .status(403)
-                    .render("fileuploaderror", { title: "Uploadfehler" });
+                    .render("fileuploaderror", {
+                        title: "Uploadfehler"
+                    });
             });
         }
     }
 );
 
-app.post("/anwendungsseite", function(req, res, next) {
-    res.render("anwendungsseite", { title: "Anwendungsseite" });
+app.post("/anwendungsseite", function (req, res, next) {
+    res.render("anwendungsseite", {
+        title: "Anwendungsseite"
+    });
 });
 
 var startRouter = require("./routes/start");
@@ -183,7 +215,9 @@ app.set("view engine", "pug");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "mydockerdata")));
@@ -195,12 +229,12 @@ app.use("/impressum", impressumRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};

@@ -18,6 +18,22 @@ library(tmap)
 library(CAST)
 library(s2)
 
+######################################################################################################################################################################
+######################################################################################################################################################################
+######################################################################################################################################################################
+
+#* Convertes uploaded geopackage by user to geojson
+#* @serializer geojson
+#* @get /gpkgtogjson
+function(){
+Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
+
+  convert <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
+  st_write(convert, "mydockerdata/usertrainingspolygonegpkg.geojson", append=FALSE)
+  print("umwandeln geht")
+  convertedgpkg <- st_read("mydockerdata/usertrainingspolygonegpkg.geojson")
+  print("einladen von umgewandelt geht")
+}
 
 ######################################################################################################################################################################
 ######################################################################################################################################################################
@@ -213,8 +229,8 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     # Zuschneiden
     sentinel <- crop(sentinel, extent(rastercord.UTM))
     sf_use_s2(FALSE)
-    Referenzdaten2 <- st_make_valid(Referenzdaten)
-    Referenzdaten <- st_crop(Referenzdaten2, trainingsdataaoi)
+    validdata <- st_make_valid(Referenzdaten)
+    Referenzdaten <- st_crop(validdata, trainingsdataaoi)
   }
 
   trainModel(Referenzdaten, sentinel)
@@ -251,9 +267,9 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     print("sentinel zuscneiden geht")
     
     sf_use_s2(FALSE)
-    Referenzdaten2 <- st_make_valid(Referenzdaten)
+    validdata <- st_make_valid(Referenzdaten)
     print("st_make_valid geht")
-    Referenzdaten <- st_crop(Referenzdaten2, trainingsdataaoi)
+    Referenzdaten <- st_crop(validdata, trainingsdataaoi)
     print("Referenzdaten zuschneiden geht")
   }
 
@@ -290,9 +306,9 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     sentinel <- crop(sentinel, extent(rastercord.UTM))
     print("sentinel zuschneiden geht")
     sf_use_s2(FALSE)
-    Referenzdaten2 <- st_make_valid(Referenzdaten)
+    validdata <- st_make_valid(Referenzdaten)
     print("st_make_valid geht")
-    Referenzdaten <- st_crop(Referenzdaten2, rastercord.UTM)
+    Referenzdaten <- st_crop(validdata, rastercord.UTM)
     print(Referenzdaten)
     print("Referenzdaten zuschneiden geht")
   }
