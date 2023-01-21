@@ -130,37 +130,46 @@ setColor <- function(prediction_terra){
    
     switch(list[i,2],
            "Acker"={
-             colors <- append(colors, "#A0522D")
+             colors <- append(colors, "#d18b2c")
            },
            "Acker_bepflanzt"={
-             colors <- append(colors, "#98FB98")
+             colors <- append(colors, "#70843a")
+           },
+           "Bahnschiene"={
+             colors <- append(colors, "#613232")
+           },
+           "Baumgruppe"={
+             colors <- append(colors, "#18471e")
            },
            "Binnengewaesser"={
-             colors <- append(colors, "#7FFFd4")
+             colors <- append(colors, "#0a1cb1")
            },
            "Industrie"={
-             colors <- append(colors, "#C0C0C0")
+             colors <- append(colors, "#696969")
            },
            "Innenstadt"={
              colors <- append(colors, "#F5F5F5")
            },
            "Kunstrasen"={
-             colors <- append(colors, "#00FF00")
+             colors <- append(colors, "#92e597")
            },
            "Laubwald"={
-             colors <- append(colors, "#228B22")
+             colors <- append(colors, "#03ad1d")
            },
            "Mischwald"={
-             colors <- append(colors, "#006400")
+             colors <- append(colors, "#11671e")
            },
            "Parklandschaft"={
-             colors <- append(colors, "#696969")
+             colors <- append(colors, "#92e597")
            },
            "Siedlung"={
              colors <- append(colors, "#B22222")
            },
+           "Strand"={
+             colors <- append(colors, "#ffff00")
+           },
            "Versiegelt"={
-             colors <- append(colors, "#000000")
+             colors <- append(colors, "#141414")
            },
            "Wiese"={
              colors <- append(colors, "#00FF00")

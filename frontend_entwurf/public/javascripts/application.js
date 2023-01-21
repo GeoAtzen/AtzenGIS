@@ -77,29 +77,29 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
             case "Acker_bepflanzt":
                 return { color: "#70843a" };
             case "Bahnschiene":
-                return { color: "#696969" };
+                return { color: "#613232" };
             case "Baumgruppe":
-                return { color: "#11671e" };
+                return { color: "#18471e" };
             case "Binnengewaesser":
                 return { color: "#0a1cb1" };
             case "Industrie":
                 return { color: "#696969" };
             case "Innenstadt":
-                return { color: "#696969" };
+                return { color: "#F5F5F5" };
             case "Kunstrasen":
                 return { color: "#92e597" };
             case "Laubwald":
-                return { color: "#11671e" };
+                return { color: "#03ad1d" };
             case "Mischwald":
                 return { color: "#11671e" };
             case "Parklandschaft":
                 return { color: "#92e597" };
             case "Siedlung":
-                return { color: "#696969" };
+                return { color: "#B22222" };
             case "Strand":
                 return { color: "#ffff00" };
             case "Versiegelt":
-                return { color: "#696969" };
+                return { color: "#141414" };
             case "Wiese":
                 return { color: "#00FF00" };
             default:
@@ -129,29 +129,29 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
             case "Acker_bepflanzt":
                 return { color: "#70843a" };
             case "Bahnschiene":
-                return { color: "#696969" };
+                return { color: "#613232" };
             case "Baumgruppe":
-                return { color: "#11671e" };
+                return { color: "#18471e" };
             case "Binnengewaesser":
                 return { color: "#0a1cb1" };
             case "Industrie":
                 return { color: "#696969" };
             case "Innenstadt":
-                return { color: "#696969" };
+                return { color: "#F5F5F5" };
             case "Kunstrasen":
                 return { color: "#92e597" };
             case "Laubwald":
-                return { color: "#11671e" };
+                return { color: "#03ad1d" };
             case "Mischwald":
                 return { color: "#11671e" };
             case "Parklandschaft":
                 return { color: "#92e597" };
             case "Siedlung":
-                return { color: "#696969" };
+                return { color: "#B22222" };
             case "Strand":
                 return { color: "#ffff00" };
             case "Versiegelt":
-                return { color: "#696969" };
+                return { color: "#141414" };
             case "Wiese":
                 return { color: "#00FF00" };
             default:
@@ -178,29 +178,29 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
             case "Acker_bepflanzt":
                 return { color: "#70843a" };
             case "Bahnschiene":
-                return { color: "#696969" };
+                return { color: "#613232" };
             case "Baumgruppe":
-                return { color: "#11671e" };
+                return { color: "#18471e" };
             case "Binnengewaesser":
                 return { color: "#0a1cb1" };
             case "Industrie":
                 return { color: "#696969" };
             case "Innenstadt":
-                return { color: "#696969" };
+                return { color: "#F5F5F5" };
             case "Kunstrasen":
                 return { color: "#92e597" };
             case "Laubwald":
-                return { color: "#11671e" };
+                return { color: "#03ad1d" };
             case "Mischwald":
                 return { color: "#11671e" };
             case "Parklandschaft":
                 return { color: "#92e597" };
             case "Siedlung":
-                return { color: "#696969" };
+                return { color: "#B22222" };
             case "Strand":
                 return { color: "#ffff00" };
             case "Versiegelt":
-                return { color: "#696969" };
+                return { color: "#141414" };
             case "Wiese":
                 return { color: "#00FF00" };
             default:
