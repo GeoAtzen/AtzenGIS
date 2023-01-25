@@ -71,7 +71,9 @@ block content
                           input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';")
                           input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(3);")
                           #puff3.spinner-border.float-end(role='status' style= 'display:none')                
-                        p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
+                        p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!
+
+              
 
 
                   h4 Sentinel 2 Bild als .tif hochladen </b>
@@ -93,23 +95,41 @@ block content
                     .w3-half
                       form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
                           form-group
-                              textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly" style="font-size: 0.8rem")
-                              button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                | geoPackage Trainingsdaten
+                            label(for='algorithm-select') Trainingsalgorithmus:
+                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                option(value='rf' name="rf") Random Forest
+                                option(value='svm' name="svm") SVM with Radial Kernel
+                                option(value='dt' name="dt") Decision Trees (rpart)
+                                textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly" style="font-size: 0.8rem")
+                                br
+                                button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
+                                  | GeoPackage Trainingsdaten
                       br
                     .w3-half
                       form(method='post', action='/anwendungsseite/ergebnisseitegjson')
                           form-group
-                              textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly" style="font-size: 0.8rem")
-                              button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                | GeoJSON Trainingsdaten
+                            label(for='algorithm-select') Trainingsalgorithmus:
+                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                option(value='rf' name="rf") Random Forest
+                                option(value='svm' name="svm") SVM with Radial Kernel
+                                option(value='dt' name="dt") Decision Trees (rpart)
+                                textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly" style="font-size: 0.8rem")
+                                br
+                                button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
+                                  | GeoJSON Trainingsdaten
                       br 
                 #shapefiletrain(style= "display:none") 
                   form(method='post', action='/anwendungsseite/ergebnisseiteshape')
                       form-group
-                          textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly" style="font-size: 0.8rem")
-                          button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                            | Shapefile Trainingsdaten
+                        label(for='algorithm-select') Trainingsalgorithmus:
+                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                option(value='rf' name="rf") Random Forest
+                                option(value='svm' name="svm") SVM with Radial Kernel
+                                option(value='dt' name="dt") Decision Trees (rpart)
+                                textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly" style="font-size: 0.8rem")
+                                br
+                                button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
+                                  | Shapefile Trainingsdaten
                   br  
                 #traniertesModelltrain(style= "display:none") 
                   form(method='post', action='/anwendungsseite/ergebnisseitemodel')

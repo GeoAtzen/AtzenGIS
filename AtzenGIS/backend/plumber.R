@@ -42,9 +42,9 @@ Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
 # Diese Funktion nimmt Referenzdaten entgegen, die sowohl vom Typ GeoJson,
 # Geopackage oder Shapefile schon weiterverarbeitet wurden und trainiert 
 # nun mit dem Tif ein Model
-trainModel <- function(Referenzdaten, sentinel){
+trainModel <- function(Referenzdaten, sentinel, alg){
   
-
+  print(alg)
   predictors <- names(sentinel)
   
   Referenzdaten <- st_transform(Referenzdaten, crs(sentinel))
@@ -54,11 +54,31 @@ trainModel <- function(Referenzdaten, sentinel){
   TrainIDs <- createDataPartition(extr$ID,p=0.05,list=FALSE)
   TrainDat <- extr[TrainIDs,]
   TrainDat <- TrainDat[complete.cases(TrainDat[,predictors]),]
-  model <- train(TrainDat[,predictors],
-                 TrainDat$Label,
-                 method="rf",
-                 importance=TRUE,
-                 ntree=50)
+
+   if(is.na(alg)) alg <- "rf"
+   
+  if(alg == "rf") {
+    model <- train(TrainDat[,predictors],
+                   TrainDat$Label,
+                   method="rf",
+                   importance=TRUE,
+                   ntree=50)
+  } else if(alg == "svm") {
+    model <- train(TrainDat[,predictors],
+                   TrainDat$Label,
+                   method="svmRadial",
+                   tuneLength = 10)
+  } else if(alg == "dt") {
+    model <- train(TrainDat[,predictors],
+                   TrainDat$Label,
+                   method="rpart")
+  } else {
+    model <- train(TrainDat[,predictors],
+                   TrainDat$Label,
+                   method="rf",
+                   importance=TRUE,
+                   ntree=50)
+  }
   
   calculatePrediction(sentinel, model)
 }
@@ -205,8 +225,8 @@ setColor <- function(prediction_terra){
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffgjson
-function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
-
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
+  #print(alg)
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
 
@@ -233,13 +253,13 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     Referenzdaten <- st_crop(validdata, trainingsdataaoi)
   }
 
-  trainModel(Referenzdaten, sentinel)
+  trainModel(Referenzdaten, sentinel, alg)
 }
 
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffgpkg
-function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
 
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
@@ -273,13 +293,13 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     print("Referenzdaten zuschneiden geht")
   }
 
-  trainModel(Referenzdaten, sentinel)
+  trainModel(Referenzdaten, sentinel, alg)
 }
 
 #* Calculates LULC Classification
 #* @serializer png
 #* @get /tiffshape
-function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
+function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   download.file("http://frontend:3000/usertrainingsdatashp.zip", destfile = "usertrainingsdatashp.zip")
   system("unzip usertrainingsdatashp.zip")
@@ -313,7 +333,7 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     print("Referenzdaten zuschneiden geht")
   }
 
-  trainModel(Referenzdaten, sentinel)
+  trainModel(Referenzdaten, sentinel, alg)
 }
 
 #* Calculates LULC Classification

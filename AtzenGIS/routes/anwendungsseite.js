@@ -61,11 +61,14 @@ router.post("/ergebnisseitegpkg", function (req, res, next) {
 
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbgpkg);
+  console.log("algorithm: " + req.body.algorithms);
+  var algorithm = req.body.algorithms
 
   if (req.body.aoibbgpkg != "") {
     aoiSplit = req.body.aoibbgpkg.split(",");
   }
-  aoiSplit != ""
+  if (algorithm == undefined) {
+    aoiSplit != ""
         ? (url +=
             "tiffgpkg?ymin=" +
             aoiSplit[2] +
@@ -76,8 +79,23 @@ router.post("/ergebnisseitegpkg", function (req, res, next) {
             "&xmax=" +
             aoiSplit[1])
         : (url += "tiffgpkg");
-  console.log(url);
-
+  }
+  else {
+    aoiSplit != ""
+          ? (url +=
+              "tiffgpkg?ymin=" +
+              aoiSplit[2] +
+              "&ymax=" +
+              aoiSplit[3] +
+              "&xmin=" +
+              aoiSplit[0] +
+              "&xmax=" +
+              aoiSplit[1] +
+              "&alg=" + 
+              algorithm)
+          : (url += "tiffgpkg" + "?alg=" + algorithm);
+    console.log(url);
+  }
 
   request(url, { json: true }, (err, res2, body) => {
     if (err) {
@@ -95,11 +113,14 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
   let url = "http://172.17.0.1:8000/";
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbshp)
+  console.log("algorithm: " + req.body.algorithms);
+  var algorithm = req.body.algorithms
 
   if (req.body.aoibbshp != "") {
     aoiSplit = req.body.aoibbshp.split(",");
   }
-  aoiSplit != ""
+  if (algorithm == undefined) {
+    aoiSplit != ""
         ? (url +=
             "tiffshape?ymin=" +
             aoiSplit[2] +
@@ -110,7 +131,23 @@ router.post("/ergebnisseiteshape", function (req, res, next) {
             "&xmax=" +
             aoiSplit[1])
         : (url += "tiffshape");
-  console.log(url);
+  }
+  else {
+    aoiSplit != ""
+          ? (url +=
+              "tiffshape?ymin=" +
+              aoiSplit[2] +
+              "&ymax=" +
+              aoiSplit[3] +
+              "&xmin=" +
+              aoiSplit[0] +
+              "&xmax=" +
+              aoiSplit[1] +
+              "&alg=" + 
+              algorithm)
+          : (url += "tiffshape" + "?alg=" + algorithm);
+    console.log(url);
+  }
 
   request(url, { json: true }, (err, res2, body) => {
     if (err) {
@@ -128,22 +165,43 @@ router.post("/ergebnisseitegjson", function (req, res, next) {
   let url = "http://172.17.0.1:8000/";
   let aoiSplit = "";
   console.log("aoi: " + req.body.aoibbgjson);
+  console.log("algorithm: " + req.body.algorithms);
+  var algorithm = req.body.algorithms
 
   if (req.body.aoibbgjson != "") {
     aoiSplit = req.body.aoibbgjson.split(",");
   }
-  aoiSplit != ""
-        ? (url +=
-            "tiffgjson?ymin=" +
-            aoiSplit[2] +
-            "&ymax=" +
-            aoiSplit[3] +
-            "&xmin=" +
-            aoiSplit[0] +
-            "&xmax=" +
-            aoiSplit[1])
-        : (url += "tiffgjson");
-  console.log(url);
+  if (algorithm == undefined) {
+    aoiSplit != ""
+          ? (url +=
+              "tiffgjson?ymin=" +
+              aoiSplit[2] +
+              "&ymax=" +
+              aoiSplit[3] +
+              "&xmin=" +
+              aoiSplit[0] +
+              "&xmax=" +
+              aoiSplit[1])
+          : (url += "tiffgjson");
+          console.log(url);
+  }
+  else {
+    aoiSplit != ""
+          ? (url +=
+              "tiffgjson?ymin=" +
+              aoiSplit[2] +
+              "&ymax=" +
+              aoiSplit[3] +
+              "&xmin=" +
+              aoiSplit[0] +
+              "&xmax=" +
+              aoiSplit[1] +
+              "&alg=" + 
+              algorithm)
+          : (url += "tiffgjson" + "?alg=" + algorithm);
+    console.log(url);
+  }
+  
 
 
   request(url, { json: true }, (err, res2, body) => {
