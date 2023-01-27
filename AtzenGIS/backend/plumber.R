@@ -72,6 +72,12 @@ trainModel <- function(Referenzdaten, sentinel, alg){
     model <- train(TrainDat[,predictors],
                    TrainDat$Label,
                    method="rpart")
+  } else if(alg == "knn") {
+    model <- train(TrainDat[,predictors],
+                   TrainDat$Label,
+                   method="knn",
+                   preProcess = c("center", "scale"),
+                   tuneLength = 10)
   } else {
     model <- train(TrainDat[,predictors],
                    TrainDat$Label,
@@ -90,13 +96,54 @@ trainModel <- function(Referenzdaten, sentinel, alg){
 # Diese Funktion erhält ein Tif und ein trainiertes Modell und kann damit die
 # Prediction erstellen, welche dann auf den Server geschrieben wird.
 calculatePrediction <- function(sentinel, model){
-  prediction <- predict(as(sentinel,"Raster"),model)
+  # print the resolution of sentinel
+  print("test")
+
+  # Get the current resolution and dimensions of the raster
+  #resolution <- res(sentinel)
+  #dimensions <- dim(sentinel)
+
+  # Define the target grid dimensions
+  #new_dimensions <- round(dimensions * (resolution / 20))
+
+  # Create a SpatialGrid object for the target grid
+  #to <- GridTopology(c(0, 0), c(20, 20), c(new_dimensions[1], new_dimensions[2]))
+
+  # Define output projection
+  #out_crs <- CRS("+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs")
+
+  # Change the resolution of the raster
+  #sentinel_lower <- projectRaster(sentinel, res = c(20,20), to = to, crs = out_crs)
+  #print("geht!")
+
+  #print(res(sentinel))
+  #print(res(sentinel_lower))
+  #print(crs(sentinel))
+  #print(class(sentinel))
+
+  # Check the dimensions of the original raster
+#dim(sentinel)
+
+# Set the new resolution to 20 x 20
+#new_resolution <- c(20, 20)
+
+# Use projectRaster() to change the resolution
+#sentinel_lower <- projectRaster(sentinel, res = new_resolution, crs = crs(sentinel))
+
+  # Check the resolution of the new raster
+  #print(res(sentinel_lower))
+
+  # Make the prediction
+  prediction <- predict(sentinel, model)
+  print("test predict")
   prediction_terra <- as(prediction,"SpatRaster")
+  print("test prediction_terra")
   prediction_terra <- setColor(prediction_terra)
+  print("test prediction_terra setcolour")
   
   crs(prediction_terra) <- "EPSG:32632"
-  
   terra::writeRaster(prediction_terra, "mydockerdata/prediction.tif", overwrite = TRUE)
+  print("Prediction geht")
 
   # Zum schneller machen
   cl <- makeCluster(4) 
@@ -113,6 +160,7 @@ calculatePrediction <- function(sentinel, model){
   coltab(AOAPlot) <- colorD
   plot(AOAPlot)
   crs(AOAPlot) <- "EPSG:32632"
+
   terra::writeRaster(AOAPlot, "mydockerdata/aoa.tif", overwrite = TRUE)
   print("Fertig mit AOA")
 
@@ -343,7 +391,7 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
 
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   model <- readRDS("mydockerdata/usertrainedmodel.rds")
-  
+
   # Daten auf Maske zuschneiden
   if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
     # für Sentinel Bilder
@@ -357,6 +405,7 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
     rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
     # Zuschneiden
     sentinel <- crop(sentinel, extent(rastercord.UTM))
+    print("croppen hat geklappt!")
   }
 
   calculatePrediction(sentinel, model)

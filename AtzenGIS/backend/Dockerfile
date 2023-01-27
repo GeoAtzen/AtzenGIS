@@ -3,20 +3,13 @@ FROM rstudio/plumber
 WORKDIR /usr/src/app
 
 # install the linux libraries needed for plumber
-RUN apt-get update -qq && apt-get install -y libcurl4-openssl-dev \
-    libssl-dev \
-    libjq-dev \
-    libprotobuf-dev \
-    protobuf-compiler \
-    make \
-    libgeos-dev \
-    libudunits2-dev \
-    libgdal-dev \
-    gdal-bin \
-    libproj-dev \
-    libv8-dev
-
-RUN apt-get install -y --no-install-recommends libxt6
+RUN apt-get update && apt-get install -y \
+    build-essential curl libcurl4-openssl-dev apt-utils libjq-dev systemctl\
+    r-base r-base-dev libssl-dev libprotobuf-dev protobuf-compiler\
+    libudunits2-dev libproj-dev libgdal-dev libgeos-dev libssl-dev libv8-dev\
+    && rm -rf /var/lib/apt/lists/*
+RUN apt install -y libprotobuf-dev protobuf-compiler
+RUN apt-get upgrade
 
 RUN R -e "install.packages(c('randomForest', 'terra', 'caret', 'raster', 'RCurl', 'tiff', 'sf','plumber','cowplot','tidyterra', 'geojsonR', 'doParallel', 'parallel', 'viridis', 'latticeExtra', 'tmap', 'CAST'))"
 RUN R -e "install.packages('plumber', dependencies=TRUE)"
