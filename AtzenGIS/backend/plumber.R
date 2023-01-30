@@ -85,7 +85,7 @@ trainModel <- function(Referenzdaten, sentinel, alg){
                    importance=TRUE,
                    ntree=50)
   }
-  
+  print("trainieren hat geklappt!")
   calculatePrediction(sentinel, model)
 }
 
@@ -96,45 +96,9 @@ trainModel <- function(Referenzdaten, sentinel, alg){
 # Diese Funktion erhält ein Tif und ein trainiertes Modell und kann damit die
 # Prediction erstellen, welche dann auf den Server geschrieben wird.
 calculatePrediction <- function(sentinel, model){
-  # print the resolution of sentinel
-  print("test")
-
-  # Get the current resolution and dimensions of the raster
-  #resolution <- res(sentinel)
-  #dimensions <- dim(sentinel)
-
-  # Define the target grid dimensions
-  #new_dimensions <- round(dimensions * (resolution / 20))
-
-  # Create a SpatialGrid object for the target grid
-  #to <- GridTopology(c(0, 0), c(20, 20), c(new_dimensions[1], new_dimensions[2]))
-
-  # Define output projection
-  #out_crs <- CRS("+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs")
-
-  # Change the resolution of the raster
-  #sentinel_lower <- projectRaster(sentinel, res = c(20,20), to = to, crs = out_crs)
-  #print("geht!")
-
-  #print(res(sentinel))
-  #print(res(sentinel_lower))
-  #print(crs(sentinel))
-  #print(class(sentinel))
-
-  # Check the dimensions of the original raster
-#dim(sentinel)
-
-# Set the new resolution to 20 x 20
-#new_resolution <- c(20, 20)
-
-# Use projectRaster() to change the resolution
-#sentinel_lower <- projectRaster(sentinel, res = new_resolution, crs = crs(sentinel))
-
-  # Check the resolution of the new raster
-  #print(res(sentinel_lower))
-
+  print("prediciton:")
   # Make the prediction
-  prediction <- predict(sentinel, model)
+  prediction <- predict(as(sentinel,"Raster"),model)
   print("test predict")
   prediction_terra <- as(prediction,"SpatRaster")
   print("test prediction_terra")

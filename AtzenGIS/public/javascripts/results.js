@@ -30,13 +30,13 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl)
 
 // assigning a label to the drawn Polygon via prompt
-var getLabel = function(layer) {
+var getLabel = function (layer) {
     var Label = prompt("Label des Polygons", "Label");
     return Label;
 };
 
 // assigning a ClassID to the drawn Polygon via prompt
-var getclassID = function(layer) {
+var getclassID = function (layer) {
     var ClassID = prompt("ClassID des Polygons", "ClassID");
     return ClassID;
 };
@@ -46,34 +46,48 @@ var polygonsgeojson = [];
 
 // Source: https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
 // Declaring your own features for the drawn polygon to safe them in the geojson
-map.on(L.Draw.Event.CREATED, function(e) {
-    var layer = e.layer
-    feature = layer.feature = layer.feature || {};
-    feature.type = feature.type || "Feature";
+document.addEventListener('DOMContentLoaded', function () {
+    map.on(L.Draw.Event.CREATED, function (e) {
+        var layer = e.layer
+        feature = layer.feature = layer.feature || {};
+        feature.type = feature.type || "Feature";
 
-    var Label = getLabel(layer);
-    var ClassID = getclassID(layer);
-    // assining the attributes entered in the prompt to be the features of the geojson
-    var props = (feature.properties = feature.properties || {});
-    props.Label = Label;
-    props.ClassID = ClassID;
+        var Label = getLabel(layer);
+        var ClassID = getclassID(layer);
+        // assining the attributes entered in the prompt to be the features of the geojson
+        var props = (feature.properties = feature.properties || {});
+        props.Label = Label;
+        props.ClassID = ClassID;
 
-    // adding the drawn polygons to the layer
-    drawnItems.addLayer(layer);
+        // adding the drawn polygons to the layer
+        drawnItems.addLayer(layer);
 
-    if (Label == "Label") {
-        layer.bindPopup("Kein Label angegeben");
-    } else if (Label == "") {
-        layer.bindPopup("Kein Label angegeben");
-    } else {
-        layer.bindPopup("Label: " + Label + "<br>" + "ClassID: " + ClassID).openPopup();
-    }
-    drawnItems.addLayer(layer);
+        if (Label == "Label") {
+            layer.bindPopup("Kein Label angegeben");
+        } else if (Label == "") {
+            layer.bindPopup("Kein Label angegeben");
+        } else {
+            layer.bindPopup("Label: " + Label + "<br>" + "ClassID: " + ClassID).openPopup();
+        }
 
-    // converting the drawn poylgons to geojson and pushing them to the global array
-    polygonsgeojson.push(drawnItems.toGeoJSON());
-
+        document.querySelector('#add-polygon-btn').addEventListener('click', function () {
+            let newFeatureCollection = {
+                type: 'FeatureCollection',
+                features: []
+            };
+            let features = drawnItems.toGeoJSON().features;
+            for (let i = 0; i < features.length; i++) {
+                newFeatureCollection.features.push(features[i]);
+            }
+            document.querySelector('#polygons').innerHTML = JSON.stringify(newFeatureCollection);
+            console.log("Selbstgezeichnete Polygone: ", document.querySelector('#polygons').innerHTML);
+        });
+    });
 });
+
+
+
+
 
 /**  
  * @function exportGeoJSON
@@ -82,79 +96,111 @@ map.on(L.Draw.Event.CREATED, function(e) {
  */
 function exportGeoJSON() {
 
-            // test GeoJSON validity by logging the data to the console for chacking it 
-            console.log(drawnItems.toGeoJSON());
-            console.log(JSON.stringify(drawnItems.toGeoJSON()));
+    // test GeoJSON validity by logging the data to the console for chacking it 
+    console.log(drawnItems.toGeoJSON());
+    console.log(JSON.stringify(drawnItems.toGeoJSON()));
 
-            // save drawn Polygons as GeoJSON in drawnpolygonsjson
-            let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
+    // save drawn Polygons as GeoJSON in drawnpolygonsjson
+    let drawnpolygonsjson = JSON.stringify(drawnItems.toGeoJSON());
 
-            // telling javascript to export drawnpolygonsjson as JSON format
-            let dataUri =
-                "data:text/json;charset=utf-8," + encodeURIComponent(drawnpolygonsjson /* geht nicht da invalides geojson + useruploadedgeojson */ );
+    // telling javascript to export drawnpolygonsjson as JSON format
+    let dataUri =
+        "data:text/json;charset=utf-8," + encodeURIComponent(drawnpolygonsjson /* geht nicht da invalides geojson + useruploadedgeojson */ );
 
-            // declaring the export name
-            let fileexportname = "digitalized_usertrainingspolygons" + ".geojson";
+    // declaring the export name
+    let fileexportname = "digitalized_usertrainingspolygons" + ".geojson";
 
-            // download via DOM
-            let linkElement = document.createElement("a");
-            linkElement.setAttribute("href", dataUri);
-            linkElement.setAttribute("download", fileexportname);
+    // download via DOM
+    let linkElement = document.createElement("a");
+    linkElement.setAttribute("href", dataUri);
+    linkElement.setAttribute("download", fileexportname);
 
-            // if polygon is empty give out error
-            let emptypolygon = '{"type":"FeatureCollection","features":[]}';
-            if (drawnpolygonsjson == emptypolygon) {
-                alert("Sie haben noch keine Polygone gezeichnet!");
-            } else {
-                linkElement.click();
-            }
+    // if polygon is empty give out error
+    let emptypolygon = '{"type":"FeatureCollection","features":[]}';
+    if (drawnpolygonsjson == emptypolygon) {
+        alert("Sie haben noch keine Polygone gezeichnet!");
+    } else {
+        linkElement.click();
+    }
 }
 
 // Anzeigen der hochgeladenen Shapefile
 var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+            layer.bindPopup(Object.keys(feature.properties).map(function (k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
                 maxHeight: 200
             });
         }
     },
-    style: function(feature) {
+    style: function (feature) {
         switch (feature.properties.Label) {
             case "Acker":
-                return { color: "#d18b2c" };
+                return {
+                    color: "#d18b2c"
+                };
             case "Acker_bepflanzt":
-                return { color: "#70843a" };
+                return {
+                    color: "#70843a"
+                };
             case "Bahnschiene":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Baumgruppe":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Binnengewaesser":
-                return { color: "#0a1cb1" };
+                return {
+                    color: "#0a1cb1"
+                };
             case "Industrie":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Innenstadt":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Kunstrasen":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Laubwald":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Mischwald":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Parklandschaft":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Siedlung":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Strand":
-                return { color: "#ffff00" };
+                return {
+                    color: "#ffff00"
+                };
             case "Versiegelt":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Wiese":
-                return { color: "#00FF00" };
+                return {
+                    color: "#00FF00"
+                };
             default:
-                return { color: "#000000" };
+                return {
+                    color: "#000000"
+                };
         }
     },
 }).addTo(map);
@@ -213,98 +259,162 @@ var usergeopackage = new L.geoPackageFeatureLayer([], {
 */
 // add GeoJSON to map
 var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+            layer.bindPopup(Object.keys(feature.properties).map(function (k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
                 maxHeight: 200
             });
         }
     },
-    style: function(feature) {
+    style: function (feature) {
         switch (feature.properties.Label) {
             case "Acker":
-                return { color: "#d18b2c" };
+                return {
+                    color: "#d18b2c"
+                };
             case "Acker_bepflanzt":
-                return { color: "#70843a" };
+                return {
+                    color: "#70843a"
+                };
             case "Bahnschiene":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Baumgruppe":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Binnengewaesser":
-                return { color: "#0a1cb1" };
+                return {
+                    color: "#0a1cb1"
+                };
             case "Industrie":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Innenstadt":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Kunstrasen":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Laubwald":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Mischwald":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Parklandschaft":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Siedlung":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Strand":
-                return { color: "#ffff00" };
+                return {
+                    color: "#ffff00"
+                };
             case "Versiegelt":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Wiese":
-                return { color: "#00FF00" };
+                return {
+                    color: "#00FF00"
+                };
             default:
-                return { color: "#000000" };
+                return {
+                    color: "#000000"
+                };
         }
     },
 }).addTo(map);
 
 // add converted GeoPackage as GeoJSON to map
 var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+            layer.bindPopup(Object.keys(feature.properties).map(function (k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
                 maxHeight: 200
             });
         }
     },
-    style: function(feature) {
+    style: function (feature) {
         switch (feature.properties.Label) {
             case "Acker":
-                return { color: "#d18b2c" };
+                return {
+                    color: "#d18b2c"
+                };
             case "Acker_bepflanzt":
-                return { color: "#70843a" };
+                return {
+                    color: "#70843a"
+                };
             case "Bahnschiene":
-                return { color: "#613232" };
+                return {
+                    color: "#613232"
+                };
             case "Baumgruppe":
-                return { color: "#18471e" };
+                return {
+                    color: "#18471e"
+                };
             case "Binnengewaesser":
-                return { color: "#0a1cb1" };
+                return {
+                    color: "#0a1cb1"
+                };
             case "Industrie":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Innenstadt":
-                return { color: "#F5F5F5" };
+                return {
+                    color: "#F5F5F5"
+                };
             case "Kunstrasen":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Laubwald":
-                return { color: "#03ad1d" };
+                return {
+                    color: "#03ad1d"
+                };
             case "Mischwald":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Parklandschaft":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Siedlung":
-                return { color: "#B22222" };
+                return {
+                    color: "#B22222"
+                };
             case "Strand":
-                return { color: "#ffff00" };
+                return {
+                    color: "#ffff00"
+                };
             case "Versiegelt":
-                return { color: "#141414" };
+                return {
+                    color: "#141414"
+                };
             case "Wiese":
-                return { color: "#00FF00" };
+                return {
+                    color: "#00FF00"
+                };
             default:
-                return { color: "#000000" };
+                return {
+                    color: "#000000"
+                };
         }
     },
 }).addTo(map);
@@ -380,13 +490,13 @@ function loadprediction() {
             });
         });
     fetch('http://localhost:3000/predictionlegende.png')
-        .then(function(data) {
+        .then(function (data) {
             return data.blob();
         })
-        .then(function(img) {
+        .then(function (img) {
             var legende = URL.createObjectURL(img);
             $('img').attr('src', legende);
-    })
+        })
 }
 
 function loadaoa() {
@@ -414,15 +524,19 @@ function loadaoa() {
 
 // adding sampling locations to map via shapefile
 var samplingshp = new L.Shapefile("http://localhost:3000/samples", {
-    onEachFeature: function(feature, layer) {
-            layer.bindPopup("Hier im Optimalfall neue trainingspolygone zeichnen!");
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup("Hier im Optimalfall neue trainingspolygone zeichnen!");
     },
-    style: function(feature) {
+    style: function (feature) {
         switch (feature.properties.DI) {
             case "1":
-                return { color: "#714F84" };
+                return {
+                    color: "#714F84"
+                };
             default:
-                return { color: "#000000" };
+                return {
+                    color: "#000000"
+                };
         }
     },
 });

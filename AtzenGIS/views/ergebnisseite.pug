@@ -38,7 +38,10 @@ block content
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingsdatashp.zip', download='uploadedtrainingsdatashp.zip' style='float: right;')
                     p Herunterladen des hochgeladenes GeoJSON als .geojson:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingspolygonegjson.geojson', download='uploadedtrainingsdatagjson.geojson' style='float: right;')
-                    p Herunterladen der selbstgezeichneten Polygone als .geojson:  
+                    p Herunterladen der selbstgezeichneten Polygone als .geojson: 
+                      textarea#polygons(name="polygons" readonly="readonly") 
+                      button.btn.btn-success#add-polygon-btn Überprüfen der gezeichneten Polygone:
+                      
                       a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()' style='float: right;')
                     br                 
                     h4 Gebiete zum Nachtrainieren
@@ -55,8 +58,17 @@ block content
                     h4 Herunterladen aller Daten als .zip: 
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/', download='alldata.zip' style='float: right;')
                     br
-                    form(method='post', action='/mergegeojson' style='margin:auto;')
-                      button.btn.btn-success() Zurück zur Anwendungsseite
+                    form(method='post', action='/anwendungsseite/mergegeojson' style='margin:auto;')
+                        form-group
+                          label(for='algorithm-select') Trainingsalgorithmus:
+                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                option(value='rf' name="rf") Random Forest
+                                option(value='svm' name="svm") SVM with Radial Kernel
+                                option(value='dt' name="dt") Decision Trees (rpart)
+                                option(value='knn' name="knn") k-Nearest Neighbors
+                                textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
+                                textarea#polygons(hidden="" name="polygons" readonly="readonly") 
+                                button.btn.btn-success() Erneut ausführen
                     p(style="font-size: small") Mit Klicken auf diesen Button gelangen Sie zur Anwendungsseite zurück und die gezeichneten Polygone werden mit den hochgeladenen Polygonen verbunden um diese erneut zu verwenden.
 
 

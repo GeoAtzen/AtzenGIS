@@ -14,24 +14,6 @@ var request = require("request");
 
 var app = express();
 
-// Zurück zur Anwendungsseite und im optimalfall mergen der beiden geojson FeatureCollections
-app.post(
-    "/mergegeojson",
-    (req, res) => {
-        /*
-        var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
-            './public/uploads/usertrainingspolygonegjson.geojson',
-            './public/uploads/usertrainingspolygonegjson.geojson'
-        ])
-        //console.log(mergedStream)
-        //mergedStream.pipe(process.stdout); 
-        */
-        res.render("anwendungsseite", {
-            title: "Anwendungsseite"
-        });
-    }
-);
-
 // error handler
 const handleError = (err, res) => {
     res

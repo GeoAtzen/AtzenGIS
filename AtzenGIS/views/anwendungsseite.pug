@@ -101,7 +101,7 @@ block content
                                 option(value='svm' name="svm") SVM with Radial Kernel
                                 option(value='dt' name="dt") Decision Trees (rpart)
                                 option(value='knn' name="knn") k-Nearest Neighbors
-                                textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly" style="font-size: 0.8rem")
+                                textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly")
                                 br
                                 button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
                                   | GeoPackage Trainingsdaten
@@ -115,7 +115,7 @@ block content
                                 option(value='svm' name="svm") SVM with Radial Kernel
                                 option(value='dt' name="dt") Decision Trees (rpart)
                                 option(value='knn' name="knn") k-Nearest Neighbors
-                                textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly" style="font-size: 0.8rem")
+                                textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
                                 br
                                 button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
                                   | GeoJSON Trainingsdaten
@@ -129,7 +129,7 @@ block content
                                 option(value='svm' name="svm") SVM with Radial Kernel
                                 option(value='dt' name="dt") Decision Trees (rpart)
                                 option(value='knn' name="knn") k-Nearest Neighbors
-                                textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly" style="font-size: 0.8rem")
+                                textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly")
                                 br
                                 button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
                                   | Shapefile Trainingsdaten
@@ -137,7 +137,7 @@ block content
                 #traniertesModelltrain(style= "display:none") 
                   form(method='post', action='/anwendungsseite/ergebnisseitemodel')
                       form-group
-                          textarea#aoibbmdl.form-control.disabled(hidden='' name="aoibbmdl" readonly="readonly" style="font-size: 0.8rem")
+                          textarea#aoibbmdl.form-control.disabled(hidden='' name="aoibbmdl" readonly="readonly")
                           button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>                                                                  
                             | trainiertem Modell
 
