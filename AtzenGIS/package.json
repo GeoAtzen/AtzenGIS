@@ -20,6 +20,7 @@
     "geotiff.js": "^1.0.1",
     "http": "^0.0.1-security",
     "http-errors": "~1.6.3",
+    "jsonlint": "^1.6.3",
     "leaflet": "^1.8.0",
     "leaflet-draw": "^1.0.4",
     "mapbox": "^1.0.0-beta10",

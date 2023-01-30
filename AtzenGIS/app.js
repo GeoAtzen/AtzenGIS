@@ -28,6 +28,15 @@ const upload = multer({
 });
 
 app.post(
+    "/zurueck",
+    (req, res) => {
+        res.render("anwendungsseite", {
+            title: "Anwendungsseite"
+        });
+    }
+);
+
+app.post(
     "/uploadsentinel",
     upload.single("file"),
     (req, res) => {

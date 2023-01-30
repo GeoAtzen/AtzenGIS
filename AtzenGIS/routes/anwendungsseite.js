@@ -5,7 +5,8 @@ const multer = require("multer");
 const fs = require("fs");
 var request = require("request");
 const path = require("path");
-var geojsonMerge = require('@mapbox/geojson-merge');
+const jsonlint = require("jsonlint");
+const geojsonMerge = require('@mapbox/geojson-merge');
 // error handler
 const handleError = (err, res) => {
   res
@@ -233,71 +234,29 @@ router.post("/ergebnisseitegjson", function (req, res, next) {
 
 // Zurück zur Anwendungsseite und im optimalfall mergen der beiden geojson FeatureCollections
 router.post("/mergegeojson", (req, res, next) => {
-    drawnpolygons = req.body.polygons
-    console.log(drawnpolygons)
+  drawnpolygons = req.body.polygons
+  console.log(drawnpolygons)
 
-    fs.writeFile('mydockerdata/merged_polygons.geojson', JSON.stringify(drawnpolygons), (err) => {
+  fs.writeFile('mydockerdata/drawnpolygonsformerge.geojson', drawnpolygons, (err) => {
     if (err) throw err;
     console.log('The file has been saved!');
   });
 
-    var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
-        'mydockerdata/usertrainingspolygonegjson.geojson',
-        'mydockerdata/merged_polygons.geojson'
-    ])
-    //console.log(mergedStream)
-    mergedStream.pipe(process.stdout); 
-    
-  let url = "http://172.17.0.1:8000/";
-  let aoiSplit = "";
-  console.log("aoi: " + req.body.aoibbgjson);
-  console.log("algorithm: " + req.body.algorithms);
-  var algorithm = req.body.algorithms
 
-  if (req.body.aoibbgjson != "") {
-    aoiSplit = req.body.aoibbgjson.split(",");
-  }
-  if (algorithm == undefined) {
-    aoiSplit != "" ?
-      (url +=
-        "tiffgjson?ymin=" +
-        aoiSplit[2] +
-        "&ymax=" +
-        aoiSplit[3] +
-        "&xmin=" +
-        aoiSplit[0] +
-        "&xmax=" +
-        aoiSplit[1]) :
-      (url += "tiffgjson");
-    console.log(url);
-  } else {
-    aoiSplit != "" ?
-      (url +=
-        "tiffgjson?ymin=" +
-        aoiSplit[2] +
-        "&ymax=" +
-        aoiSplit[3] +
-        "&xmin=" +
-        aoiSplit[0] +
-        "&xmax=" +
-        aoiSplit[1] +
-        "&alg=" +
-        algorithm) :
-      (url += "tiffgjson" + "?alg=" + algorithm);
-    console.log(url);
-  }
+  var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
+    'mydockerdata/drawnpolygonsformerge.geojson',
+    'mydockerdata/usertrainingspolygonegjson.geojson'
+  ]);
 
-  request(url, {
-    json: true
-  }, (err, res2, body) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.render("ergebnisseite", {
-      title: "Ergebnisseite"
-    });
+  var writeStream = fs.createWriteStream('mydockerdata/mergedgeojsonfile.geojson');
+
+  mergedStream.pipe(writeStream);
+
+  writeStream.on('finish', function () {
+    console.log('The merged file has been saved!');
+    var file = 'mydockerdata/mergedgeojsonfile.geojson';
+    res.download(file);
   });
-  }
-);
+});
 
 module.exports = router;
