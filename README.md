@@ -33,7 +33,7 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 
 <h3>Step 1</h3>
-
+![alt text](https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/stylesheets/1_readme.jpeg?raw=true)
 
 <h2>License</h2>
 Dieses Programm ist eine freie, OPENSOURCE Software: Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben und/oder verändern.
