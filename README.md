@@ -1,5 +1,5 @@
 # Area of Application by GeoAtzen
-Ein Web-Tool zum kalkulueren der Area of Applicability (kurz: AOA).
+A Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
 <h2>Background</h2>
 Methoden des maschinellen Lernens werden immer mehr und mehr für räumliche Vorhersagen, wie etwa Klassifizerung und Fernerkundung, verwendet. Einer der Gründe hierfür ist u.a. die Fähigkeit hier nicht-lineare Beziehungen zu erlernen und dadurch Klassifizierungssaufgaben zu lösen.
 <br>Ein Problem hierbei ist jedoch, dass diese Algorithmen lediglich aussagekräftige Vorhersagen treffen können, wenn sie auf Daten angewendet werden, die den Ursprungsdaten ähnlich sind, auf denen Sie trainiert wurden. Um diese "Ähnlichkeiten" zu quantifizieren und darzustellen wurde die AOA (Meyer und Pebesma, 2021) entwickelt.
@@ -28,11 +28,9 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 <br>Die Website ist dann erreichbar unter:
 <br>http://localhost:3000/
 <br>
-<h4>Achtung!</h4>
-<br>Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
+<h5>Attention!</h5>
+<br>First Loading Session will take some time!
 
-<h2>Benutzung</h2>
-Zur einfachen Handhabung der Prozesse haben wir eine einfach und unkomplizierte Website erichtet. Die Step-by-Step Erklärung ist wie folgt:
 
 <h3>Step 1</h3>
 

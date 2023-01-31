@@ -8,7 +8,7 @@ block content
     p Diese Seite ist für Demonstrationszwecke
     .row.justify-content-md-left
           .col-lg-6.col-xs-12.mb-3
-                #anwendungsmap
+                #demomap
 
           .col-lg-6.col-xs-12.mb-3
             est
@@ -21,9 +21,9 @@ block content
                     p 
                     .w3-row
                       .w3-half
-                        button.btn.btn-success(onclick="document.getElementById('geopackagegeojson').style.display='block'; document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
+                        button.btn.btn-success(onclick="document.getElementById('fuerdiedemo').style.display='block'; document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
                       .w3-half
-                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';  document.getElementById('geopackagegeojson').style.display='block'; document.getElementById('shapefiletrain').style.display='block';") Nein
+                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';  document.getElementById('fuerdiedemo').style.display='block'; document.getElementById('shapefiletrain').style.display='block';") Nein
                     br
                     p Wählen Sie ja oder nein um den Vorgang fortzusetzen.
                     br
@@ -89,13 +89,27 @@ block content
                   h4 Ausführen
                     button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
                   p
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
                   
-                #geopackagegeojson(style= "display:none") 
+                #fuerdiedemo(style= "display:none") 
                   .w3-row
                     .w3-half
                       form(method='post', action='/demo/demoergebnis')
                           form-group
-                              textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly" style="font-size: 0.8rem")
+                              textarea#aoibbdemo.form-control.disabled(hidden='' name="aoibbmdl" readonly="readonly")
                               button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen der Demo 
 
   #warteseiteGanz(style= "display:none")

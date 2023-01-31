@@ -21,7 +21,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
-
+// googlesat as another option for better quality then the own satellite images
 var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}');
 
 // drawcontrol variables
@@ -206,7 +206,7 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegp
     },
 }).addTo(map);
 
-// adding the merged file to the map with styling and pop up for it's properties
+// adding the demo geojson file to the map with styling and pop up for it's properties
 var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {

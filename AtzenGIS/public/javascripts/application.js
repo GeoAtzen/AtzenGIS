@@ -14,13 +14,14 @@ window.onload= function() {
     var anzeig2 = document.getElementById("buttonAnzeig");
     anzeig2.style.display ="block";
 }
-// erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
+// creating a leaflet map with OSM as baselayer and view set to ...
 var map = L.map("anwendungsmap").setView([52, 7.8], 12);
 
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
+// googlesat as another option for better quality then the own satellite images
 var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}');
 
 //drawcontrol variables
@@ -109,7 +110,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
 }).addTo(map);
 
 
-// add GeoJSON to map
+// adding the uploaded geojson file to the map with styling and pop up for it's properties
 var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
@@ -207,7 +208,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
     },
 }).addTo(map);
 
-// add converted GeoPackage as GeoJSON to map
+// add converted GeoPackage as GeoJSON to map with styling and pop up for it's properties
 var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
