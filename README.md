@@ -28,12 +28,13 @@ workflows as a standard applicability estimation tool. The system to be develope
 combines training, prediction (here LULC classes) and applicability estimation, and
 supports two modes of operation:
 
-<br>a) the user submits a trained model and selects an area of interest: the system
+<br>1) the user submits a trained model and selects an area of interest: the system
 performs the classification in the area of interest and computes the AOA
-<br>b) the user submits a (trained or untrained) model and training data and selects
+<br>
+<br>2) the user submits a (trained or untrained) model and training data and selects
 an area of interest: the system performs the training, the classification in the
 area of interest and computes the AOA
-
+<br>
 <h2> Getting Started</h2>
 We used Docker to ensure an easy deployment.
 
@@ -47,6 +48,7 @@ We used Docker to ensure an easy deployment.
 <br>http://localhost:3000/
 <br>
 <h4>Attention!</h4>
+<br>First Loading Session will take some time!
 <br>Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
 
 <h2>Prerequisites</h2>
@@ -55,7 +57,7 @@ We used Docker to ensure an easy deployment.
 
 <h2>License</h2>
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation.
-Refer to [placeholder](placeholder) for more, specific information regarding the License
+Refer to LICENSE for more, specific information regarding the License.
 
 <h2>Acknowledgments</h2>
 This Software was made by Johnathan M., Darian W., Luca H., Tobias K., Tim L. and Erkam D. for the Geosoftware II class led by E. Pebesma and C. Knoth.
