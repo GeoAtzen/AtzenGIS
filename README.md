@@ -48,8 +48,7 @@ We used Docker to ensure an easy deployment.
 <br>http://localhost:3000/
 <br>
 <h5>Attention!</h5>
-<br>First Loading Session will take some time!
-
+First Loading Session will take some time!
 
 <h2>Prerequisites</h2>
 
