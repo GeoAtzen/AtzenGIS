@@ -5,15 +5,15 @@ We used Docker to ensure an easy deployment.
 
 
 <h3>Docker</h3>
-1. Docker Desktop starten
-2. Dieses Repository klonen!
-3. In VSC im Terminal in den Ordner AtzenGIS navigieren
-3. $ docker-compose up
-Die Website ist dann erreichbar unter:
-http://localhost:3000/
-
-Achtung!
-Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
+<br>1. Docker Desktop starten
+<br>2. Dieses Repository klonen!
+<br>3. In VSC im Terminal in den Ordner AtzenGIS navigieren
+<br>3. $ docker-compose up
+<br>Die Website ist dann erreichbar unter:
+<br>http://localhost:3000/
+<br>
+<h4>Achtung!</h4>
+<br>Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
 
 <h2>Prerequisites</h2>
 
