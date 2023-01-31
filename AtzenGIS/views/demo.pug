@@ -11,7 +11,7 @@ block content
                 #anwendungsmap
 
           .col-lg-6.col-xs-12.mb-3
-            
+            est
             h3
               
               .card.text-dark.p-4.border-success.cardanwendungsseite
@@ -21,7 +21,7 @@ block content
                     p 
                     .w3-row
                       .w3-half
-                        button.btn.btn-success(onclick="document.getElementById('traniertesModelltrain').style.display='block'; document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
+                        button.btn.btn-success(onclick="document.getElementById('geopackagegeojson').style.display='block'; document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
                       .w3-half
                         button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';  document.getElementById('geopackagegeojson').style.display='block'; document.getElementById('shapefiletrain').style.display='block';") Nein
                     br
@@ -93,32 +93,10 @@ block content
                 #geopackagegeojson(style= "display:none") 
                   .w3-row
                     .w3-half
-                      form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
+                      form(method='post', action='/demo/demoergebnis')
                           form-group
                               textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly" style="font-size: 0.8rem")
-                              button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                | geoPackage Trainingsdaten
-                      br
-                    .w3-half
-                      form(method='post', action='/anwendungsseite/ergebnisseitegjson')
-                          form-group
-                              textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly" style="font-size: 0.8rem")
-                              button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                | GeoJSON Trainingsdaten
-                      br 
-                #shapefiletrain(style= "display:none") 
-                  form(method='post', action='/anwendungsseite/ergebnisseiteshape')
-                      form-group
-                          textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly" style="font-size: 0.8rem")
-                          button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                            | Shapefile Trainingsdaten
-                  br  
-                #traniertesModelltrain(style= "display:none") 
-                  form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                      form-group
-                          textarea#aoibbmdl.form-control.disabled(hidden='' name="aoibbmdl" readonly="readonly" style="font-size: 0.8rem")
-                          button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>                                                                  
-                            | trainiertem Modell
+                              button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen der Demo 
 
   #warteseiteGanz(style= "display:none")
     br
