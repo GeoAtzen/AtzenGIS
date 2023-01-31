@@ -59,7 +59,7 @@ map.on(L.Draw.Event.CREATED, (e) => {
 })
 
 
-// adding the uploaded shapefile to the map with styling and popup for its properties
+// Anzeigen der hochgeladenen Shapefile
 var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
@@ -108,7 +108,58 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
     },
 }).addTo(map);
 
-
+/* Anzeigen des hochgeladenen geopackages
+// Anmerkung: Layer MUSS layer1 heißen
+var usergeopackage = new L.geoPackageFeatureLayer([], {
+    geoPackageUrl: 'http://localhost:3000/usertrainingspolygonegpkg.gpkg',
+    layerName: 'layer1',
+    onEachFeature: function(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                return k + ": " + feature.properties[k];
+            }).join("<br />"), {
+                maxHeight: 200
+            });
+        }
+    },
+    style: function(feature) {
+        switch (feature.properties.Label) {
+            case "Acker":
+                return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+                return { color: "#70843a" };
+            case "Bahnschiene":
+                return { color: "#613232" };
+            case "Baumgruppe":
+                return { color: "#18471e" };
+            case "Binnengewaesser":
+                return { color: "#0a1cb1" };
+            case "Industrie":
+                return { color: "#696969" };
+            case "Innenstadt":
+                return { color: "#F5F5F5" };
+            case "Kunstrasen":
+                return { color: "#92e597" };
+            case "Laubwald":
+                return { color: "#03ad1d" };
+            case "Mischwald":
+                return { color: "#11671e" };
+            case "Parklandschaft":
+                return { color: "#92e597" };
+            case "Siedlung":
+                return { color: "#B22222" };
+            case "Strand":
+                return { color: "#ffff00" };
+            case "Versiegelt":
+                return { color: "#141414" };
+            case "Wiese":
+                return { color: "#00FF00" };
+            default:
+                return { color: "#000000" };
+        }
+    },
+});
+*/
 // add GeoJSON to map
 var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.geojson", {
     onEachFeature: function(feature, layer) {
@@ -158,7 +209,7 @@ var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.
     },
 }).addTo(map);
 
-// adding the merged file to the map with styling and pop up for it's properties
+// add GeoJSON to map
 var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
@@ -256,15 +307,14 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingsp
     },
 }).addTo(map);
 
-// adding the des .tif via georaster plugin: 
-// source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
+// hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
 fetch("http://localhost:3000/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {
             console.log("georaster:", georaster);
 
-            // source: https://github.com/GeoTIFF/georaster-layer-for-leaflet-example/blob/master/examples/separated.html#L45
+            // https://github.com/GeoTIFF/georaster-layer-for-leaflet-example/blob/master/examples/separated.html#L45
             const pixelValuesToColorFn = ([red, green, blue]) => {
                 let mins = georaster.mins;
                 red = Math.round(
@@ -298,12 +348,12 @@ fetch("http://localhost:3000/usersentineldata.tif")
 
             map.fitBounds(geotiffdata.getBounds());
 
-            // adding the layer to layercontrol of the leaflet map asynchronous
+            // Asynchrones hinzufügen des Layer zur Layerkontrollfunktion von Leaflet
             layerControl.addOverlay(geotiffdata, 'Satelliten Bild');
         });
     });
 
-// adding the draw function and giving the coordinates to aoibbmdl via DOM so it can be given to server side javascript modules via body parser
+// aoi modell
 const areaofinterestTextmdl = document.getElementById("aoibbmdl");
 areaofinterestTextmdl.value = "";
 
@@ -333,7 +383,7 @@ map.on("draw:deleted", function (e) {
   areaofinterestTextmdl.value = "";
 });
 
-// adding the draw function and giving the coordinates to aoibbgpkg via DOM so it can be given to server side javascript modules via body parser
+// aoi gpkg
 const areaofinterestTextgpkg = document.getElementById("aoibbgpkg");
 areaofinterestTextgpkg.value = "";
 
@@ -363,7 +413,7 @@ map.on("draw:deleted", function (e) {
   areaofinterestTextgpkg.value = "";
 });
 
-// adding the draw function and giving the coordinates to aoibbgjson via DOM so it can be given to server side javascript modules via body parser
+// aoi gjson
 const areaofinterestTextgjson = document.getElementById("aoibbgjson");
 areaofinterestTextgjson.value = "";
 
@@ -393,7 +443,7 @@ map.on("draw:deleted", function (e) {
   areaofinterestTextgjson.value = "";
 });
 
-// adding the draw function and giving the coordinates to aoibbshp via DOM so it can be given to server side javascript modules via body parser
+// aoi shp
 const areaofinterestTextshp = document.getElementById("aoibbshp");
 areaofinterestTextshp.value = "";
 
@@ -437,3 +487,4 @@ var overlayMaps = {
 };
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+

@@ -1,11 +1,10 @@
 var modal;
-
+// various event handler
 window.onclick = function(event) {
     if (event.target == modal) {
     modal.style.display = "none";
     }
     }
-
 
 window.onload= function() {
     console.log('ist geladen');
@@ -14,16 +13,18 @@ window.onload= function() {
     var anzeig2 = document.getElementById("buttonAnzeig");
     anzeig2.style.display ="block";
 }
-// erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
-var map = L.map("anwendungsmap").setView([52, 7.8], 12);
+
+// creating a leaflet map with OSM as baselayer and view set to Telgte
+var map = L.map("demomap").setView([52, 7.8], 12);
 
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 
+
 var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}');
 
-//drawcontrol variables
+// drawcontrol variables
 var drawnItems = new L.FeatureGroup()
 var drawControl = new L.Control.Draw({
     draw: {
@@ -58,59 +59,8 @@ map.on(L.Draw.Event.CREATED, (e) => {
     });
 })
 
-
-// adding the uploaded shapefile to the map with styling and popup for its properties
-var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
-    },
-    style: function(feature) {
-        switch (feature.properties.Label) {
-            case "Acker":
-                return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-                return { color: "#70843a" };
-            case "Bahnschiene":
-                return { color: "#613232" };
-            case "Baumgruppe":
-                return { color: "#18471e" };
-            case "Binnengewaesser":
-                return { color: "#0a1cb1" };
-            case "Industrie":
-                return { color: "#696969" };
-            case "Innenstadt":
-                return { color: "#F5F5F5" };
-            case "Kunstrasen":
-                return { color: "#92e597" };
-            case "Laubwald":
-                return { color: "#03ad1d" };
-            case "Mischwald":
-                return { color: "#11671e" };
-            case "Parklandschaft":
-                return { color: "#92e597" };
-            case "Siedlung":
-                return { color: "#B22222" };
-            case "Strand":
-                return { color: "#ffff00" };
-            case "Versiegelt":
-                return { color: "#141414" };
-            case "Wiese":
-                return { color: "#00FF00" };
-            default:
-                return { color: "#000000" };
-        }
-    },
-}).addTo(map);
-
-
-// add GeoJSON to map
-var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.geojson", {
+// adding the demo shapefile to the map with styling and popup for it's properties
+var usershapefile = new L.Shapefile("http://localhost:3000/demoshape.zip", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -159,7 +109,7 @@ var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.
 }).addTo(map);
 
 // adding the merged file to the map with styling and pop up for it's properties
-var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
+var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -207,8 +157,8 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
     },
 }).addTo(map);
 
-// add converted GeoPackage as GeoJSON to map
-var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
+// add converted GeoPackage as GeoJSON to map with styling and popup for it's properties
+var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegpkg.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -256,9 +206,58 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingsp
     },
 }).addTo(map);
 
-// adding the des .tif via georaster plugin: 
+// adding the merged file to the map with styling and pop up for it's properties
+var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegjson.geojson", {
+    onEachFeature: function(feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+                return k + ": " + feature.properties[k];
+            }).join("<br />"), {
+                maxHeight: 200
+            });
+        }
+    },
+    style: function(feature) {
+        switch (feature.properties.Label) {
+            case "Acker":
+                return { color: "#d18b2c" };
+            case "Acker_bepflanzt":
+                return { color: "#70843a" };
+            case "Bahnschiene":
+                return { color: "#613232" };
+            case "Baumgruppe":
+                return { color: "#18471e" };
+            case "Binnengewaesser":
+                return { color: "#0a1cb1" };
+            case "Industrie":
+                return { color: "#696969" };
+            case "Innenstadt":
+                return { color: "#F5F5F5" };
+            case "Kunstrasen":
+                return { color: "#92e597" };
+            case "Laubwald":
+                return { color: "#03ad1d" };
+            case "Mischwald":
+                return { color: "#11671e" };
+            case "Parklandschaft":
+                return { color: "#92e597" };
+            case "Siedlung":
+                return { color: "#B22222" };
+            case "Strand":
+                return { color: "#ffff00" };
+            case "Versiegelt":
+                return { color: "#141414" };
+            case "Wiese":
+                return { color: "#00FF00" };
+            default:
+                return { color: "#000000" };
+        }
+    },
+}).addTo(map);
+
+// adding the .tif via georaster plugin: 
 // source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("http://localhost:3000/usersentineldata.tif")
+fetch("http://localhost:3000/demosentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {
@@ -303,124 +302,34 @@ fetch("http://localhost:3000/usersentineldata.tif")
         });
     });
 
-// adding the draw function and giving the coordinates to aoibbmdl via DOM so it can be given to server side javascript modules via body parser
-const areaofinterestTextmdl = document.getElementById("aoibbmdl");
-areaofinterestTextmdl.value = "";
+// adding the demo aoi to the map (no need for the data here technically since it is the demo)
+const areaofinterestTextdemo = document.getElementById("aoibbdemo");
+areaofinterestTextdemo.value = "";
 
-var aoimdl;
+var aoidemo;
 map.on("draw:created", function (e) {
-  var areaofinterestmdl = e.layer;
-  aoimdl = [
-    areaofinterestmdl._bounds._southWest.lng,
-    areaofinterestmdl._bounds._northEast.lng,
-    areaofinterestmdl._bounds._southWest.lat,
-    areaofinterestmdl._bounds._northEast.lat,
+  var areaofinterestdemo = e.layer;
+  aoidemo = [
+    areaofinterestdemo._bounds._southWest.lng,
+    areaofinterestdemo._bounds._northEast.lng,
+    areaofinterestdemo._bounds._southWest.lat,
+    areaofinterestdemo._bounds._northEast.lat,
   ];
-  console.log(aoimdl);
-  areaofinterestTextmdl.value = aoimdl;
-  console.log(areaofinterestTextmdl.value);
+  console.log(aoidemo);
+  areaofinterestTextdemo.value = aoidemo;
+  console.log(areaofinterestTextdemo.value);
 });
 
 map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoimdl != null) {
-    map.removeLayer(aoimdl);
-    areaofinterestTextmdl.value = "";
+  if (aoidemo != null) {
+    map.removeLayer(aoidemo);
+    areaofinterestTextdemo.value = "";
   }
 });
 
 map.on("draw:deleted", function (e) {
-  aoimdl = null;
-  areaofinterestTextmdl.value = "";
-});
-
-// adding the draw function and giving the coordinates to aoibbgpkg via DOM so it can be given to server side javascript modules via body parser
-const areaofinterestTextgpkg = document.getElementById("aoibbgpkg");
-areaofinterestTextgpkg.value = "";
-
-var aoigpkg;
-map.on("draw:created", function (e) {
-  var areaofinterestgpkg = e.layer;
-  aoigpkg = [
-    areaofinterestgpkg._bounds._southWest.lng,
-    areaofinterestgpkg._bounds._northEast.lng,
-    areaofinterestgpkg._bounds._southWest.lat,
-    areaofinterestgpkg._bounds._northEast.lat,
-  ];
-  console.log(aoigpkg);
-  areaofinterestTextgpkg.value = aoigpkg;
-  console.log(areaofinterestTextgpkg.value);
-});
-
-map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoigpkg != null) {
-    map.removeLayer(aoigpkg);
-    areaofinterestTextgpkg.value = "";
-  }
-});
-
-map.on("draw:deleted", function (e) {
-  aoigpkg = null;
-  areaofinterestTextgpkg.value = "";
-});
-
-// adding the draw function and giving the coordinates to aoibbgjson via DOM so it can be given to server side javascript modules via body parser
-const areaofinterestTextgjson = document.getElementById("aoibbgjson");
-areaofinterestTextgjson.value = "";
-
-var aoigjson;
-map.on("draw:created", function (e) {
-  var areaofinterestgjson = e.layer;
-  aoigjson = [
-    areaofinterestgjson._bounds._southWest.lng,
-    areaofinterestgjson._bounds._northEast.lng,
-    areaofinterestgjson._bounds._southWest.lat,
-    areaofinterestgjson._bounds._northEast.lat,
-  ];
-  console.log(aoigjson);
-  areaofinterestTextgjson.value = aoigjson;
-  console.log(areaofinterestTextgjson.value);
-});
-
-map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoigjson != null) {
-    map.removeLayer(aoigjson);
-    areaofinterestTextgjson.value = "";
-  }
-});
-
-map.on("draw:deleted", function (e) {
-  aoigjson = null;
-  areaofinterestTextgjson.value = "";
-});
-
-// adding the draw function and giving the coordinates to aoibbshp via DOM so it can be given to server side javascript modules via body parser
-const areaofinterestTextshp = document.getElementById("aoibbshp");
-areaofinterestTextshp.value = "";
-
-var aoishp;
-map.on("draw:created", function (e) {
-  var areaofinterestshp = e.layer;
-  aoishp = [
-    areaofinterestshp._bounds._southWest.lng,
-    areaofinterestshp._bounds._northEast.lng,
-    areaofinterestshp._bounds._southWest.lat,
-    areaofinterestshp._bounds._northEast.lat,
-  ];
-  console.log(aoishp);
-  areaofinterestTextshp.value = aoishp;
-  console.log(areaofinterestTextshp.value);
-});
-
-map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoishp != null) {
-    map.removeLayer(aoishp);
-    areaofinterestTextshp.value = "";
-  }
-});
-
-map.on("draw:deleted", function (e) {
-  aoishp = null;
-  areaofinterestTextshp.value = "";
+  aoidemo = null;
+  areaofinterestTextdemo.value = "";
 });
 
 // Layer Control
