@@ -40,15 +40,21 @@ block content
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingspolygonegjson.geojson', download='uploadedtrainingsdatagjson.geojson' style='float: right;')
                     p 
                     br                 
-                    h4 Gebiete zum Nachtrainieren:
+                    h4 Gebiete zum Nachtrainieren
                       button.buttonFragezeichen(onclick="document.getElementById('id12').style.display='block'; modal = document.getElementById('id12')" title='Hilfe') ?
                     p Benutzen Sie zum Ein- und Ausblenden bitte die Layer Kontrollfunktion auf der Karte oben rechts!
                     p Herunterladen der selbstgezeichneten Polygone als .geojson: 
+                      
                       a.i.fa.fa-download.btn.btndownload.btn-success(onclick='exportGeoJSON()' style='float: right;')
-                      button.btn.btn-success#add-polygon-btn Überprüfen der gezeichneten Polygone:
+                      br
+                      br
+                      br
+                      button.btn.btn-success#add-polygon-btn(style= "display:block; margin:0 auto;") Überprüfen der gezeichneten Polygone:
                       form(method='post', action='/anwendungsseite/mergegeojson' style='margin:auto;')
-                        textarea#polygons(name="polygons") 
-                        button.btn.btn-success() Mit hochgeladenem GeoJSON zu einer FeatureCollection zusammenführen! Datei wird auf Knopfdruck heruntergeladen! 
+                        textarea#polygons(name="polygons" style="width:80%; height:200px; display:block; margin:0 auto;") 
+                        br
+                        button.btn.btn-success(style="display:block; margin:auto;") Mit hochgeladenem GeoJSON zu einer FeatureCollection zusammenführen 
+                        p(style="font-size: small; text-align: center;") Datei wird auf Knopfdruck heruntergeladen 
                     p Herunterladen der Gebiete wo nachtrainiert werden sollte als .shapefile:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples.shp', download='samplinglocations.shp' style='float: right;')
                     h4 Sentinel 2 Bild
