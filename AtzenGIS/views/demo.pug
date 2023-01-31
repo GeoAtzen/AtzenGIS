@@ -64,7 +64,7 @@ block content
                           br
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                           button.btn.btn-success(id= 'dateiAus4' onclick="document.getElementById('dateiAus4').textContent = 'Polygone.POLYGON';" style= "color: black; background-color: lightgrey; border: 1px solid black; margin-right: 5%;") Datei auswählen
-                          button.btn.btn-success(id='btn3' onclick='bufferAktivieren(4); document.getElementById('btn3').textContent = "Hinzufügen erfolgreich!";') Hinzufügen
+                          input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(2);")
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
                         p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
                       #shapefilezeug
