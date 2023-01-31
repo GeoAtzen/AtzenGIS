@@ -39,7 +39,7 @@ WebApp öffnen und zum AtzenGIS navigieren
 
 <h3>Step 2</h3>
 Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht
-<img width="1600" alt="step2" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/2_readme.jpeg?token=GHSAT0AAAAAAB4DNRAAYZS2BIUKANMNQ5AKY6ZR6JA">
+<img width="1600" alt="step2" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/2_readme.jpeg">
 
 <h3>Step 3.1</h3>
 Hochladen der Daten und optinal auswählen einer area of interest
