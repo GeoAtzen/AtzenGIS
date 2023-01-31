@@ -7,7 +7,8 @@ We used Docker to ensure an easy deployment.
 <br>
 1. Docker Desktop starten
 <br>
-2. In VSC im Terminal in den Ordner GeoAtzen navigieren
+2. Dieses Repository klonen! <br>
+3. In VSC im Terminal in den Ordner AtzenGIS navigieren
 <br>
 3. $ docker-compose up
 <br>
