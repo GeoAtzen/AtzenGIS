@@ -13,7 +13,7 @@ When applying a trained machine learning algorithm to a new geographic area, it 
 unclear whether or not the pixels properties in that area are similar enough to the
 training data to enable a reliable classification.
 
-<h2> Short Introduction into the Area of Applicability (AOA) </h2>
+<h2>Short Introduction</h2>
 The Area of Applicability is a method developed by Meyer and Pebesma (2021)
 to delineate areas in spatial data (here remote sensing images) that can be assumed
 to be areas the machine learning model can reliably be applied to, in our case to
@@ -29,11 +29,11 @@ combines training, prediction (here LULC classes) and applicability estimation, 
 supports two modes of operation:
 
 <br>1) the user submits a trained model and selects an area of interest: the system
-performs the classification in the area of interest and computes the AOA
+performs the classification in the area of interest and computes the AOA.
 <br>
 <br>2) the user submits a (trained or untrained) model and training data and selects
 an area of interest: the system performs the training, the classification in the
-area of interest and computes the AOA
+area of interest and computes the AOA.
 <br>
 <h2> Getting Started</h2>
 We used Docker to ensure an easy deployment.
@@ -47,9 +47,9 @@ We used Docker to ensure an easy deployment.
 <br>Die Website ist dann erreichbar unter:
 <br>http://localhost:3000/
 <br>
-<h4>Attention!</h4>
+<h5>Attention!</h5>
 <br>First Loading Session will take some time!
-<br>Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
+
 
 <h2>Prerequisites</h2>
 
