@@ -119,7 +119,7 @@ calculatePrediction <- function(sentinel, model){
   # Grau ist außerhalb von AOA
   AOAPlot <- AOA$AOA
   cellValue <- c(1, 0)
-  colorV <- c("#d3d3d3", rgb(0,0,0,0))
+  colorV <- c("#ffec8b", "#8a2be2"))
   colorD <- data.frame(cellValue = cellValue, color = colorV)
   coltab(AOAPlot) <- colorD
   plot(AOAPlot)
