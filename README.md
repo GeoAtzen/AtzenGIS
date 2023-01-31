@@ -43,28 +43,28 @@ Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder 
 
 <h3>Step 3.1</h3>
 Hochladen der Daten und optinal auswählen einer area of interest
-<img width="1600" alt="step31" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_1_readme.jpeg?token=GHSAT0AAAAAAB4DNRABUVS22R4BWLZVSFHWY6ZR6ZA">
+<img width="1600" alt="step31" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_1_readme.jpeg">
 
 <h3>Step 3.2</h3>
 Hochladen der Daten und optinal auswählen einer Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten
-<img width="1600" alt="step32" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_2_readme.jpeg?token=GHSAT0AAAAAAB4DNRABPEWNR5BTHCRH6GX2Y6ZR7SA">
+<img width="1600" alt="step32" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_2_readme.jpeg">
 
 <h3>Step 4</h3>
 Anzeigen der Prediction auf Knopfdruck mit Legende
-<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/4_readme.jpeg?token=GHSAT0AAAAAAB4DNRAAAGGVDRWREGMKXILCY6ZSAJA">
+<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/4_readme.jpeg">
 
 <h3>Step 5</h3>
 Anzeigen der AOA mit Informationstext und den sampling locations
-<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/5_readme.jpeg?token=GHSAT0AAAAAAB4DNRAADNK64FEK3Q6JEPD4Y6ZSBIA">
+<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/5_readme.jpeg">
 
 
 <h3>Step 6</h3>
 Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch schriftlich anzupassen, mit dem bereits hochgeladenen GeoPackage oder GeoJSON zu verbinden und dann herunterzuladen.
-<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/6_readme.jpeg?token=GHSAT0AAAAAAB4DNRABVBWEYHJPAPUM2PMCY6ZSCZA">
+<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/6_readme.jpeg">
 
 <h3>Step 7</h3>
 Download aller einzelnen Daten und auf Knopfdruck zurück zu Anwendungsseite um dort mit der gemergten Datei einen erneuten Durchlauf zu starten
-<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/7_readme.jpeg?token=GHSAT0AAAAAAB4DNRAADYEMXAEJKGPD5724Y6ZSDNQ">
+<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/7_readme.jpeg">
 
 
 <h2>License</h2>
