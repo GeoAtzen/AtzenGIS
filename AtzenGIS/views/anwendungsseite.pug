@@ -52,7 +52,7 @@ block content
                         button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
                       form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                         input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
-                        input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(4)')
+                        button.btn.btn-success(id='btn3' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn3').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                         #puff4.spinner-border.float-end(role='status' style= 'display:none') 
 
 
