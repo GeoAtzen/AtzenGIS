@@ -34,24 +34,24 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 <h3>Step 1</h3>
 <br>WebApp öffnen und zum AtzenGIS navigieren
-<img width="2000" alt="step1" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg">
+<img width="1600" alt="step1" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg">
 
 
 <h3>Step 2</h3>
 <br>Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht
-<img width="2000" alt="step2" src="https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpegg">
+<img width="1600" alt="step2" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/2_readme.jpeg?token=GHSAT0AAAAAAB4DNRAAYZS2BIUKANMNQ5AKY6ZR6JA">
 
 <h3>Step 3.1</h3>
 <br>Hochladen der Daten und optinal auswählen einer area of interest
-![3_1_readme](https://user-images.githubusercontent.com/86024844/215885773-13fb5ed3-4f98-4243-aa96-98429768bc7b.jpeg)
+<img width="1600" alt="step31" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_1_readme.jpeg?token=GHSAT0AAAAAAB4DNRABUVS22R4BWLZVSFHWY6ZR6ZA">
 
 <h3>Step 3.2</h3>
 <br>Hochladen der Daten und optinal auswählen einer Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten
-![3_2_readme](https://user-images.githubusercontent.com/86024844/215885923-2a149983-bdd1-48b3-aef1-51839ee5d964.jpeg)
+<img width="1600" alt="step32" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_2_readme.jpeg?token=GHSAT0AAAAAAB4DNRABPEWNR5BTHCRH6GX2Y6ZR7SA">
 
 <h3>Step 4</h3>
 <br>Anzeigen der Prediction auf Knopfdruck mit Legende
-![4_readme](https://user-images.githubusercontent.com/86024844/215885997-d3f77ac2-4d24-4e6c-85ed-1527085c4453.jpeg)
+<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/4_readme.jpeg?token=GHSAT0AAAAAAB4DNRAAAGGVDRWREGMKXILCY6ZSAJA">
 
 <h3>Step 5</h3>
 <br>Anzeigen der AOA mit Informationstext und den sampling locations
