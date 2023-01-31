@@ -43,11 +43,11 @@ Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder 
 
 <h3>Step 3.1</h3>
 Hochladen der Daten und optinal auswählen einer area of interest
-<img width="1600" alt="step31" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_1_readme.jpeg">
+<img width="1600" alt="step31" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/4_readme.jpeg">
 
 <h3>Step 3.2</h3>
 Hochladen der Daten und optinal auswählen einer Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten
-<img width="1600" alt="step32" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/3_2_readme.jpeg">
+<img width="1600" alt="step32" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/3_2_readme.jpeg">
 
 <h3>Step 4</h3>
 Anzeigen der Prediction auf Knopfdruck mit Legende
