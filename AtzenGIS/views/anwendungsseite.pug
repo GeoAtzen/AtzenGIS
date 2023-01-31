@@ -64,7 +64,7 @@ block content
                           input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none';")
                           button.btn.btn-success(id='btn4' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn4').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
-                        p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
+                        p(style="font-size: small")
                       #shapefilezeug
                         h4  Trainingspolygone als Shapefile als .zip
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
