@@ -34,12 +34,11 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 <h3>Step 1</h3>
 <br>WebApp öffnen und zum AtzenGIS navigieren
-<img width="209" alt="erkamneu" src="https://user-images.githubusercontent.com/103262720/215887768-2500faf9-ab92-4f2d-8caf-338466146d7c.png">
 ![1_readme](https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg)
 
 <h3>Step 2</h3>
 <br>Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht
-<img width="209" alt="erkamneu" src="https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpeg">
+<img width="2000" alt="erkamneu" src="https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpeg">
 ![2_readme](https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpeg)
 
 <h3>Step 3.1</h3>
@@ -75,9 +74,3 @@ Weitere Informationen über die Lizenz finden Sie unter LICENSE.
 <h2>Acknowledgments</h2>
 Dieses Programm wurde von Johnathan M., Darian W., Luca H., Tobias K., Tim L. und Erkam D. für die Veranstaltung Geosoftware II unter der Leitung von E. Pebesma und C. Knoth erstellt.
 
-
-
-
-<img width="209" alt="erkamneu" src="https://user-images.githubusercontent.com/103262720/215887768-2500faf9-ab92-4f2d-8caf-338466146d7c.png">
-
-![berecihwaehlen](https://user-images.githubusercontent.com/103262720/215891968-c3866b23-5f0d-4fe6-b2f0-b331dc4dd56d.PNG)
