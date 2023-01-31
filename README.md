@@ -1,63 +1,45 @@
 # Area of Application by GeoAtzen
-A Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
+Ein Web-Tool zum kalkulueren der Area of Applicability (kurz: AOA).
 <h2>Background</h2>
-Machine learning methods have become very popular means for spatial prediction
-efforts such as classifying remote sensing images. One reason is their ability to
-learn non-linear relationships and thereby solve more complex classifications tasks.
-A (sometimes underestimated) issue is that machine learning algorithms can only
-provide meaningful predictions (e.g., the land use / land cover class represented by
-a pixel of a remote sensing image) when applied to data that is similar to the data
-they were trained on (Meyer and Pebesma, 2021). ”Similar” here refers to the value
-ranges of the predictor variables (such as different bands of the remote sensing image).
-When applying a trained machine learning algorithm to a new geographic area, it is
-unclear whether or not the pixels properties in that area are similar enough to the
-training data to enable a reliable classification.
+Methoden des maschinellen Lernens werden immer mehr und mehr für räumliche Vorhersagen, wie etwa Klassifizerung und Fernerkundung, verwendet. Einer der Gründe hierfür ist u.a. die Fähigkeit hier nicht-lineare Beziehungen zu erlernen und dadurch Klassifizierungssaufgaben zu lösen.
+<br>Ein Problem hierbei ist jedoch, dass diese Algorithmen lediglich aussagekräftige Vorhersagen treffen können, wenn sie auf Daten angewendet werden, die den Ursprungsdaten ähnlich sind, auf denen Sie trainiert wurden. Um diese "Ähnlichkeiten" zu quantifizieren und darzustellen wurde die AOA (Meyer und Pebesma, 2021) entwickelt.
 
-<h2>Short Introduction</h2>
-The Area of Applicability is a method developed by Meyer and Pebesma (2021)
-to delineate areas in spatial data (here remote sensing images) that can be assumed
-to be areas the machine learning model can reliably be applied to, in our case to
-perform land use/land cover (LULC) classification. Besides delineating such an area
-of applicability (AOA), this tool can also be used to point to areas where collecting
-additional training data is needed to train a more applicable model.
 
 <h2>Project Goals</h2>
-The methods for computing the AOA are currently available as part of the R package CAST. The aim of this project is to make this functionality available to larger
-user groups and directly integrate it into machine learning-based image classification
-workflows as a standard applicability estimation tool. The system to be developed
-combines training, prediction (here LULC classes) and applicability estimation, and
-supports two modes of operation:
+Die Methoden zur Berechnung der AOA sind derzeit als Teil des R-Packets CAST verfügbar. Ziel dieses Projektes ist es, genau diese Funktionalität für größere Nutzergruppen verfügbar zu stellen und diese zurm Standardwerkzeug zur Einschätzung der Anwendbarkeit zu integrieren.
+<br>Das entwickelte System kombiniert Vorhersagen und Anwendbarkeitsabschätzung basieren auf zwei Betriebsmodelle:
+[1]Der Benutzer legt ein trainiertes Modell vor und wählt einen Bereich von Interesse aus: Das System
+führt die Klassifizierung in dem betreffenden Gebiet durch und berechnet die AOA.
+[2]Der Benutzer gibt ein (trainiertes oder untrainiertes) Modell und Trainingsdaten ein und wählt
+Das System führt das Training und die Klassifizierung in dem betreffenden Gebiet durch
+Bereich von Interesse durch und berechnet die AOA.
 
-<br>1) the user submits a trained model and selects an area of interest: the system
-performs the classification in the area of interest and computes the AOA.
-<br>
-<br>2) the user submits a (trained or untrained) model and training data and selects
-an area of interest: the system performs the training, the classification in the
-area of interest and computes the AOA.
+
 <br>
 <h2> Getting Started</h2>
-We used Docker to ensure an easy deployment.
+Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 
 <h3>Docker</h3>
-<br>1. Start Docker Desktop
-<br>2. Clone this repository
-<br>3. Open the AtzenGIS folder in the Terminal of your IDE (we used VSC)
+<br>1. Docker Desktop starten
+<br>2. Dieses Repository klonen!
+<br>3. In VSC im Terminal in den Ordner AtzenGIS navigieren
 <br>3. $ docker-compose up
 <br>Die Website ist dann erreichbar unter:
 <br>http://localhost:3000/
 <br>
-<h5>Attention!</h5>
-<br>First Loading Session will take some time!
+<h4>Achtung!</h4>
+<br>Beim ersten Mal dauert das aber ewig, danach gehts immer direkt da alles gecached wird!
 
+<h2>Benutzung</h2>
+Zur einfachen Handhabung der Prozesse haben wir eine einfach und unkomplizierte Website erichtet. Die Step-by-Step Erklärung ist wie folgt:
 
-<h2>Prerequisites</h2>
+<h3>Step 1</h3>
 
-<h2>Usage</h2>
 
 <h2>License</h2>
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation.
-Refer to LICENSE for more, specific information regarding the License.
+Dieses Programm ist eine freie, OPENSOURCE Software: Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben und/oder verändern.
+Weitere Informationen über die Lizenz finden Sie unter LICENSE.
 
 <h2>Acknowledgments</h2>
-This Software was made by Johnathan M., Darian W., Luca H., Tobias K., Tim L. and Erkam D. for the Geosoftware II class led by E. Pebesma and C. Knoth.
+Dieses Programm wurde von Johnathan M., Darian W., Luca H., Tobias K., Tim L. und Erkam D. für die Veranstaltung Geosoftware II unter der Leitung von E. Pebesma und C. Knoth erstellt.
