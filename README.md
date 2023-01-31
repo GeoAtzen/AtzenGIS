@@ -64,7 +64,7 @@ Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch s
 
 <h3>Step 7</h3>
 Download aller einzelnen Daten und auf Knopfdruck zurück zu Anwendungsseite um dort mit der gemergten Datei einen erneuten Durchlauf zu starten
-<img width="1600" alt="step4" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/7_readme.jpeg">
+<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/7_readme.jpeg">
 
 
 <h2>License</h2>
