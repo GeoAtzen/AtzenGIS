@@ -21,7 +21,7 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 
 <h3>Docker</h3>
-<br>1. Docker Desktop starten
+1. Docker Desktop starten
 <br>2. Dieses Repository klonen!
 <br>3. In VSC im Terminal in den Ordner AtzenGIS navigieren
 <br>3. $ docker-compose up
