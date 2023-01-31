@@ -22,13 +22,13 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 <h3>Docker</h3>
 1. Docker Desktop starten
-<br>2. Dieses Repository klonen!
-<br>3. In VSC im Terminal in den Ordner AtzenGIS navigieren
+<br>2.1 Dieses Repository klonen und in VSC im Terminal in den Ordner AtzenGIS navigieren oder
+<br>2.2 Im Terminal docker pull geoatzen/frontendatzengis und docker pull geoatzen/backendatzengis
 <br>3. $ docker-compose up
 <br>Die Website ist dann erreichbar unter:
 <br>http://localhost:3000/
 <br>
-<h5>Attention!</h5>
+<h5>Achtung!</h5>
 <br>First Loading Session will take some time!
 
 
