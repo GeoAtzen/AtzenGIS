@@ -24,4 +24,4 @@ This program is free software: you can redistribute it and/or modify it under th
 Refer to [placeholder](placeholder) for more, specific information regarding the License
 
 <h2>Acknowledgments</h2>
-This Software was made by [Johnathan M.](https://github.com/JonthMM), [Darian W.](https://github.com/darianwwu), [Luca H.](https://github.com/ECAttorney), [Tobias K.](https://github.com/tkrumrei), [Tim L.](https://github.com/tlehman1), [Erkam D.](https://github.com/rkmd0) in the Geosoftware II class
+This Software was made by [Johnathan M.]:https://github.com/JonthMM, [Darian W.]:https://github.com/darianwwu, [Luca H.]:https://github.com/ECAttorney, [Tobias K.]:https://github.com/tkrumrei, [Tim L.]:https://github.com/tlehman1, [Erkam D.]:https://github.com/rkmd0 in the Geosoftware II class
