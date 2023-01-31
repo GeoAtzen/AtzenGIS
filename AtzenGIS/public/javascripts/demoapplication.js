@@ -60,7 +60,7 @@ map.on(L.Draw.Event.CREATED, (e) => {
 })
 
 // adding the demo shapefile to the map with styling and popup for it's properties
-var usershapefile = new L.Shapefile("http://localhost:3000/demoshape.zip", {
+var usershapefile = new L.Shapefile("http://localhost:3000/demodaten/demoshape.zip", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -155,9 +155,9 @@ var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.
                 return { color: "#000000" };
         }
     },
-}).addTo(map);
+});
 
-// add converted GeoPackage as GeoJSON to map with styling and popup for it's properties
+/* add converted GeoPackage as GeoJSON to map with styling and popup for it's properties
 var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegpkg.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
@@ -205,9 +205,9 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegp
         }
     },
 }).addTo(map);
-
+*/
 // adding the demo geojson file to the map with styling and pop up for it's properties
-var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demodaten/demopolygonegjson.geojson", {
     onEachFeature: function(feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function(k) {
@@ -257,7 +257,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegjson.ge
 
 // adding the .tif via georaster plugin: 
 // source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("http://localhost:3000/demosentineldata.tif")
+fetch("http://localhost:3000/demodaten/demosentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {
@@ -339,7 +339,6 @@ var baseMaps = {
 };
 
 var overlayMaps = {
-    "Geopackage": gpkgtogeojsondata,
     "Shapefile": usershapefile,
     "GeoJSON": geojsondata,
     "Merged": mergedgeojson,

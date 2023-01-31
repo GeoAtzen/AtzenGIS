@@ -123,7 +123,7 @@ function exportGeoJSON() {
 }
 
 // adding the uploaded shapefile to the map with styling and popup for its properties
-var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
+var usershapefile = new L.Shapefile("http://localhost:3000/demodaten/demoshape.zip", {
     onEachFeature: function (feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function (k) {
@@ -205,7 +205,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
 
 
 // adding the demo geojson file to the map with styling and pop up for it's properties
-var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegjson.geojson", {
+var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demodaten/demopolygonegjson.geojson", {
     onEachFeature: function (feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function (k) {
@@ -285,8 +285,8 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegjson.ge
     },
 }).addTo(map);
 
-// add converted GeoPackage as GeoJSON to map with styling and pop up for it's properties
-var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
+/* add converted GeoPackage as GeoJSON to map with styling and pop up for it's properties
+var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/demopolygonegpkg.geojson", {
     onEachFeature: function (feature, layer) {
         if (feature.properties) {
             layer.bindPopup(Object.keys(feature.properties).map(function (k) {
@@ -365,11 +365,11 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingsp
         }
     },
 }).addTo(map);
-
+*/
 
 // adding the .tif via georaster plugin: 
 // source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
-fetch("http://localhost:3000/usersentineldata.tif")
+fetch("http://localhost:3000/demodaten/demosentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
         parseGeoraster(arrayBuffer).then((georaster) => {
@@ -418,7 +418,7 @@ fetch("http://localhost:3000/usersentineldata.tif")
 // adding the prediction .tif via georaster plugin: 
 // source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
-    fetch("http://localhost:3000/prediction.tif")
+    fetch("http://localhost:3000/demodaten/demoprediction.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -438,7 +438,7 @@ function loadprediction() {
                 layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
             });
         });
-    fetch('http://localhost:3000/predictionlegende.png')
+    fetch('http://localhost:3000/demodaten/demopredictionlegende.png')
         .then(function (data) {
             return data.blob();
         })
@@ -451,7 +451,7 @@ function loadprediction() {
 // adding the aoa .tif via georaster plugin: 
 // source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadaoa() {
-    fetch("http://localhost:3000/aoa.tif")
+    fetch("http://localhost:3000/demodaten/demoaoa.tif")
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => {
             parseGeoraster(arrayBuffer).then((georaster) => {
@@ -474,7 +474,7 @@ function loadaoa() {
 }
 
 // adding sampling locations to map via shapefile
-var samplingshp = new L.Shapefile("http://localhost:3000/samples", {
+var samplingshp = new L.Shapefile("http://localhost:3000/demodaten/demosamples.zip", {
     onEachFeature: function (feature, layer) {
         layer.bindPopup("Hier im Optimalfall neue trainingspolygone zeichnen!");
     },
@@ -500,7 +500,6 @@ var baseMaps = {
 
 var overlayMaps = {
     "Sampling Locations": samplingshp,
-    "Geopackage": gpkgtogeojsondata,
     "Shapefile": usershapefile,
     "GeoJSON": geojsondata,
     "Eigene Polygone": drawnItems

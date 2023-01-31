@@ -63,14 +63,14 @@ block content
                         h4 Trainingspolygone als GeoPackage oder GeoJSON:
                           br
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
-                          button.btn.btn-success(id= 'dateiAus4' onclick="document.getElementById('dateiAus4').textContent = 'Polygone.POLYGON';" style= "color: black; background-color: lightgrey; border: 1px solid black; margin-right: 5%;") Datei auswählen
+                          button.btn.btn-success(id= 'dateiAus4' onclick="document.getElementById('dateiAus4').textContent = 'Polygone.geojson';" style= "color: black; background-color: lightgrey; border: 1px solid black; margin-right: 5%;") Datei auswählen
                           input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(2);")
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
                         p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
                       #shapefilezeug
                         h4  Trainingspolygone als Shapefile als .zip
                           br
-                          button.btn.btn-success(id= 'dateiAus1' onclick="document.getElementById('dateiAus1').textContent = 'Shapefile.shp';" style= "color: black; background-color: lightgrey; border: 1px solid black; margin-right: 5%;") Datei auswählen
+                          button.btn.btn-success(id= 'dateiAus1' onclick="document.getElementById('dateiAus1').textContent = 'Shapefile.zip';" style= "color: black; background-color: lightgrey; border: 1px solid black; margin-right: 5%;") Datei auswählen
                           input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(3);")
                           #puff3.spinner-border.float-end(role='status' style= 'display:none')                
                         p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!                
