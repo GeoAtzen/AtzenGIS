@@ -38,7 +38,7 @@ block content
                     p Herunterladen des hochgeladenes GeoPackage als .geojson:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingspolygonegpkg.geojson', download='uploadedtrainingspolygone.geojson' style='float: right;')
                     p Herunterladen des hochgeladenes Shapefile als .zip:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingsdatashp.zip', download='uploadedtrainingsdatashp.zip' style='float: right;')
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/downloadtrainingsdatashp', download='uploadedtrainingsdatashp.zip' style='float: right;')
                     p Herunterladen des hochgeladenes GeoJSON als .geojson:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usertrainingspolygonegjson.geojson', download='uploadedtrainingsdatagjson.geojson' style='float: right;')
                     p 
@@ -58,8 +58,12 @@ block content
                         br
                         button.btn.btn-success(style="display:block; margin:auto;") Mit hochgeladenem GeoJSON zu einer FeatureCollection zusammenführen 
                         p(style="font-size: small; text-align: center;") Datei wird auf Knopfdruck heruntergeladen 
-                    p Herunterladen der Gebiete wo nachtrainiert werden sollte als .shapefile:  
-                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples.shp', download='samplinglocations.shp' style='float: right;')
+                    p Herunterladen der Gebiete wo nachtrainiert werden sollte als .shapefile: 
+                      br 
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples.shp', download='samplinglocations.shp' style='float: right;') shp
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples.prj', download='samplinglocations.shp' style='float: right;') prj
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples.shx', download='samplinglocations.shp' style='float: right;') shx
+                      a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/samples.dbf', download='samplinglocations.shp' style='float: right;') dbf
                     h4 Sentinel 2 Bild
                     p Herunterladen des ursprünglichen Satellitenbildes:  
                       a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/usersentineldata.tif', download='uploadedsentineldata.tif' style='float: right;')

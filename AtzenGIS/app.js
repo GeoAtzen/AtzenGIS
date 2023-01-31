@@ -151,6 +151,12 @@ app.post(
     }
 );
 
+app.get("/downloadtrainingsdatashp", (req, res) => {
+    const file = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
+    res.download(file, "uploadedtrainingsdatashp.zip");
+});
+
+
 app.post("/anwendungsseite", function (req, res, next) {
     res.render("anwendungsseite", {
         title: "Anwendungsseite"

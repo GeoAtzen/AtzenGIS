@@ -30,21 +30,18 @@ Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
 
   convert <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
   st_write(convert, "mydockerdata/usertrainingspolygonegpkg.geojson", append=FALSE)
-  print("umwandeln geht")
   convertedgpkg <- st_read("mydockerdata/usertrainingspolygonegpkg.geojson")
-  print("einladen von umgewandelt geht")
 }
 
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 
-# Diese Funktion nimmt Referenzdaten entgegen, die sowohl vom Typ GeoJson,
-# Geopackage oder Shapefile schon weiterverarbeitet wurden und trainiert 
-# nun mit dem Tif ein Model
+# This function accepts reference data that is of type GeoJson,
+# Geopackage or Shapefile and trains a model with the Tif. 
+# now with the Tif a model
 trainModel <- function(Referenzdaten, sentinel, alg){
   
-  print(alg)
   predictors <- names(sentinel)
   
   Referenzdaten <- st_transform(Referenzdaten, crs(sentinel))
@@ -85,7 +82,6 @@ trainModel <- function(Referenzdaten, sentinel, alg){
                    importance=TRUE,
                    ntree=50)
   }
-  print("trainieren hat geklappt!")
   calculatePrediction(sentinel, model)
 }
 
@@ -93,30 +89,23 @@ trainModel <- function(Referenzdaten, sentinel, alg){
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 
-# Diese Funktion erhält ein Tif und ein trainiertes Modell und kann damit die
-# Prediction erstellen, welche dann auf den Server geschrieben wird.
+# This function receives a Tif and a trained model and can use it to # create the prediction, which is then written to the server.
+# Prediction, which is then written to the server.
 calculatePrediction <- function(sentinel, model){
-  print("prediciton:")
   # Make the prediction
   prediction <- predict(as(sentinel,"Raster"),model)
-  print("test predict")
   prediction_terra <- as(prediction,"SpatRaster")
-  print("test prediction_terra")
   prediction_terra <- setColor(prediction_terra)
-  print("test prediction_terra setcolour")
   
   crs(prediction_terra) <- "EPSG:32632"
   terra::writeRaster(prediction_terra, "mydockerdata/prediction.tif", overwrite = TRUE)
-  print("Prediction geht")
 
-  # Zum schneller machen
+  # for faster computation
   cl <- makeCluster(4) 
   registerDoParallel(cl) 
   
-  # Berechnung AOA (dauert sehr lange)
   AOA <- aoa(sentinel,model,cl=cl)
 
-  # Grau ist außerhalb von AOA
   AOAPlot <- AOA$AOA
   cellValue <- c(1, 0)
   colorV <- c("#ffec8b", "#8a2be2")
@@ -126,27 +115,19 @@ calculatePrediction <- function(sentinel, model){
   crs(AOAPlot) <- "EPSG:32632"
 
   terra::writeRaster(AOAPlot, "mydockerdata/aoa.tif", overwrite = TRUE)
-  print("Fertig mit AOA")
 
-  #DIPlot <- AOA$DI
-  #crs(DIPlot) <- "EPSG:32632"
-  #writeRaster(DIPlot, "./data/DI.tif", overwrite = TRUE)
-  #print("Fertig mit DI")
 
   DIGanz <- as.polygons(selectHighest(AOA$DI, 2000))
   writeVector(DIGanz, "mydockerdata/samples.shp", overwrite=TRUE)
   
-
-  print("Fertig mit DI Sampling Locations")
-
 }
 
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 
-# Diese Funktion enthält eine prediction und eine Farbpalette. 
-# Über Cowplot erhält man hier eine symbolisierte Legende.
+# This function contains a prediction and a color palette. 
+# About Cowplot one receives here a symbolized legend.
 
 getLegend <- function(prediction_terra, colors){
   
@@ -168,7 +149,7 @@ getLegend <- function(prediction_terra, colors){
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 
-# Symbolisierung der Prediction
+# Symbolisierung of the prediction
 
 setColor <- function(prediction_terra){
   
@@ -234,31 +215,28 @@ setColor <- function(prediction_terra){
 ######################################################################################################################################################################
 ######################################################################################################################################################################
 
-#* Calculates LULC Classification
+#* Calculates LULC Classification and cuts the data if aoi given
 #* @serializer png
 #* @get /tiffgjson
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
-  #print(alg)
+  
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
 
-  # für trainingspolygone
+  # for trainingspolygons
   trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
   print(trainingsdataaoi)
   class(trainingsdataaoi) <- "numeric"
 
-  # Daten auf Maske zuschneiden
+  # Cut data to aoi
   if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
-    # für Sentinel Bilder
+    # für Sentinel data
     v <- c(xmin, xmax, ymin, ymax)
     class(v) <- "numeric"
     e <- extent(v)
     rastercordaoi <- as(e,'SpatialPolygons')  
     proj4string(rastercordaoi) <- CRS("+proj=longlat")
-    # wildcard <- crs(sentinel, describe=TRUE)$code
-    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
     rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
-    # Zuschneiden
     sentinel <- crop(sentinel, extent(rastercord.UTM))
     sf_use_s2(FALSE)
     validdata <- st_make_valid(Referenzdaten)
@@ -268,7 +246,7 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
   trainModel(Referenzdaten, sentinel, alg)
 }
 
-#* Calculates LULC Classification
+#* Calculates LULC Classification and cuts the data if aoi given
 #* @serializer png
 #* @get /tiffgpkg
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
@@ -276,39 +254,30 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.gpkg")
 
-  # für trainingspolygone
+  # for trainingspolygons
   trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
   class(trainingsdataaoi) <- "numeric"
-  print(trainingsdataaoi)
-  print("trainingsdataaoi geht")
   
-  # Daten auf Maske zuschneiden
+  # Cut data to aoi
   if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
-    # für Sentinel Bilder
+    # for sentinel data
     v <- c(xmin, xmax, ymin, ymax)
     class(v) <- "numeric"
     e <- extent(v)
     rastercordaoi <- as(e,'SpatialPolygons')  
     proj4string(rastercordaoi) <- CRS("+proj=longlat")
-    # wildcard <- crs(sentinel, describe=TRUE)$code
-    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
     rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
-    print("sentinel erstellen geht")
-    # Zuschneiden
     sentinel <- crop(sentinel, extent(rastercord.UTM))
-    print("sentinel zuscneiden geht")
     
     sf_use_s2(FALSE)
     validdata <- st_make_valid(Referenzdaten)
-    print("st_make_valid geht")
     Referenzdaten <- st_crop(validdata, trainingsdataaoi)
-    print("Referenzdaten zuschneiden geht")
   }
 
   trainModel(Referenzdaten, sentinel, alg)
 }
 
-#* Calculates LULC Classification
+#* Calculates LULC Classification and cuts the data if aoi given
 #* @serializer png
 #* @get /tiffshape
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
@@ -317,38 +286,31 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
   system("unzip usertrainingsdatashp.zip")
   Referenzdaten <- st_read("usertrainingspolygoneshp.shp")
 
-  # für trainingspolygone
+  # for trainingspolygons
   trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
   class(trainingsdataaoi) <- "numeric"
-  print("trainingsdataaoi geht")
+  
 
-  # Daten auf Maske zuschneiden
   if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
-    # für Sentinel Bilder
+    # for sentinel data
     v <- c(xmin, xmax, ymin, ymax)
     class(v) <- "numeric"
     e <- extent(v)
     rastercordaoi <- as(e,'SpatialPolygons')  
     proj4string(rastercordaoi) <- CRS("+proj=longlat")
-    # wildcard <- crs(sentinel, describe=TRUE)$code
-    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
     rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
-    print("sentinel erstellen geht")
-    # Zuschneiden
     sentinel <- crop(sentinel, extent(rastercord.UTM))
-    print("sentinel zuschneiden geht")
+    
     sf_use_s2(FALSE)
     validdata <- st_make_valid(Referenzdaten)
-    print("st_make_valid geht")
+    
     Referenzdaten <- st_crop(validdata, rastercord.UTM)
-    print(Referenzdaten)
-    print("Referenzdaten zuschneiden geht")
   }
 
   trainModel(Referenzdaten, sentinel, alg)
 }
 
-#* Calculates LULC Classification
+#* Calculates LULC Classification and cuts the data if aoi given
 #* @serializer png
 #* @get /tiffmodel
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
@@ -356,20 +318,15 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA){
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   model <- readRDS("mydockerdata/usertrainedmodel.rds")
 
-  # Daten auf Maske zuschneiden
   if(!(is.na(ymin) || is.na(ymax) || is.na(xmin) || is.na(xmax))){
-    # für Sentinel Bilder
+    # for sentinel data
     v <- c(xmin, xmax, ymin, ymax)
     class(v) <- "numeric"
     e <- extent(v)
     rastercordaoi <- as(e,'SpatialPolygons')  
     proj4string(rastercordaoi) <- CRS("+proj=longlat")
-    # wildcard <- crs(sentinel, describe=TRUE)$code
-    # rastercord.UTM <- spTransform(cord.dec, CRS("+init=epsg:wildcard"))
     rastercord.UTM <- spTransform(rastercordaoi, CRS("+init=epsg:32632"))
-    # Zuschneiden
     sentinel <- crop(sentinel, extent(rastercord.UTM))
-    print("croppen hat geklappt!")
   }
 
   calculatePrediction(sentinel, model)
@@ -382,8 +339,3 @@ function(pr) {
     # Overwrite the default serializer to return unboxed JSON
     pr_set_serializer(serializer_unboxed_json())
 }
-
-#* Merges two geojsons
-#* @serializer geojson
-#* @get /merge_files
-#merge_files(INPUT_FOLDER = "../uploads/", OUTPUT_FILE = "merged_file.geojson")
