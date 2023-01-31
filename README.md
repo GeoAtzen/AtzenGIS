@@ -1,4 +1,4 @@
-# Area of Application by GeoAtzen
+# AtzenGIS by GeoAtzen
 A Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
 <h2>Background</h2>
 Machine learning methods have become very popular means for spatial prediction
