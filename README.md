@@ -28,9 +28,9 @@ workflows as a standard applicability estimation tool. The system to be develope
 combines training, prediction (here LULC classes) and applicability estimation, and
 supports two modes of operation:
 
-⋅⋅* the user submits a trained model and selects an area of interest: the system
+<br>a) the user submits a trained model and selects an area of interest: the system
 performs the classification in the area of interest and computes the AOA
-⋅⋅*the user submits a (trained or untrained) model and training data and selects
+<br>b) the user submits a (trained or untrained) model and training data and selects
 an area of interest: the system performs the training, the classification in the
 area of interest and computes the AOA
 
