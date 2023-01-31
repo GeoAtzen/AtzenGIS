@@ -48,23 +48,14 @@ app.post(
             fs.rename(tempPath, targetPath, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(200)
-                    .render("fileupload", {
-                        title: "Fileupload"
-                    });
+                res.status(200).send();
 
             });
         } else {
             fs.unlink(tempPath, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(403)
-                    .render("fileuploaderror", {
-                        title: "Uploadfehler"
-                    });
-
+                res.status(403).send();
             });
         }
     }
@@ -83,11 +74,7 @@ app.post(
             fs.rename(tempPath, targetPathgpkg, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(200)
-                    .render("fileupload", {
-                        title: "Fileupload"
-                    })
+                res.status(200).send();
             });
             request(
                 "http://172.17.0.1:8000/gpkgtogjson", {
@@ -102,21 +89,13 @@ app.post(
             fs.rename(tempPath, targetPathgjson, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(200)
-                    .render("fileupload", {
-                        title: "Fileupload"
-                    })
+                res.status(200).send();
             });
         } else {
             fs.unlink(tempPath, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(403)
-                    .render("fileuploaderror", {
-                        title: "Uploadfehler"
-                    });
+                res.status(403).send();
             });
         }
     }
@@ -134,21 +113,14 @@ app.post(
             fs.rename(tempPath, targetPath, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(200)
-                    .render("fileupload", {
-                        title: "Fileupload"
-                    })
+                res.status(200).send();
             });
         } else {
             fs.unlink(tempPath, err => {
                 if (err) return handleError(err, res);
 
-                res
-                    .status(403)
-                    .render("fileuploaderror", {
-                        title: "Uploadfehler"
-                    });
+                res.status(403).send();
+                    
             });
         }
     }
@@ -164,25 +136,17 @@ app.post(
         const targetPath = path.join(__dirname, "mydockerdata/usertrainedmodel.rds");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".rds") {
-            fs.rename(tempPath, targetPath, err => {
-                if (err) return handleError(err, res);
+        fs.rename(tempPath, targetPath, err => {
+            if (err) return handleError(err, res);
 
-                res
-                    .status(200)
-                    .render("fileupload", {
-                        title: "Fileupload"
-                    })
-            });
-        } else {
-            fs.unlink(tempPath, err => {
-                if (err) return handleError(err, res);
+            res.status(200).send();
+        });
+    } else {
+        fs.unlink(tempPath, err => {
+            if (err) return handleError(err, res);
 
-                res
-                    .status(403)
-                    .render("fileuploaderror", {
-                        title: "Uploadfehler"
-                    });
-            });
+            res.status(403).send();
+        });
         }
     }
 );
