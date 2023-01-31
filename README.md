@@ -34,7 +34,7 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 <h3>Step 1</h3>
 <br>WebApp öffnen und zum AtzenGIS navigieren
-![1_readme](https://user-images.githubusercontent.com/86024844/215885548-c488dde2-ff5e-4fc4-b952-d5cfa650414a.jpeg)
+![1_readme]([https://user-images.githubusercontent.com/86024844/215885548-c488dde2-ff5e-4fc4-b952-d5cfa650414a.jpeg](https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg))
 
 <h3>Step 2</h3>
 <br>Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht
