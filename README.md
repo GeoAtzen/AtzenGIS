@@ -55,12 +55,12 @@ Anzeigen der Prediction auf Knopfdruck mit Legende
 
 <h3>Step 5</h3>
 Anzeigen der AOA mit Informationstext und den sampling locations
-<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/5_readme.jpeg">
+<img width="1600" alt="step5" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/5_readme.jpeg">
 
 
 <h3>Step 6</h3>
 Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch schriftlich anzupassen, mit dem bereits hochgeladenen GeoPackage oder GeoJSON zu verbinden und dann herunterzuladen.
-<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/6_readme.jpeg">
+<img width="1600" alt="step6" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/6_readme.jpeg">
 
 <h3>Step 7</h3>
 Download aller einzelnen Daten und auf Knopfdruck zurück zu Anwendungsseite um dort mit der gemergten Datei einen erneuten Durchlauf zu starten
