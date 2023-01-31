@@ -1,4 +1,4 @@
-// erstellen einer leaflet Karte mit Europa als Startpunkt und mit OSM als Basiskarte
+// creating a leaflet map with OSM as baselayer and view set to ...
 var map = L.map("ergebnismap").setView([52, 7.8], 12);
 
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -6,6 +6,7 @@ var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
 }).addTo(map);
 
+// googlesat as another option for better quality then the own satellite images
 var googlesat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}');
 
 // drawcontrol variables
@@ -44,8 +45,8 @@ var getclassID = function (layer) {
 // Global array to store the drawn polygons as GeoJSON
 var polygonsgeojson = [];
 
-// Source: https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
 // Declaring your own features for the drawn polygon to safe them in the geojson
+// Source: https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
 document.addEventListener('DOMContentLoaded', function () {
     map.on(L.Draw.Event.CREATED, function (e) {
         var layer = e.layer
@@ -86,9 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
 /**  
  * @function exportGeoJSON
  * @description Export drawn polygons to a valid GeoJSON File
@@ -124,7 +122,7 @@ function exportGeoJSON() {
     }
 }
 
-// Anzeigen der hochgeladenen Shapefile
+// adding the uploaded shapefile to the map with styling and popup for its properties
 var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
     onEachFeature: function (feature, layer) {
         if (feature.properties) {
@@ -205,59 +203,8 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
     },
 }).addTo(map);
 
-/* Anzeigen des hochgeladenen geopackages
-// Anmerkung: Layer MUSS layer1 heißen
-var usergeopackage = new L.geoPackageFeatureLayer([], {
-    geoPackageUrl: 'http://localhost:3000/usertrainingspolygonegpkg.gpkg',
-    layerName: 'layer1',
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
-    },
-    style: function(feature) {
-        switch (feature.properties.Label) {
-            case "Acker":
-                return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-                return { color: "#70843a" };
-            case "Bahnschiene":
-                return { color: "#696969" };
-            case "Baumgruppe":
-                return { color: "#11671e" };
-            case "Binnengewaesser":
-                return { color: "#0a1cb1" };
-            case "Industrie":
-                return { color: "#696969" };
-            case "Innenstadt":
-                return { color: "#696969" };
-            case "Kunstrasen":
-                return { color: "#92e597" };
-            case "Laubwald":
-                return { color: "#11671e" };
-            case "Mischwald":
-                return { color: "#11671e" };
-            case "Parklandschaft":
-                return { color: "#92e597" };
-            case "Siedlung":
-                return { color: "#696969" };
-            case "Strand":
-                return { color: "#ffff00" };
-            case "Versiegelt":
-                return { color: "#696969" };
-            case "Wiese":
-                return { color: "#00FF00" };
-            default:
-                return { color: "#000000" };
-        }
-    },
-});
-*/
-// add GeoJSON to map
+
+// adding the uploaded geojson file to the map with styling and pop up for it's properties
 var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
     onEachFeature: function (feature, layer) {
         if (feature.properties) {
@@ -338,7 +285,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
     },
 }).addTo(map);
 
-// add converted GeoPackage as GeoJSON to map
+// add converted GeoPackage as GeoJSON to map with styling and pop up for it's properties
 var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
     onEachFeature: function (feature, layer) {
         if (feature.properties) {
@@ -420,7 +367,8 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingsp
 }).addTo(map);
 
 
-// hinzufügen des .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
+// adding the .tif via georaster plugin: 
+// source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
 fetch("http://localhost:3000/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
     .then((arrayBuffer) => {
@@ -466,8 +414,8 @@ fetch("http://localhost:3000/usersentineldata.tif")
         });
     });
 
-// hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
-// hinzufügen des Prediction .tif via georaster plugin: https://github.com/GeoTIFF/georaster und https://github.com/GeoTIFF/georaster-layer-for-leaflet
+// adding the prediction .tif via georaster plugin: 
+// source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadprediction() {
     fetch("http://localhost:3000/prediction.tif")
         .then((response) => response.arrayBuffer())
@@ -499,6 +447,8 @@ function loadprediction() {
         })
 }
 
+// adding the apa .tif via georaster plugin: 
+// source: https://github.com/GeoTIFF/georaster and https://github.com/GeoTIFF/georaster-layer-for-leaflet
 function loadaoa() {
     fetch("http://localhost:3000/aoa.tif")
         .then((response) => response.arrayBuffer())

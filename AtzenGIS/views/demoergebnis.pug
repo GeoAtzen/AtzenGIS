@@ -7,7 +7,7 @@ block content
   p Auf der Ergebnisseite werden die Ergebnisse wie Prediction, AOA und Sampling Locations angezeigt, welche auf der Anwendungsseite berechnet wurden. Ihnen ist es hier möglich, sich die Dateien einzeln anzeigen zu lassen und/oder diese zu downloaden.
         .row.justify-content-md-left
           .col-xs-12.col-sm-6.col-lg-8
-                #ergebnismap
+                #demoergebnismap
           .col-xs-6.col-lg-4
             h4
               button.buttonFragezeichen(onclick="document.getElementById('id11').style.display='block'; modal = document.getElementById('id11')" title='Hilfe') ?     
@@ -147,9 +147,7 @@ block content
 
   script(src="/javascripts/shp.js")
   script(src='/javascripts/leaflet.shpfile.js')
-  script(src="/javascripts/results.js")
-  script(src="/javascripts/application.js")
-  
+  script(src="/javascripts/demoresults.js")
 
   script.
     // Script for side navigation
