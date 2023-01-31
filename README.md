@@ -34,12 +34,12 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 
 <h3>Step 1</h3>
 <br>WebApp öffnen und zum AtzenGIS navigieren
-![1_readme](https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg)
+<img width="2000" alt="step1" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg">
+
 
 <h3>Step 2</h3>
 <br>Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht
-<img width="2000" alt="erkamneu" src="https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpeg">
-![2_readme](https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpeg)
+<img width="2000" alt="step2" src="https://user-images.githubusercontent.com/86024844/215885649-dafe49d8-51ad-4914-89e6-497881fe0b76.jpegg">
 
 <h3>Step 3.1</h3>
 <br>Hochladen der Daten und optinal auswählen einer area of interest
