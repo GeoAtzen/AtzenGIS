@@ -9,6 +9,7 @@ const multer = require("multer");
 const decompress = require("decompress");
 var geojsonMerge = require('@mapbox/geojson-merge');
 var cors = require("cors");
+const archiver = require("archiver");
 var request = require("request");
 
 
@@ -155,6 +156,20 @@ app.get("/downloadtrainingsdatashp", (req, res) => {
     const file = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
     res.download(file, "uploadedtrainingsdatashp.zip");
 });
+
+app.get("/downloadmydockerdata", (req, res) => {
+    res.setHeader("Content-Type", "application/zip");
+    res.setHeader("Content-Disposition", "attachment; filename=mydockerdata.zip");
+
+    const archive = archiver("zip", {
+        zlib: { level: 9 }
+    });
+
+    archive.pipe(res);
+    archive.directory("mydockerdata/", false);
+    archive.finalize();
+});
+
 
 
 app.post("/anwendungsseite", function (req, res, next) {
