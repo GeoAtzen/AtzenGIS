@@ -76,3 +76,4 @@ Dieses Programm wurde von Johnathan M., Darian W., Luca H., Tobias K., Tim L. un
 
 
 
+<img width="209" alt="erkamneu" src="https://user-images.githubusercontent.com/103262720/215887768-2500faf9-ab92-4f2d-8caf-338466146d7c.png">
