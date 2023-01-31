@@ -72,5 +72,5 @@ Dieses Programm ist eine freie, opensource Software: Sie können es unter den Be
 Weitere Informationen über die Lizenz finden Sie unter <a href="https://github.com/GeoAtzen/AtzenGIS/blob/main/LICENCE">LICENSE</a>.
 
 <h2>Acknowledgments</h2>
-Dieses Programm wurde von Johnathan M., Darian W., Luca H., Tobias K., Tim L. und Erkam D. für die Veranstaltung Geosoftware II unter der Leitung von E. Pebesma und C. Knoth erstellt.
+Dieses Programm wurde von Jonathan M., Darian W., Luca H., Tobias K., Tim L. und Erkam D. für die Veranstaltung Geosoftware II unter der Leitung von E. Pebesma und C. Knoth erstellt.
 
