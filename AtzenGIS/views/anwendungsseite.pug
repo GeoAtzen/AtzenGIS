@@ -62,14 +62,14 @@ block content
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
                           input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none';")
-                          input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(2);")
+                          button.btn.btn-success(id='btn4' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn4').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
                         p(style="font-size: small") Bei GeoPackage den Layer, welcher auf der Karte angezeigt werden soll, bitte "Layer1" nennen
                       #shapefilezeug
                         h4  Trainingspolygone als Shapefile als .zip
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
                           input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';")
-                          input.btn.btn-success(type='submit', value='Hinzufügen' onclick="bufferAktivieren(3);")
+                          button.btn.btn-success(id='btn5' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn5').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                           #puff3.spinner-border.float-end(role='status' style= 'display:none')                
                         p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!
 
@@ -80,7 +80,7 @@ block content
                     button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
                   form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                     input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
-                    input.btn.btn-success(type='submit', value='Hinzufügen' onclick='bufferAktivieren(1)')
+                    button.btn.btn-success(id='btn6' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn6').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                     #puff1.spinner-border.float-end(role='status' style= 'display:none')
                     p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
                   h4 Bereich auf der Karte auswählen 
