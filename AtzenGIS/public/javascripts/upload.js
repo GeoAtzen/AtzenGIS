@@ -1,3 +1,4 @@
+// jQuery handlers for calling the upload routes, so the site does not have to refresh!
 $(function() {
   $('form[action="/uploadsentinel"]').submit(function(e) {
     e.preventDefault();

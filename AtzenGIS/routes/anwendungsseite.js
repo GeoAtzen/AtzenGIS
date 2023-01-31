@@ -242,10 +242,28 @@ router.post("/mergegeojson", (req, res, next) => {
     console.log('The file has been saved!');
   });
 
+  if (!fs.existsSync('mydockerdata/usertrainingspolygonegjson.geojson')) {
+    return res.send("Error: 'mydockerdata/usertrainingspolygonegjson.geojson' does not exist.");
+  }
+
+  if (!fs.existsSync('mydockerdata/usertrainingspolygonegpkg.geojson')) {
+    return res.send("Error: 'mydockerdata/usertrainingspolygonegpkg.geojson' does not exist.");
+  }
+
+  var userTrainingsFilePath = fs.existsSync('mydockerdata/usertrainingspolygonegpkg.geojson')
+    ? 'mydockerdata/usertrainingspolygonegpkg.geojson'
+    : fs.existsSync('mydockerdata/usertrainingspolygonegjson.geojson')
+      ? 'mydockerdata/usertrainingspolygonegjson.geojson'
+      : null;
+
+  if (!userTrainingsFilePath) {
+    res.status(400).send({ error: 'No user trainings file found' });
+    return;
+  }
 
   var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
-    'mydockerdata/drawnpolygonsformerge.geojson',
-    'mydockerdata/usertrainingspolygonegjson.geojson'
+    userTrainingsFilePath,
+    'mydockerdata/drawnpolygonsformerge.geojson'
   ]);
 
   var writeStream = fs.createWriteStream('mydockerdata/mergedgeojsonfile.geojson');
