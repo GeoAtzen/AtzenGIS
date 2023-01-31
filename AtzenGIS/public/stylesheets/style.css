@@ -74,25 +74,6 @@ h5 {
     margin-left: 1%;
 }
 
-body,
-html {
-    height: 100%;
-    margin: 0;
-}
-
-.main-content {
-    height: calc(100% - footer-height);
-    margin: auto;
-    padding: 20px;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    height: footer-height;
-    width: 100%;
-}
-
 .buttonFragezeichen {
     color: rgb(255, 255, 255);
     border: 2px solid #198754;
