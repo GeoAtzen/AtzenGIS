@@ -29,7 +29,7 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 <br>http://localhost:3000/
 <br>
 <h5>Achtung!</h5>
-<br>First Loading Session will take some time!
+<br>Beim ersten mal dauert es bis zu 70 minuten bis alles Installiert ist! Bitte haben Sie Geduld
 
 
 <h3>Step 1</h3>
