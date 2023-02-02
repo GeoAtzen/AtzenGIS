@@ -1,4 +1,7 @@
-// jQuery handlers for calling the upload routes, so the site does not have to refresh!
+/**
+   * Handles file upload to "/uploadsentinel" route.
+   * Shows a loading spinner and alerts the user of the upload status.
+   */
 $(function() {
   $('form[action="/uploadsentinel"]').submit(function(e) {
     e.preventDefault();
@@ -26,6 +29,10 @@ $(function() {
     });
   });
 
+/**
+    * Handles file upload to "/uploadtrainingsdatashp" route.
+    * Shows a loading spinner and alerts the user of the upload status.
+    */
   $('form[action="/uploadtrainingsdatashp"]').submit(function(e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -52,6 +59,10 @@ $(function() {
     });
   });
 
+/**
+   * Handles file upload to "/uploadtrainingsdata" route.
+   * Shows a loading spinner and alerts the user of the upload status.
+   */
   $('form[action="/uploadtrainingsdata"]').submit(function(e) {
     e.preventDefault();
     let formData = new FormData(this);
@@ -78,6 +89,10 @@ $(function() {
     });
   });
 
+/**
+   * Handles file upload to "/uploadmodel" route.
+   * Shows a loading spinner and alerts the user of the upload status.
+   */
   $('form[action="/uploadmodel"]').submit(function(e) {
     e.preventDefault();
     let formData = new FormData(this);

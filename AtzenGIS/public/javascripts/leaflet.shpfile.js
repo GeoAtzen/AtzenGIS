@@ -1,6 +1,15 @@
 'use strict';
 
-/* global cw, shp */
+/**
+ * L.Shapefile is a subclass of L.GeoJSON, which is used to load and parse Shapefile data.
+ * @class L.Shapefile
+ * @extends L.GeoJSON
+ * @param {string|ArrayBuffer} file - The shapefile data to be loaded.
+ * @param {Object} options - The options object for this instance.
+ * @fires data:loading - Fires when data is being loaded.
+ * @fires data:loaded - Fires when data has been loaded and added to the instance.
+ * @fires data:error - Fires when there is an error loading the data.
+ */
 L.Shapefile = L.GeoJSON.extend({
   options: {
     importUrl: 'shp.js'
@@ -58,6 +67,12 @@ L.Shapefile = L.GeoJSON.extend({
   }
 });
 
+/**
+ * Adds the Shapefile data to the instance.
+ * @function
+ * @param {string|ArrayBuffer} file - The shapefile data to be added.
+ * @return {L.Shapefile}
+ */
 L.shapefile = function(a, b, c) {
   return new L.Shapefile(a, b, c);
 };
