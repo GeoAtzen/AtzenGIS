@@ -121,7 +121,7 @@ $(function() {
 });
 
 /*
-function submitForm(event) {
+function submitForm(event) { 
   event.preventDefault();
   const form = event.target.form;
   const btn = event.target;

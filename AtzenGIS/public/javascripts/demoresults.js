@@ -526,7 +526,7 @@ function loadaoa() {
 
 /**
 Loads the sampling locations to the map from a shapefile.
-The shapefile is specified by its URL: "http://localhost:3000/samples".
+The shapefile is specified by its URL: "http://localhost:3000/samples". 
 */
 var samplingshp = new L.Shapefile("http://localhost:3000/demodaten/demosamples.zip", {
     onEachFeature: function (feature, layer) {

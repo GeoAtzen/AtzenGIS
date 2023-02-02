@@ -8,7 +8,7 @@
  * @param {Object} options - The options object for this instance.
  * @fires data:loading - Fires when data is being loaded.
  * @fires data:loaded - Fires when data has been loaded and added to the instance.
- * @fires data:error - Fires when there is an error loading the data.
+ * @fires data:error - Fires when there is an error loading the data. 
  */
 L.Shapefile = L.GeoJSON.extend({
   options: {

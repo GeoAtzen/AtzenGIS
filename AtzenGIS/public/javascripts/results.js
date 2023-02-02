@@ -557,7 +557,7 @@ var samplingshp = new L.Shapefile("http://localhost:3000/samples", {
 
 /**
 Object literal to store the base maps available for the map.
-Contains two key-value pairs, where the key is the name of the base map and the value is the corresponding map layer.
+Contains two key-value pairs, where the key is the name of the base map and the value is the corresponding map layer. 
 @constant
 @type {Object}
 @property {L.TileLayer} "OpenStreetMap" - The OpenStreetMap base layer.

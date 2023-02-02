@@ -369,7 +369,7 @@ areaofinterestTextdemo.value = "";
 var aoidemo; // Variable for storing the drawn AOI
 
 /**
-Event listener for "draw:created" on the map object. This event is triggered when the user creates a new shape on the map.
+Event listener for "draw:created" on the map object. This event is triggered when the user creates a new shape on the map. 
 When this event is triggered, the coordinates of the new shape are retrieved and stored in the "aoishp" variable.
 @event "draw:created"
 @param {object} e - The event object passed to the listener.

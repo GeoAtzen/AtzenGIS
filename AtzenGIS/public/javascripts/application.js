@@ -505,7 +505,7 @@ var baseMaps = {
 };
 
 /**
-Object literal to store the overlay maps for the map.
+Object literal to store the overlay maps for the map. 
 Contains two key-value pairs, where the key is the name of the base map and the value is the corresponding map layer.
 @constant
 @type {Object}
