@@ -38,29 +38,28 @@ app.post(
 );
 
 app.post(
-    "/uploadsentinel",
-    upload.single("file"),
-    (req, res) => {
+  "/uploadsentinel",
+  upload.single("file"),
+  (req, res) => {
+    const tempPath = req.file.path;
+    const targetPath = path.join(__dirname, "mydockerdata/usersentineldata.tif");
 
-        const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "mydockerdata/usersentineldata.tif");
-
-        if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
-            fs.rename(tempPath, targetPath, err => {
-                if (err) return handleError(err, res);
-
-                res.status(200).send();
-
-            });
-        } else {
-            fs.unlink(tempPath, err => {
-                if (err) return handleError(err, res);
-
-                res.status(403).send();
-            });
-        }
+    if (path.extname(req.file.originalname).toLowerCase() === ".tif") {
+      fs.rename(tempPath, targetPath, (err) => {
+        if (err) return handleError(err, res);
+        res.status(200).send();
+      });
+    } else {
+      fs.unlink(tempPath, (err) => {
+        if (err) return handleError(err, res);
+        res.status(403).send();
+      });
     }
+  }
 );
+
+
+
 
 // Uploading data handler for trainingsdata here
 app.post(
@@ -70,6 +69,7 @@ app.post(
         const tempPath = req.file.path;
         const targetPathgpkg = path.join(__dirname, "mydockerdata/usertrainingspolygonegpkg.gpkg");
         const targetPathgjson = path.join(__dirname, "mydockerdata/usertrainingspolygonegjson.geojson");
+        const targetPathshp = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
 
         if (path.extname(req.file.originalname).toLowerCase() === ".gpkg") {
             fs.rename(tempPath, targetPathgpkg, err => {
@@ -92,7 +92,14 @@ app.post(
 
                 res.status(200).send();
             });
-        } else {
+        } else if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
+            fs.rename(tempPath, targetPathshp, err => {
+                if (err) return handleError(err, res);
+
+                res.status(200).send();
+            });
+        }
+        else {
             fs.unlink(tempPath, err => {
                 if (err) return handleError(err, res);
 
@@ -101,7 +108,7 @@ app.post(
         }
     }
 );
-
+/*
 // Uploading data handler for trainingsdata as shapefile (.zip)
 app.post(
     "/uploadtrainingsdatashp",
@@ -126,7 +133,7 @@ app.post(
         }
     }
 );
-
+*/
 
 // Uploading data handler for trained model here
 app.post(
@@ -151,6 +158,8 @@ app.post(
         }
     }
 );
+
+
 
 app.get("/downloadtrainingsdatashp", (req, res) => {
     const file = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
