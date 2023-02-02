@@ -143,17 +143,9 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id02').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 1. Bereich wählen
-         p Zeichnen Sie links auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
-
-  #id03.w3-modal
-    .w3-modal-content.w3-card-4.w3-animate-top
-      header.w3-container.w3-teal.w3-display-container
-        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id03').style.display='none'")
-          i.fa.fa-remove
-      .w3-container
-         h3 2. Datenupload
-         p In diesem Abschnitt können Sie alle Daten, die zur Durchführung des Programms benötigt werden, hochladen. Die Uploads sind in verschienede Bereiche unterteilt, bitte folgen Sie den Anweisungen des jeweiligen Abschnitts.
+         h3 Bereich wählen
+         p Zeichnen Sie auf der Karte mit dem Leaflet Draw Plugin einen rechteckigen Bereich, mit welchem Sie arbeiten möchten.
+         p Sie finden das Tool zum Zeichnen des Bereichs am linken Rand der Karte (Viereckiger Knopf). Durch ziehen mit der Maus und klicken können Sie einen neuen Bereich hinzufügen.
 
   #id04.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -161,8 +153,10 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id04').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 2.1 Trainiertes Modell
-         p In diesem Abschnitt können sie ein bereits trainiertes Modell hochladen, um mit diesem direkt weiterzuarbeiten.
+         h3 Trainiertes Modell
+         p In diesem Abschnitt können sie ein bereits trainiertes Modell hochladen.
+         p Das von Ihnen hochgeladene trainierte Modell wird benutzt, um die AOA zu berechnen.
+         p Falls Sie noch kein trainiertes Modell haben, gehen Sie bitte einen Schritt zurück und wählen "Nein" bei der Frage, ob sie schon ein solches besitzen.
 
   #id05.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -170,8 +164,12 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id05').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 2.2 Sektion Trainingsdaten
-         p In diesem Abschnitt können Sie Trainingspolygone hochladen. Sie können zwischen einem Upload in Form von 2.2.1 Trainingspolygone als GeoPackage oder GeoJSON <b> oder </b> 2.2.2 Trainingspolygone als Shapefile als .zip wählen. Bitte achten Sie auf die korrekte Benennung der Dateien und haben Sie Geduld. Das Anzeigen kann etwas Zeit in Anspruch nehmen. Aus Ihren Trainingsdaten wird dann ein Modell erstellt.
+         h3 Trainingsdaten
+         p In diesem Abschnitt können Sie Trainingspolygone hochladen. 
+         p Sie können zwischen einem Upload in Form von2Trainingspolygonen als GeoPackage oder GeoJSON oder
+         p Trainingspolygonen als Shapefile als .zip wählen.
+         p Bitte achten Sie auf die korrekte Benennung der Dateien und haben Sie Geduld. Das Anzeigen kann etwas Zeit in Anspruch nehmen.
+         p Aus Ihren Trainingsdaten wird im Anschluss ein trainiertes Modell erstellt.
 
   #id06.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -179,26 +177,11 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id06').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 2.3 Sentinel 2 Bild als .tif
-         p In diesem Abschnitt können Sie ein Sentinel 2 Bild als .tif Datei hochladen. Um eine Echtfarbkompositdarstellung zu erzeugen achten Sie bitte darauf ein Mehrkanal-TIF zu wählen und kein Einkanal-TIF.
+         h3 Sentinel-2 Bild
+         p In diesem Abschnitt können Sie ein Sentinel 2 Bild als .tif Datei hochladen.
+         p Um eine Echtfarbkompositdarstellung zu erzeugen achten Sie bitte darauf ein Mehrkanal-TIF zu wählen und kein Einkanal-TIF.
+         p Durch die Verwendung eines Mehrkanal-TIFs anstelle eines Einkanal-TIFs wird sichergestellt, dass die Echtfarbkompositdarstellung über ausreichende Farbinformationen verfügt, um eine realistische Darstellung zu erzeugen.
 
-  #id07.w3-modal
-    .w3-modal-content.w3-card-4.w3-animate-top
-      header.w3-container.w3-teal.w3-display-container
-        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id07').style.display='none'")
-          i.fa.fa-remove
-      .w3-container
-         h3 3. Auflösung wählen
-         p In diesem Abschnitt können Sie die Auflösung der Daten wählen. Nutzen Sie hierfür das Dropdown-Menü und wählen Sie zwischen Hoch(10mx10m), Mittel (20mx20m) und Niedrig (30mx30m). Höhere Auflösungen bieten eine bessere Genauigkeit, führen aber auch zu längeren Ladezeiten.
-
-  #id08.w3-modal
-    .w3-modal-content.w3-card-4.w3-animate-top
-      header.w3-container.w3-teal.w3-display-container
-        span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id08').style.display='none'")
-          i.fa.fa-remove
-      .w3-container
-         h3 4. Algorithmus wählen
-         p In diesem Abschnitt können Sie den Klassifizierungsalgorithmus, der zur Verarbeitung der Daten genutzt wird, wählen. Nutzen Sie hierfür das Dropdown-Menü und wählen Sie zwischen "Random Forest", "Decision Tree" und "Anderer Algorithmus". 
 
   #id09.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -206,8 +189,9 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id09').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 5. Ausführen
-         p Bitte wählen Sie in diesem Abschnitt die Methode zum Ausführen des Programms aus, die den von Ihnen gewählten ud hochgeladenen Daten entspricht. Nach dem Klick auf die richtige Methode werden Sie zur Ergebnisseite weitergeleitet. Dies kann einen Moment dauern, bitte haben Sie Geduld.
+         h3 Ausführen
+         p Nutzen Sie den Button zum Ausführen des Programms.
+         p Im Anschluss werden Sie zur Ergebnisseite weitergeleitet. Dies kann einen Moment dauern, bitte haben Sie Geduld.
 
   #id10.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top
@@ -215,7 +199,8 @@ block content
         span.w3-button.w3-teal.w3-display-topright(onclick="document.getElementById('id10').style.display='none'")
           i.fa.fa-remove
       .w3-container
-         h3 Durchführungsschritte
-         p ----- Vor dem finalen Release erscheint an dieser Stelle ein Video, was Sie durch die verschiedenen Schritte führt. -----
+         h3 Fragen?
+         p Besuchen Sie unsere Demoseite um mehr über die Durchführung des Programms zu erfahren.
+
 
   script(src="/javascripts/demoapplication.js")
