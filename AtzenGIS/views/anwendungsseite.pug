@@ -21,7 +21,7 @@ block content
                     p 
                     .w3-row
                       .w3-half
-                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none'; document.getElementById('traniertesModelltrain').style.display='block';") Ja
+                        button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainingsdaten').style.display='none'; document.getElementById('abfrage').style.display='none';") Ja
                       .w3-half
                         button.btn.btn-success(onclick="document.getElementById('rest').style.display='block'; document.getElementById('trainiertesModell').style.display='none'; document.getElementById('abfrage').style.display='none';  document.getElementById('geopackagegeojson').style.display='block'; document.getElementById('shapefiletrain').style.display='block';") Nein
                     br
@@ -43,6 +43,7 @@ block content
                     br
                     br
                 #rest(style= "display:none")   
+                
 
                   p
 
@@ -52,8 +53,8 @@ block content
                         button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
                       form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                         input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
-                        button.btn.btn-success(id='btn3' type= 'sumbit' onclick="document.getElementById('btn3').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
-                        #puff4.spinner-border.float-end(role='status' style= 'display:none') 
+                        button.btn.btn-success(id='btn3' type= 'sumbit' onclick="document.getElementById('traniertesModelltrain').style.display='block';") Hinzufügen
+                        #puff4.spinner-border.float-end(role='status' style= 'display:none')
 
 
                     #trainingsdaten
@@ -62,7 +63,7 @@ block content
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
                           input(type='file', name='file', accept=".gpkg, .geojson, .zip" style="color:grey; font-size:large;")
-                          button.btn.btn-success(id='btn4' type= 'sumbit' onclick="document.getElementById('btn4').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                          button.btn.btn-success(id='btn4' type= 'sumbit' onclick="document.getElementById('geopackagegeojson').style.display='block';") Hinzufügen
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
                         p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!            
 
@@ -71,7 +72,7 @@ block content
                     button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
                   form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                     input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
-                    button.btn.btn-success(id='btn6' type= 'sumbit' onclick="document.getElementById('btn6').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                    button.btn.btn-success(id='btn6' type= 'sumbit') Hinzufügen
                     #puff1.spinner-border.float-end(role='status' style= 'display:none')
                     p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
                   h4 Bereich auf der Karte auswählen 
@@ -111,12 +112,12 @@ block content
                                     button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
                                       | Shapefile Trainingsdaten
                   br  
-                #traniertesModelltrain(style= "display:none") 
+                #traniertesModelltrain(style="display:none") 
                   form(method='post', action='/anwendungsseite/ergebnisseitemodel')
-                      form-group
-                          textarea#aoibbmdl.form-control.disabled(hidden='' name="aoibbmdl" readonly="readonly")
-                          button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>                                                                  
-                            | trainiertem Modell
+                    form-group
+                      textarea#aoibbmdl.form-control.disabled(hidden='' name="aoibbmdl" readonly="readonly")
+                      button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>                                                                  
+                        | trainiertem Modell
 
   #warteseiteGanz(style= "display:none")
     br
