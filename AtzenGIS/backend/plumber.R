@@ -221,8 +221,16 @@ setColor <- function(prediction_terra){
 function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
   
   sentinel <- rast("mydockerdata/usersentineldata.tif")
-  Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
+  
+  if (file.exists("mydockerdata/usertrainingspolygonegjson.geojson")) {
+    Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
+  } else if (file.exists("mydockerdata/usertrainingspolygonegpkg.geojson")) {
+    Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.geojson")
+  } else {
+    stop("Neither mydockerdata/usertrainingspolygonegjson.geojson nor mydockerdata/usertrainingspolygonegpkg.geojson exists")
+  }
 
+  print(Referenzdaten)
   # for trainingspolygons
   trainingsdataaoi <- c(xmin=xmin,ymin=ymin,xmax=xmax,ymax=ymax)
   print(trainingsdataaoi)
@@ -245,6 +253,7 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
 
   trainModel(Referenzdaten, sentinel, alg)
 }
+
 
 #* Calculates LULC Classification and cuts the data if aoi given
 #* @serializer png

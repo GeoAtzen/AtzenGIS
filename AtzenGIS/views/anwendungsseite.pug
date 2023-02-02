@@ -52,35 +52,26 @@ block content
                         button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
                       form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                         input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
-                        button.btn.btn-success(id='btn3' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn3').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                        button.btn.btn-success(id='btn3' type= 'sumbit' onclick="document.getElementById('btn3').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                         #puff4.spinner-border.float-end(role='status' style= 'display:none') 
 
 
                     #trainingsdaten
                       #geozeug
-                        h4 Trainingspolygone als GeoPackage oder GeoJSON:
+                        h4 Trainingspolygone als GeoPackage oder GeoJSON oder als Shapefile(zip):
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
-                          input(type='file', name='file', accept=".gpkg, .geojson" style="color:grey; font-size:large;" onclick="document.getElementById('shapefilezeug').style.display='none';")
-                          button.btn.btn-success(id='btn4' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn4').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                          input(type='file', name='file', accept=".gpkg, .geojson, .zip" style="color:grey; font-size:large;")
+                          button.btn.btn-success(id='btn4' type= 'sumbit' onclick="document.getElementById('btn4').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
-                        p(style="font-size: small")
-                      #shapefilezeug
-                        h4  Trainingspolygone als Shapefile als .zip
-                        form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdatashp' )
-                          input(type='file', name='file', accept=".zip" style="color:grey; font-size:large;" onclick="document.getElementById('geozeug').style.display='none';")
-                          button.btn.btn-success(id='btn5' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn5').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
-                          #puff3.spinner-border.float-end(role='status' style= 'display:none')                
-                        p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!
+                        p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!            
 
               
-
-
                   h4 Sentinel 2 Bild als .tif hochladen </b>
                     button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
                   form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                     input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
-                    button.btn.btn-success(id='btn6' type= 'sumbit' onclick="bufferAktivieren(4); document.getElementById('btn6').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                    button.btn.btn-success(id='btn6' type= 'sumbit' onclick="document.getElementById('btn6').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
                     #puff1.spinner-border.float-end(role='status' style= 'display:none')
                     p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
                   h4 Bereich auf der Karte auswählen 
@@ -89,49 +80,36 @@ block content
                   button.buttonFragezeichen(onclick="document.getElementById('id09').style.display='block'; modal = document.getElementById('id09')" title='Hilfe') ?
                   p
                   
-                #geopackagegeojson(style= "display:none") 
+                #geopackagegeojson(style= "display:none")
                   .w3-row
-                    .w3-half
-                      form(method='post', action='/anwendungsseite/ergebnisseitegpkg')
-                          form-group
-                            label(for='algorithm-select') Trainingsalgorithmus:
-                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
-                                option(value='rf' name="rf") Random Forest
-                                option(value='svm' name="svm") SVM with Radial Kernel
-                                option(value='dt' name="dt") Decision Trees (rpart)
-                                option(value='knn' name="knn") k-Nearest Neighbors
-                                textarea#aoibbgpkg.form-control.disabled(hidden='' name="aoibbgpkg" readonly="readonly")
-                                br
-                                button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                  | GeoPackage Trainingsdaten
-                      br
                     .w3-half
                       form(method='post', action='/anwendungsseite/ergebnisseitegjson')
                           form-group
                             label(for='algorithm-select') Trainingsalgorithmus:
-                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
-                                option(value='rf' name="rf") Random Forest
-                                option(value='svm' name="svm") SVM with Radial Kernel
-                                option(value='dt' name="dt") Decision Trees (rpart)
-                                option(value='knn' name="knn") k-Nearest Neighbors
-                                textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
-                                br
-                                button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                  | GeoJSON Trainingsdaten
-                      br 
-                #shapefiletrain(style= "display:none") 
-                  form(method='post', action='/anwendungsseite/ergebnisseiteshape')
-                      form-group
-                        label(for='algorithm-select') Trainingsalgorithmus:
-                              select#algorithm-select.form-control(multiple='multiple', name='algorithms')
-                                option(value='rf' name="rf") Random Forest
-                                option(value='svm' name="svm") SVM with Radial Kernel
-                                option(value='dt' name="dt") Decision Trees (rpart)
-                                option(value='knn' name="knn") k-Nearest Neighbors
-                                textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly")
-                                br
-                                button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
-                                  | Shapefile Trainingsdaten
+                                  select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                    option(value='rf' name="rf") Random Forest
+                                    option(value='svm' name="svm") SVM with Radial Kernel
+                                    option(value='dt' name="dt") Decision Trees (rpart)
+                                    option(value='knn' name="knn") k-Nearest Neighbors
+                                    textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
+                                    br
+                                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
+                                      | GeoJSON oder Geopackage Trainingsdaten
+                      br
+                    .w3-half
+                    #shapefiletrain(style= "display:none") 
+                      form(method='post', action='/anwendungsseite/ergebnisseiteshape')
+                          form-group
+                            label(for='algorithm-select') Trainingsalgorithmus:
+                                  select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                    option(value='rf' name="rf") Random Forest
+                                    option(value='svm' name="svm") SVM with Radial Kernel
+                                    option(value='dt' name="dt") Decision Trees (rpart)
+                                    option(value='knn' name="knn") k-Nearest Neighbors
+                                    textarea#aoibbshp.form-control.disabled(hidden='' name="aoibbshp" readonly="readonly")
+                                    br
+                                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; document.getElementById('alles').style.display='none';") Ausführen mit <br>
+                                      | Shapefile Trainingsdaten
                   br  
                 #traniertesModelltrain(style= "display:none") 
                   form(method='post', action='/anwendungsseite/ergebnisseitemodel')
@@ -366,8 +344,6 @@ block content
     y.textContent = "Gering";
     }
     }
-
-    function bufferAktivieren(numb) {
-    var el = document.getElementById("puff"+ numb);
-    el.style = 'display: block';
-    }
+    
+    
+    

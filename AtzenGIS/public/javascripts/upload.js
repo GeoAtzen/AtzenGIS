@@ -13,9 +13,11 @@ $(function() {
         $('#puff1').show();
       },
       success: function(data) {
+        alert("Hochladen des Sentinel Bildes erfolgreich!")
         console.log('File upload successful for sentinel!');
       },
       error: function(err) {
+        alert("Hochladen des Sentinel Bildes fehlgeschlagen!")
         console.error('File upload failed for sentinel:', err);
       },
       complete: function() {
@@ -37,9 +39,11 @@ $(function() {
         $('#puff3').show();
       },
       success: function(data) {
+        alert("Hochladen der Shapefile erfolgreich!")
         console.log('File upload successful for trainingsdatashp!');
       },
       error: function(err) {
+        alert("Hochladen der Shapefile fehlgeschlagen!")
         console.error('File upload failed for trainingsdatashp:', err);
       },
       complete: function() {
@@ -61,9 +65,11 @@ $(function() {
         $('#puff2').show();
       },
       success: function(data) {
+        alert("Hochladen erfolgreich!")
         console.log('File upload successful for trainingsdata!');
       },
       error: function(err) {
+        alert("Hochladen Fehlgeschlagen!")
         console.error('File upload failed for trainingsdata:', err);
       },
       complete: function() {
@@ -85,9 +91,11 @@ $(function() {
         $('#puff4').show();
       },
       success: function(data) {
+        alert("Hochladen des Models erfolgreich!")
         console.log('File upload successful for model!');
       },
       error: function(err) {
+        alert("Hochladen des Models fehlgeschlagen!")
         console.error('File upload failed for model:', err);
       },
       complete: function() {
@@ -96,3 +104,55 @@ $(function() {
     });
   });
 });
+
+/*
+function submitForm(event) {
+  event.preventDefault();
+  const form = event.target.form;
+  const btn = event.target;
+
+  // Show loading spinner
+  const spinner = document.querySelector("#puff4");
+  spinner.style.display = "block";
+
+  // Submit the form
+  const xhr = new XMLHttpRequest();
+  xhr.open(form.method, form.action, true);
+  xhr.setRequestHeader("Content-Type", "multipart/form-data");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      btn.textContent = "Hinzufügen erfolgreich";
+    } else if (xhr.readyState === XMLHttpRequest.DONE) {
+      btn.textContent = "Fehler beim Hinzufügen";
+    }
+  };
+  xhr.send(new FormData(form));
+}
+
+function handleSubmitResponse(element) {
+  event.preventDefault();
+
+  // Show loading spinner
+  const spinner = document.querySelector("#puff1");
+  spinner.style.display = "block";
+  
+  const btn = element;
+
+  // Submit the form
+  const form = element.closest("form");
+  const xhr = new XMLHttpRequest();
+  xhr.open(form.method, form.action, true);
+  xhr.setRequestHeader("Content-Type", "multipart/form-data");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      spinner.style.display = "none";
+      if (xhr.status === 200) {
+        btn.textContent = "Hinzufügen erfolgreich";
+      } else {
+        btn.textContent = "Fehler beim Hinzufügen";
+      }
+    }
+  };
+  xhr.send(new FormData(form));
+}
+*/

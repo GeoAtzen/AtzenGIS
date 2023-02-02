@@ -14,6 +14,7 @@ window.onload= function() {
     var anzeig2 = document.getElementById("buttonAnzeig");
     anzeig2.style.display ="block";
 }
+
 // creating a leaflet map with OSM as baselayer and view set to ...
 var map = L.map("anwendungsmap").setView([52, 7.8], 12);
 
@@ -334,35 +335,6 @@ map.on("draw:deleted", function (e) {
   areaofinterestTextmdl.value = "";
 });
 
-// adding the draw function and giving the coordinates to aoibbgpkg via DOM so it can be given to server side javascript modules via body parser
-const areaofinterestTextgpkg = document.getElementById("aoibbgpkg");
-areaofinterestTextgpkg.value = "";
-
-var aoigpkg;
-map.on("draw:created", function (e) {
-  var areaofinterestgpkg = e.layer;
-  aoigpkg = [
-    areaofinterestgpkg._bounds._southWest.lng,
-    areaofinterestgpkg._bounds._northEast.lng,
-    areaofinterestgpkg._bounds._southWest.lat,
-    areaofinterestgpkg._bounds._northEast.lat,
-  ];
-  console.log(aoigpkg);
-  areaofinterestTextgpkg.value = aoigpkg;
-  console.log(areaofinterestTextgpkg.value);
-});
-
-map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoigpkg != null) {
-    map.removeLayer(aoigpkg);
-    areaofinterestTextgpkg.value = "";
-  }
-});
-
-map.on("draw:deleted", function (e) {
-  aoigpkg = null;
-  areaofinterestTextgpkg.value = "";
-});
 
 // adding the draw function and giving the coordinates to aoibbgjson via DOM so it can be given to server side javascript modules via body parser
 const areaofinterestTextgjson = document.getElementById("aoibbgjson");
