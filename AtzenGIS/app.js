@@ -31,8 +31,17 @@ const upload = multer({
 app.post(
     "/zurueck",
     (req, res) => {
-        res.render("anwendungsseite", {
+        res.render("demo", {
             title: "Anwendungsseite"
+        });
+    }
+);
+
+app.post(
+    "/erneut",
+    (req, res) => {
+        res.render("demoergebnis", {
+            title: "Demorgebnisseite"
         });
     }
 );

@@ -32,7 +32,7 @@ var drawControl = new L.Control.Draw({
         circle: false,
         polyline: false,
         circlemarker: false,
-        rectangle: false,
+        rectangle: true,
         poylgon: true,
     },
     edit: {
@@ -63,18 +63,23 @@ Declaring your own features for the drawn polygon to store them in the geojson
 @author https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
 */
 document.addEventListener('DOMContentLoaded', function () {
+    // only add the label and classid when the polygon option is chosen
     map.on(L.Draw.Event.CREATED, function (e) {
+        var type = e.layerType
         var layer = e.layer
-        feature = layer.feature = layer.feature || {};
-        feature.type = feature.type || "Feature";
+        if (type === 'polygon') {
+            feature = layer.feature = layer.feature || {};
+            feature.type = feature.type || "Feature";
 
-        var Label = getLabel(layer);
-        var ClassID = getclassID(layer);
-        // assining the attributes entered in the prompt to be the features of the geojson
-        var props = (feature.properties = feature.properties || {});
-        props.Label = Label;
-        props.ClassID = ClassID;
-
+            var Label = getLabel(layer);
+            var ClassID = getclassID(layer);
+            // assining the attributes entered in the prompt to be the features of the geojson
+            var props = (feature.properties = feature.properties || {});
+            props.Label = Label;
+            props.ClassID = ClassID;
+        } else {
+            // Do not show the label and classID prompt for rectangle
+        }
         // adding the drawn polygons to the layer
         drawnItems.addLayer(layer);
 
@@ -138,6 +143,41 @@ function exportGeoJSON() {
 }
 
 /**
+@function
+Adds the draw function and updates the coordinates to the DOM element with id "aoibbgjson".
+The updated value is given to server side javascript modules via body parser.
+*/
+const areaofinterestTextgjson = document.getElementById("aoibbgjson");
+areaofinterestTextgjson.value = "";
+
+var aoigjson;
+map.on("draw:created", function (e) {
+    var areaofinterestgjson = e.layer;
+    aoigjson = [
+        areaofinterestgjson._bounds._southWest.lng,
+        areaofinterestgjson._bounds._northEast.lng,
+        areaofinterestgjson._bounds._southWest.lat,
+        areaofinterestgjson._bounds._northEast.lat,
+    ];
+    console.log(aoigjson);
+    areaofinterestTextgjson.value = aoigjson;
+    console.log(areaofinterestTextgjson.value);
+});
+
+map.on(L.Draw.Event.DRAWSTART, function (e) {
+    if (aoigjson != null) {
+        map.removeLayer(aoigjson);
+        areaofinterestTextgjson.value = "";
+    }
+});
+
+map.on("draw:deleted", function (e) {
+    aoigjson = null;
+    areaofinterestTextgjson.value = "";
+});
+
+
+/**
 Adds the uploaded shapefile to the map with styling and a popup displaying its properties.
 @param {L.Shapefile} usershapefile - the Shapefile layer to be added to the map
 @param {String} http://localhost:3000/usertrainingsdatashp.zip - the URL for the shapefile
@@ -167,11 +207,11 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
                 };
             case "Bahnschiene":
                 return {
-                    color: "#696969"
+                    color: "#613232"
                 };
             case "Baumgruppe":
                 return {
-                    color: "#11671e"
+                    color: "#18471e"
                 };
             case "Binnengewaesser":
                 return {
@@ -183,7 +223,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
                 };
             case "Innenstadt":
                 return {
-                    color: "#696969"
+                    color: "#F5F5F5"
                 };
             case "Kunstrasen":
                 return {
@@ -191,7 +231,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
                 };
             case "Laubwald":
                 return {
-                    color: "#11671e"
+                    color: "#03ad1d"
                 };
             case "Mischwald":
                 return {
@@ -203,7 +243,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
                 };
             case "Siedlung":
                 return {
-                    color: "#696969"
+                    color: "#B22222"
                 };
             case "Strand":
                 return {
@@ -211,7 +251,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
                 };
             case "Versiegelt":
                 return {
-                    color: "#696969"
+                    color: "#141414"
                 };
             case "Wiese":
                 return {
@@ -227,7 +267,7 @@ var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.
 
 
 /**
-Adds the merged file to the map with styling and pop-up for its properties.
+Adds the uploaded geojson file to the map with styling and pop-up for its properties.
 @constructor L.GeoJSON.AJAX
 @param {string} url - The URL of the GeoJSON file.
 @param {Object} options - The options for the GeoJSON layer.
@@ -259,11 +299,11 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
                 };
             case "Bahnschiene":
                 return {
-                    color: "#696969"
+                    color: "#613232"
                 };
             case "Baumgruppe":
                 return {
-                    color: "#11671e"
+                    color: "#18471e"
                 };
             case "Binnengewaesser":
                 return {
@@ -275,7 +315,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
                 };
             case "Innenstadt":
                 return {
-                    color: "#696969"
+                    color: "#F5F5F5"
                 };
             case "Kunstrasen":
                 return {
@@ -283,7 +323,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
                 };
             case "Laubwald":
                 return {
-                    color: "#11671e"
+                    color: "#03ad1d"
                 };
             case "Mischwald":
                 return {
@@ -295,7 +335,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
                 };
             case "Siedlung":
                 return {
-                    color: "#696969"
+                    color: "#B22222"
                 };
             case "Strand":
                 return {
@@ -303,7 +343,7 @@ var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygon
                 };
             case "Versiegelt":
                 return {
-                    color: "#696969"
+                    color: "#141414"
                 };
             case "Wiese":
                 return {
@@ -408,9 +448,97 @@ var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingsp
     },
 }).addTo(map);
 
+/**
+Adds the merged GeoJSON file to the map with styling and a popup displaying its properties.
+@param {L.GeoJSON.AJAX} mergedgeojson - the GeoJSON layer to be added to the map
+@param {String} http://localhost:3000/mergedgeojsonfile.geojson - the URL for the GeoJSON file
+@param {Object} onEachFeature - a function that will be called on each feature in the layer,
+displaying its properties in a popup
+@param {Object} style - a function that styles the features based on the value of the "Label" property
+*/
+var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.geojson", {
+    onEachFeature: function (feature, layer) {
+        if (feature.properties) {
+            layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                return k + ": " + feature.properties[k];
+            }).join("<br />"), {
+                maxHeight: 200
+            });
+        }
+    },
+    style: function (feature) {
+        switch (feature.properties.Label) {
+            case "Acker":
+                return {
+                    color: "#d18b2c"
+                };
+            case "Acker_bepflanzt":
+                return {
+                    color: "#70843a"
+                };
+            case "Bahnschiene":
+                return {
+                    color: "#613232"
+                };
+            case "Baumgruppe":
+                return {
+                    color: "#18471e"
+                };
+            case "Binnengewaesser":
+                return {
+                    color: "#0a1cb1"
+                };
+            case "Industrie":
+                return {
+                    color: "#696969"
+                };
+            case "Innenstadt":
+                return {
+                    color: "#F5F5F5"
+                };
+            case "Kunstrasen":
+                return {
+                    color: "#92e597"
+                };
+            case "Laubwald":
+                return {
+                    color: "#03ad1d"
+                };
+            case "Mischwald":
+                return {
+                    color: "#11671e"
+                };
+            case "Parklandschaft":
+                return {
+                    color: "#92e597"
+                };
+            case "Siedlung":
+                return {
+                    color: "#B22222"
+                };
+            case "Strand":
+                return {
+                    color: "#ffff00"
+                };
+            case "Versiegelt":
+                return {
+                    color: "#141414"
+                };
+            case "Wiese":
+                return {
+                    color: "#00FF00"
+                };
+            default:
+                return {
+                    color: "#000000"
+                };
+        }
+    },
+}).addTo(map);
+
 
 /**
-Adds the .tif file via georaster plugin and displays it on the map.
+Adds the uploaded sentinel .tif file via georaster plugin and displays it on the map.
 The plugin is imported from the following sources:
 @author - https://github.com/GeoTIFF/georaster 
 @author - https://github.com/GeoTIFF/georaster-layer-for-leaflet
@@ -491,18 +619,29 @@ function loadprediction() {
                 layerControl.addOverlay(predictiongeotiffdata, 'Prediction');
             });
         });
-    fetch('http://localhost:3000/predictionlegende.png')
-        .then(function (data) {
-            return data.blob();
-        })
-        .then(function (img) {
-            var legende = URL.createObjectURL(img);
-            $('img').attr('src', legende);
-        })
+    
+    // creating a legend object
+    var legend = L.control({
+        position: 'topright'
+    });
+
+    // adding the legend to the map with the wanted styles
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'prediction legend');
+        div.innerHTML = '<img src="http://localhost:3000/predictionlegende.png"/>';
+
+        div.childNodes[0].style.width = "200px";
+        div.childNodes[0].style.height = "400px";
+        div.childNodes[0].style.objectFit = "none";
+        div.childNodes[0].style.objectPosition = "center center";
+        div.childNodes[0].style.opacity = 0.75;
+        return div;
+    };
+    legend.addTo(map);
 }
 
 /**
- * Loads the apa .tif file via georaster plugin. The file is fetched from the localhost and 
+ * Loads the aoa .tif file via georaster plugin. The file is fetched from the localhost and 
  * parsed using the parseGeoraster method. The parsed data is then used to create a new GeoRasterLayer 
  * object, which is added to the map and to the layer control function of Leaflet. The map is then 
  * fitted to the bounds of the apa data.
@@ -581,7 +720,8 @@ var overlayMaps = {
     "Geopackage": gpkgtogeojsondata,
     "Shapefile": usershapefile,
     "GeoJSON": geojsondata,
-    "Eigene Polygone": drawnItems
+    "Eigene Polygone": drawnItems,
+    "zusammengefügt": mergedgeojson
 };
 
 /**

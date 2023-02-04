@@ -4,23 +4,10 @@ var modal; // Variable for storing the Modal currently open
 onClick function to hide the modal when clicking outside of the modal window.
 @param {Event} event - The event object associated with the click event.
 */
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == modal) {
-    modal.style.display = "none";
+        modal.style.display = "none";
     }
-    }
-
-/**
-onLoad function to hide a display element and show another display element after the page has loaded.
-Also logs a message to the console to indicate that the page has loaded.
-*/
-
-window.onload= function() {
-    console.log('ist geladen');
-    var anzeig = document.getElementById("puff5");
-    anzeig.style.display = "none";
-    var anzeig2 = document.getElementById("buttonAnzeig");
-    anzeig2.style.display ="block";
 }
 
 /**
@@ -80,72 +67,600 @@ map.on(L.Draw.Event.CREATED, (e) => {
     drawnItems.addLayer(layer);
     map.addLayer(layer);
 
-    map.on("draw:deleted", function(e) {
+    map.on("draw:deleted", function (e) {
         map.removeControl(drawControl);
         map.addControl(drawControl);
     });
 })
 
-
 /**
-Adds the uploaded shapefile to the map with styling and a popup displaying its properties.
-@param {L.Shapefile} usershapefile - the Shapefile layer to be added to the map
-@param {String} http://localhost:3000/usertrainingsdatashp.zip - the URL for the shapefile
-@param {Object} onEachFeature - a function that will be called on each feature in the layer,
-displaying its properties in a popup
-@param {Object} style - a function that styles the features based on the value of the "Label" property
+@function refreshMap()
+* "refreshes" the leaflet map by adding layers, removing them and then readding them to the map and to the layer control panel
 */
-var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
+function refreshMap() {
+
+    /**
+    Adds the uploaded shapefile to the map with styling and a popup displaying its properties.
+    @param {L.Shapefile} usershapefile - the Shapefile layer to be added to the map
+    @param {String} http://localhost:3000/usertrainingsdatashp.zip - the URL for the shapefile
+    @param {Object} onEachFeature - a function that will be called on each feature in the layer,
+    displaying its properties in a popup
+    @param {Object} style - a function that styles the features based on the value of the "Label" property
+    */
+    var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
+        onEachFeature: function (feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+            switch (feature.properties.Label) {
+                case "Acker":
+                    return {
+                        color: "#d18b2c"
+                    };
+                case "Acker_bepflanzt":
+                    return {
+                        color: "#70843a"
+                    };
+                case "Bahnschiene":
+                    return {
+                        color: "#613232"
+                    };
+                case "Baumgruppe":
+                    return {
+                        color: "#18471e"
+                    };
+                case "Binnengewaesser":
+                    return {
+                        color: "#0a1cb1"
+                    };
+                case "Industrie":
+                    return {
+                        color: "#696969"
+                    };
+                case "Innenstadt":
+                    return {
+                        color: "#F5F5F5"
+                    };
+                case "Kunstrasen":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Laubwald":
+                    return {
+                        color: "#03ad1d"
+                    };
+                case "Mischwald":
+                    return {
+                        color: "#11671e"
+                    };
+                case "Parklandschaft":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Siedlung":
+                    return {
+                        color: "#B22222"
+                    };
+                case "Strand":
+                    return {
+                        color: "#ffff00"
+                    };
+                case "Versiegelt":
+                    return {
+                        color: "#141414"
+                    };
+                case "Wiese":
+                    return {
+                        color: "#00FF00"
+                    };
+                default:
+                    return {
+                        color: "#000000"
+                    };
+            }
+        },
+    });
+
+    // removes the layer
+    map.removeLayer(usershapefile);
+    // adds the layer back to the map and adds it to the layer control panel
+    var usershapefile = new L.Shapefile("http://localhost:3000/usertrainingsdatashp.zip", {
+        onEachFeature: function (feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+            switch (feature.properties.Label) {
+                case "Acker":
+                    return {
+                        color: "#d18b2c"
+                    };
+                case "Acker_bepflanzt":
+                    return {
+                        color: "#70843a"
+                    };
+                case "Bahnschiene":
+                    return {
+                        color: "#613232"
+                    };
+                case "Baumgruppe":
+                    return {
+                        color: "#18471e"
+                    };
+                case "Binnengewaesser":
+                    return {
+                        color: "#0a1cb1"
+                    };
+                case "Industrie":
+                    return {
+                        color: "#696969"
+                    };
+                case "Innenstadt":
+                    return {
+                        color: "#F5F5F5"
+                    };
+                case "Kunstrasen":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Laubwald":
+                    return {
+                        color: "#03ad1d"
+                    };
+                case "Mischwald":
+                    return {
+                        color: "#11671e"
+                    };
+                case "Parklandschaft":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Siedlung":
+                    return {
+                        color: "#B22222"
+                    };
+                case "Strand":
+                    return {
+                        color: "#ffff00"
+                    };
+                case "Versiegelt":
+                    return {
+                        color: "#141414"
+                    };
+                case "Wiese":
+                    return {
+                        color: "#00FF00"
+                    };
+                default:
+                    return {
+                        color: "#000000"
+                    };
+            }
+        },
+    }).addTo(map);
+    // adding the layer to layercontrol of the leaflet map asynchronous
+    layerControl.addOverlay(usershapefile, 'Shapefile');
+
+    /**
+    Adds the uploaded GeoJSON file to the map with styling and pop-up for its properties.
+    @constructor L.GeoJSON.AJAX
+    @param {string} url - The URL of the GeoJSON file.
+    @param {Object} options - The options for the GeoJSON layer.
+    @param {function} options.onEachFeature - A function that is called on each feature of the GeoJSON data.
+    @param {function} options.style - A function that returns the style for each feature based on its properties.
+    @property {string} url - The URL of the GeoJSON file.
+    @property {function} onEachFeature - A function that is called on each feature of the GeoJSON data.
+    @property {function} style - A function that returns the style for each feature based on its properties.
+    */
+    var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
+        onEachFeature: function (feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+            switch (feature.properties.Label) {
+                case "Acker":
+                    return {
+                        color: "#d18b2c"
+                    };
+                case "Acker_bepflanzt":
+                    return {
+                        color: "#70843a"
+                    };
+                case "Bahnschiene":
+                    return {
+                        color: "#613232"
+                    };
+                case "Baumgruppe":
+                    return {
+                        color: "#18471e"
+                    };
+                case "Binnengewaesser":
+                    return {
+                        color: "#0a1cb1"
+                    };
+                case "Industrie":
+                    return {
+                        color: "#696969"
+                    };
+                case "Innenstadt":
+                    return {
+                        color: "#F5F5F5"
+                    };
+                case "Kunstrasen":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Laubwald":
+                    return {
+                        color: "#03ad1d"
+                    };
+                case "Mischwald":
+                    return {
+                        color: "#11671e"
+                    };
+                case "Parklandschaft":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Siedlung":
+                    return {
+                        color: "#B22222"
+                    };
+                case "Strand":
+                    return {
+                        color: "#ffff00"
+                    };
+                case "Versiegelt":
+                    return {
+                        color: "#141414"
+                    };
+                case "Wiese":
+                    return {
+                        color: "#00FF00"
+                    };
+                default:
+                    return {
+                        color: "#000000"
+                    };
+            }
+            
+        },
+    });
+
+    // removes the layer
+    map.removeLayer(geojsondata);
+
+    // adds the layer back to the map and adds it to the layer control panel
+    var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
+        onEachFeature: function (feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+            switch (feature.properties.Label) {
+                case "Acker":
+                    return {
+                        color: "#d18b2c"
+                    };
+                case "Acker_bepflanzt":
+                    return {
+                        color: "#70843a"
+                    };
+                case "Bahnschiene":
+                    return {
+                        color: "#613232"
+                    };
+                case "Baumgruppe":
+                    return {
+                        color: "#18471e"
+                    };
+                case "Binnengewaesser":
+                    return {
+                        color: "#0a1cb1"
+                    };
+                case "Industrie":
+                    return {
+                        color: "#696969"
+                    };
+                case "Innenstadt":
+                    return {
+                        color: "#F5F5F5"
+                    };
+                case "Kunstrasen":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Laubwald":
+                    return {
+                        color: "#03ad1d"
+                    };
+                case "Mischwald":
+                    return {
+                        color: "#11671e"
+                    };
+                case "Parklandschaft":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Siedlung":
+                    return {
+                        color: "#B22222"
+                    };
+                case "Strand":
+                    return {
+                        color: "#ffff00"
+                    };
+                case "Versiegelt":
+                    return {
+                        color: "#141414"
+                    };
+                case "Wiese":
+                    return {
+                        color: "#00FF00"
+                    };
+                default:
+                    return {
+                        color: "#000000"
+                    };
+            }
+        },
+    }).addTo(map);
+    // adding the layer to layercontrol of the leaflet map asynchronous
+    layerControl.addOverlay(geojsondata, 'GeoJSON');
+
+    /**
+    Adds the converted GeoPackage as GeoJSON to the map with styling and pop-up for its properties.
+    @constructor L.GeoJSON.AJAX
+    @param {string} url - The URL of the GeoJSON file.
+    @param {Object} options - The options for the GeoJSON layer.
+    @param {function} options.onEachFeature - A function that is called on each feature of the GeoJSON data.
+    @param {function} options.style - A function that returns the style for each feature based on its properties.
+    @property {string} url - The URL of the GeoJSON file.
+    @property {function} onEachFeature - A function that is called on each feature of the GeoJSON data.
+    @property {function} style - A function that returns the style for each feature based on its properties.
+    */
+    var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
+        onEachFeature: function (feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+            switch (feature.properties.Label) {
+                case "Acker":
+                    return {
+                        color: "#d18b2c"
+                    };
+                case "Acker_bepflanzt":
+                    return {
+                        color: "#70843a"
+                    };
+                case "Bahnschiene":
+                    return {
+                        color: "#613232"
+                    };
+                case "Baumgruppe":
+                    return {
+                        color: "#18471e"
+                    };
+                case "Binnengewaesser":
+                    return {
+                        color: "#0a1cb1"
+                    };
+                case "Industrie":
+                    return {
+                        color: "#696969"
+                    };
+                case "Innenstadt":
+                    return {
+                        color: "#F5F5F5"
+                    };
+                case "Kunstrasen":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Laubwald":
+                    return {
+                        color: "#03ad1d"
+                    };
+                case "Mischwald":
+                    return {
+                        color: "#11671e"
+                    };
+                case "Parklandschaft":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Siedlung":
+                    return {
+                        color: "#B22222"
+                    };
+                case "Strand":
+                    return {
+                        color: "#ffff00"
+                    };
+                case "Versiegelt":
+                    return {
+                        color: "#141414"
+                    };
+                case "Wiese":
+                    return {
+                        color: "#00FF00"
+                    };
+                default:
+                    return {
+                        color: "#000000"
+                    };
+            }
+        },
+    });
+
+    // removes the layer
+    map.removeLayer(gpkgtogeojsondata);
+    // adds the layer back to the map and adds it to the layer control panel
+   var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
+        onEachFeature: function (feature, layer) {
+            if (feature.properties) {
+                layer.bindPopup(Object.keys(feature.properties).map(function (k) {
+                    return k + ": " + feature.properties[k];
+                }).join("<br />"), {
+                    maxHeight: 200
+                });
+            }
+        },
+        style: function (feature) {
+            switch (feature.properties.Label) {
+                case "Acker":
+                    return {
+                        color: "#d18b2c"
+                    };
+                case "Acker_bepflanzt":
+                    return {
+                        color: "#70843a"
+                    };
+                case "Bahnschiene":
+                    return {
+                        color: "#613232"
+                    };
+                case "Baumgruppe":
+                    return {
+                        color: "#18471e"
+                    };
+                case "Binnengewaesser":
+                    return {
+                        color: "#0a1cb1"
+                    };
+                case "Industrie":
+                    return {
+                        color: "#696969"
+                    };
+                case "Innenstadt":
+                    return {
+                        color: "#F5F5F5"
+                    };
+                case "Kunstrasen":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Laubwald":
+                    return {
+                        color: "#03ad1d"
+                    };
+                case "Mischwald":
+                    return {
+                        color: "#11671e"
+                    };
+                case "Parklandschaft":
+                    return {
+                        color: "#92e597"
+                    };
+                case "Siedlung":
+                    return {
+                        color: "#B22222"
+                    };
+                case "Strand":
+                    return {
+                        color: "#ffff00"
+                    };
+                case "Versiegelt":
+                    return {
+                        color: "#141414"
+                    };
+                case "Wiese":
+                    return {
+                        color: "#00FF00"
+                    };
+                default:
+                    return {
+                        color: "#000000"
+                    };
+            }
+        },
+    }).addTo(map);
+    // adding the layer to layercontrol of the leaflet map asynchronous
+    layerControl.addOverlay(gpkgtogeojsondata, 'GeoPackage');
+
+    /**
+    Adds the .tif file via georaster plugin and displays it on the map.
+    The plugin is imported from the following sources:
+    @author - https://github.com/GeoTIFF/georaster 
+    @author - https://github.com/GeoTIFF/georaster-layer-for-leaflet
+    */
+    fetch("http://localhost:3000/usersentineldata.tif")
+        .then((response) => response.arrayBuffer())
+        .then((arrayBuffer) => {
+            parseGeoraster(arrayBuffer).then((georaster) => {
+                console.log("georaster:", georaster);
+
+                const pixelValuesToColorFn = ([red, green, blue]) => {
+                    let mins = georaster.mins;
+                    red = Math.round(
+                        (255 / (4000 - mins[0])) * (red - mins[0])
+                    );
+                    green = Math.round(
+                        (255 / (4000 - mins[1])) * (green - mins[1])
+                    );
+                    blue = Math.round(
+                        (255 / (4000 - mins[2])) * (blue - mins[2])
+                    );
+
+                    // make sure no values exceed 255
+                    red = Math.min(red, 255);
+                    green = Math.min(green, 255);
+                    blue = Math.min(blue, 255);
+
+                    // treat all black as no data
+                    if (red === 0 && green === 0 && blue === 0) return null;
+
+                    return `rgb(${blue}, ${green}, ${red})`;
+                };
+
+                var geotiffdata = new GeoRasterLayer({
+                    georaster: georaster,
+                    pixelValuesToColorFn,
+                    resolution: 512,
+                });
+                // direktes hinzufügen zur Karte
+                geotiffdata.addTo(map);
+                // removes the layer
+                map.removeLayer(geotiffdata);
+                geotiffdata.addTo(map);
+
+                map.fitBounds(geotiffdata.getBounds());
+
+                // adding the layer to layercontrol of the leaflet map asynchronous
+                layerControl.addOverlay(geotiffdata, 'Satelliten Bild');
             });
-        }
-    },
-    style: function(feature) {
-        switch (feature.properties.Label) {
-            case "Acker":
-                return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-                return { color: "#70843a" };
-            case "Bahnschiene":
-                return { color: "#613232" };
-            case "Baumgruppe":
-                return { color: "#18471e" };
-            case "Binnengewaesser":
-                return { color: "#0a1cb1" };
-            case "Industrie":
-                return { color: "#696969" };
-            case "Innenstadt":
-                return { color: "#F5F5F5" };
-            case "Kunstrasen":
-                return { color: "#92e597" };
-            case "Laubwald":
-                return { color: "#03ad1d" };
-            case "Mischwald":
-                return { color: "#11671e" };
-            case "Parklandschaft":
-                return { color: "#92e597" };
-            case "Siedlung":
-                return { color: "#B22222" };
-            case "Strand":
-                return { color: "#ffff00" };
-            case "Versiegelt":
-                return { color: "#141414" };
-            case "Wiese":
-                return { color: "#00FF00" };
-            default:
-                return { color: "#000000" };
-        }
-    },
-}).addTo(map);
-
-
+        });
+}
 /**
-Adds the uploaded GeoJSON file to the map with styling and a popup displaying its properties.
+Adds the merged GeoJSON file to the map with styling and a popup displaying its properties.
 @param {L.GeoJSON.AJAX} mergedgeojson - the GeoJSON layer to be added to the map
 @param {String} http://localhost:3000/mergedgeojsonfile.geojson - the URL for the GeoJSON file
 @param {Object} onEachFeature - a function that will be called on each feature in the layer,
@@ -153,220 +668,84 @@ displaying its properties in a popup
 @param {Object} style - a function that styles the features based on the value of the "Label" property
 */
 var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.geojson", {
-    onEachFeature: function(feature, layer) {
+    onEachFeature: function (feature, layer) {
         if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
+            layer.bindPopup(Object.keys(feature.properties).map(function (k) {
                 return k + ": " + feature.properties[k];
             }).join("<br />"), {
                 maxHeight: 200
             });
         }
     },
-    style: function(feature) {
+    style: function (feature) {
         switch (feature.properties.Label) {
             case "Acker":
-                return { color: "#d18b2c" };
+                return {
+                    color: "#d18b2c"
+                };
             case "Acker_bepflanzt":
-                return { color: "#70843a" };
+                return {
+                    color: "#70843a"
+                };
             case "Bahnschiene":
-                return { color: "#613232" };
+                return {
+                    color: "#613232"
+                };
             case "Baumgruppe":
-                return { color: "#18471e" };
+                return {
+                    color: "#18471e"
+                };
             case "Binnengewaesser":
-                return { color: "#0a1cb1" };
+                return {
+                    color: "#0a1cb1"
+                };
             case "Industrie":
-                return { color: "#696969" };
+                return {
+                    color: "#696969"
+                };
             case "Innenstadt":
-                return { color: "#F5F5F5" };
+                return {
+                    color: "#F5F5F5"
+                };
             case "Kunstrasen":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Laubwald":
-                return { color: "#03ad1d" };
+                return {
+                    color: "#03ad1d"
+                };
             case "Mischwald":
-                return { color: "#11671e" };
+                return {
+                    color: "#11671e"
+                };
             case "Parklandschaft":
-                return { color: "#92e597" };
+                return {
+                    color: "#92e597"
+                };
             case "Siedlung":
-                return { color: "#B22222" };
+                return {
+                    color: "#B22222"
+                };
             case "Strand":
-                return { color: "#ffff00" };
+                return {
+                    color: "#ffff00"
+                };
             case "Versiegelt":
-                return { color: "#141414" };
+                return {
+                    color: "#141414"
+                };
             case "Wiese":
-                return { color: "#00FF00" };
+                return {
+                    color: "#00FF00"
+                };
             default:
-                return { color: "#000000" };
+                return {
+                    color: "#000000"
+                };
         }
     },
 }).addTo(map);
-
-/**
-Adds the merged file to the map with styling and pop-up for its properties.
-@constructor L.GeoJSON.AJAX
-@param {string} url - The URL of the GeoJSON file.
-@param {Object} options - The options for the GeoJSON layer.
-@param {function} options.onEachFeature - A function that is called on each feature of the GeoJSON data.
-@param {function} options.style - A function that returns the style for each feature based on its properties.
-@property {string} url - The URL of the GeoJSON file.
-@property {function} onEachFeature - A function that is called on each feature of the GeoJSON data.
-@property {function} style - A function that returns the style for each feature based on its properties.
-*/
-var geojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegjson.geojson", {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
-    },
-    style: function(feature) {
-        switch (feature.properties.Label) {
-            case "Acker":
-                return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-                return { color: "#70843a" };
-            case "Bahnschiene":
-                return { color: "#613232" };
-            case "Baumgruppe":
-                return { color: "#18471e" };
-            case "Binnengewaesser":
-                return { color: "#0a1cb1" };
-            case "Industrie":
-                return { color: "#696969" };
-            case "Innenstadt":
-                return { color: "#F5F5F5" };
-            case "Kunstrasen":
-                return { color: "#92e597" };
-            case "Laubwald":
-                return { color: "#03ad1d" };
-            case "Mischwald":
-                return { color: "#11671e" };
-            case "Parklandschaft":
-                return { color: "#92e597" };
-            case "Siedlung":
-                return { color: "#B22222" };
-            case "Strand":
-                return { color: "#ffff00" };
-            case "Versiegelt":
-                return { color: "#141414" };
-            case "Wiese":
-                return { color: "#00FF00" };
-            default:
-                return { color: "#000000" };
-        }
-    },
-}).addTo(map);
-
-/**
-Adds the converted GeoPackage as GeoJSON to the map with styling and pop-up for its properties.
-@constructor L.GeoJSON.AJAX
-@param {string} url - The URL of the GeoJSON file.
-@param {Object} options - The options for the GeoJSON layer.
-@param {function} options.onEachFeature - A function that is called on each feature of the GeoJSON data.
-@param {function} options.style - A function that returns the style for each feature based on its properties.
-@property {string} url - The URL of the GeoJSON file.
-@property {function} onEachFeature - A function that is called on each feature of the GeoJSON data.
-@property {function} style - A function that returns the style for each feature based on its properties.
-*/
-var gpkgtogeojsondata = new L.GeoJSON.AJAX("http://localhost:3000/usertrainingspolygonegpkg.geojson", {
-    onEachFeature: function(feature, layer) {
-        if (feature.properties) {
-            layer.bindPopup(Object.keys(feature.properties).map(function(k) {
-                return k + ": " + feature.properties[k];
-            }).join("<br />"), {
-                maxHeight: 200
-            });
-        }
-    },
-    style: function(feature) {
-        switch (feature.properties.Label) {
-            case "Acker":
-                return { color: "#d18b2c" };
-            case "Acker_bepflanzt":
-                return { color: "#70843a" };
-            case "Bahnschiene":
-                return { color: "#613232" };
-            case "Baumgruppe":
-                return { color: "#18471e" };
-            case "Binnengewaesser":
-                return { color: "#0a1cb1" };
-            case "Industrie":
-                return { color: "#696969" };
-            case "Innenstadt":
-                return { color: "#F5F5F5" };
-            case "Kunstrasen":
-                return { color: "#92e597" };
-            case "Laubwald":
-                return { color: "#03ad1d" };
-            case "Mischwald":
-                return { color: "#11671e" };
-            case "Parklandschaft":
-                return { color: "#92e597" };
-            case "Siedlung":
-                return { color: "#B22222" };
-            case "Strand":
-                return { color: "#ffff00" };
-            case "Versiegelt":
-                return { color: "#141414" };
-            case "Wiese":
-                return { color: "#00FF00" };
-            default:
-                return { color: "#000000" };
-        }
-    },
-}).addTo(map);
-
-/**
-Adds the .tif file via georaster plugin and displays it on the map.
-The plugin is imported from the following sources:
-@author - https://github.com/GeoTIFF/georaster 
-@author - https://github.com/GeoTIFF/georaster-layer-for-leaflet
-*/
-fetch("http://localhost:3000/usersentineldata.tif")
-    .then((response) => response.arrayBuffer())
-    .then((arrayBuffer) => {
-        parseGeoraster(arrayBuffer).then((georaster) => {
-            console.log("georaster:", georaster);
-
-            const pixelValuesToColorFn = ([red, green, blue]) => {
-                let mins = georaster.mins;
-                red = Math.round(
-                    (255 / (4000 - mins[0])) * (red - mins[0])
-                );
-                green = Math.round(
-                    (255 / (4000 - mins[1])) * (green - mins[1])
-                );
-                blue = Math.round(
-                    (255 / (4000 - mins[2])) * (blue - mins[2])
-                );
-
-                // make sure no values exceed 255
-                red = Math.min(red, 255);
-                green = Math.min(green, 255);
-                blue = Math.min(blue, 255);
-
-                // treat all black as no data
-                if (red === 0 && green === 0 && blue === 0) return null;
-
-                return `rgb(${blue}, ${green}, ${red})`;
-            };
-
-            var geotiffdata = new GeoRasterLayer({
-                georaster: georaster,
-                pixelValuesToColorFn,
-                resolution: 512,
-            });
-            // direktes hinzufügen zur Karte
-            geotiffdata.addTo(map);
-
-            map.fitBounds(geotiffdata.getBounds());
-
-            // adding the layer to layercontrol of the leaflet map asynchronous
-            layerControl.addOverlay(geotiffdata, 'Satelliten Bild');
-        });
-    });
 
 /**
 @function
@@ -378,28 +757,28 @@ areaofinterestTextmdl.value = "";
 
 var aoimdl;
 map.on("draw:created", function (e) {
-  var areaofinterestmdl = e.layer;
-  aoimdl = [
-    areaofinterestmdl._bounds._southWest.lng,
-    areaofinterestmdl._bounds._northEast.lng,
-    areaofinterestmdl._bounds._southWest.lat,
-    areaofinterestmdl._bounds._northEast.lat,
-  ];
-  console.log(aoimdl);
-  areaofinterestTextmdl.value = aoimdl;
-  console.log(areaofinterestTextmdl.value);
+    var areaofinterestmdl = e.layer;
+    aoimdl = [
+        areaofinterestmdl._bounds._southWest.lng,
+        areaofinterestmdl._bounds._northEast.lng,
+        areaofinterestmdl._bounds._southWest.lat,
+        areaofinterestmdl._bounds._northEast.lat,
+    ];
+    console.log(aoimdl);
+    areaofinterestTextmdl.value = aoimdl;
+    console.log(areaofinterestTextmdl.value);
 });
 
 map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoimdl != null) {
-    map.removeLayer(aoimdl);
-    areaofinterestTextmdl.value = "";
-  }
+    if (aoimdl != null) {
+        map.removeLayer(aoimdl);
+        areaofinterestTextmdl.value = "";
+    }
 });
 
 map.on("draw:deleted", function (e) {
-  aoimdl = null;
-  areaofinterestTextmdl.value = "";
+    aoimdl = null;
+    areaofinterestTextmdl.value = "";
 });
 
 
@@ -413,28 +792,28 @@ areaofinterestTextgjson.value = "";
 
 var aoigjson;
 map.on("draw:created", function (e) {
-  var areaofinterestgjson = e.layer;
-  aoigjson = [
-    areaofinterestgjson._bounds._southWest.lng,
-    areaofinterestgjson._bounds._northEast.lng,
-    areaofinterestgjson._bounds._southWest.lat,
-    areaofinterestgjson._bounds._northEast.lat,
-  ];
-  console.log(aoigjson);
-  areaofinterestTextgjson.value = aoigjson;
-  console.log(areaofinterestTextgjson.value);
+    var areaofinterestgjson = e.layer;
+    aoigjson = [
+        areaofinterestgjson._bounds._southWest.lng,
+        areaofinterestgjson._bounds._northEast.lng,
+        areaofinterestgjson._bounds._southWest.lat,
+        areaofinterestgjson._bounds._northEast.lat,
+    ];
+    console.log(aoigjson);
+    areaofinterestTextgjson.value = aoigjson;
+    console.log(areaofinterestTextgjson.value);
 });
 
 map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoigjson != null) {
-    map.removeLayer(aoigjson);
-    areaofinterestTextgjson.value = "";
-  }
+    if (aoigjson != null) {
+        map.removeLayer(aoigjson);
+        areaofinterestTextgjson.value = "";
+    }
 });
 
 map.on("draw:deleted", function (e) {
-  aoigjson = null;
-  areaofinterestTextgjson.value = "";
+    aoigjson = null;
+    areaofinterestTextgjson.value = "";
 });
 
 /**
@@ -455,16 +834,16 @@ When this event is triggered, the coordinates of the new shape are retrieved and
 @param {object} e - The event object passed to the listener.
 */
 map.on("draw:created", function (e) {
-  var areaofinterestshp = e.layer;
-  aoishp = [
-    areaofinterestshp._bounds._southWest.lng,
-    areaofinterestshp._bounds._northEast.lng,
-    areaofinterestshp._bounds._southWest.lat,
-    areaofinterestshp._bounds._northEast.lat,
-  ];
-  console.log(aoishp);
-  areaofinterestTextshp.value = aoishp;
-  console.log(areaofinterestTextshp.value);
+    var areaofinterestshp = e.layer;
+    aoishp = [
+        areaofinterestshp._bounds._southWest.lng,
+        areaofinterestshp._bounds._northEast.lng,
+        areaofinterestshp._bounds._southWest.lat,
+        areaofinterestshp._bounds._northEast.lat,
+    ];
+    console.log(aoishp);
+    areaofinterestTextshp.value = aoishp;
+    console.log(areaofinterestTextshp.value);
 });
 
 /**
@@ -474,10 +853,10 @@ If the "aoishp" variable is not null, the previously created shape is removed fr
 @param {object} e - The event object passed to the listener.
 */
 map.on(L.Draw.Event.DRAWSTART, function (e) {
-  if (aoishp != null) {
-    map.removeLayer(aoishp);
-    areaofinterestTextshp.value = "";
-  }
+    if (aoishp != null) {
+        map.removeLayer(aoishp);
+        areaofinterestTextshp.value = "";
+    }
 });
 
 /**
@@ -487,8 +866,8 @@ When this event is triggered, the value of the "aoishp" variable is set to null 
 @param {object} e - The event object passed to the listener.
 */
 map.on("draw:deleted", function (e) {
-  aoishp = null;
-  areaofinterestTextshp.value = "";
+    aoishp = null;
+    areaofinterestTextshp.value = "";
 });
 
 /**
@@ -513,10 +892,7 @@ Contains two key-value pairs, where the key is the name of the base map and the 
 @property {L.TileLayer} "Google Satellite" - The Google Satellite base layer.
 */
 var overlayMaps = {
-    "Geopackage": gpkgtogeojsondata,
-    "Shapefile": usershapefile,
-    "GeoJSON": geojsondata,
-    "Merged": mergedgeojson,
+    "Merged": mergedgeojson
 };
 
 /**

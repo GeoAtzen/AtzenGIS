@@ -222,12 +222,19 @@ function(ymin=NA, ymax=NA, xmin=NA, xmax=NA, alg=NA){
   
   sentinel <- rast("mydockerdata/usersentineldata.tif")
   
-  if (file.exists("mydockerdata/usertrainingspolygonegjson.geojson")) {
+  # checks if a merged file exists and if so it uses it forst for iterative process
+  if (file.exists("mydockerdata/mergedgeojsonfile.geojson")) {
+    print("merged")
+    Referenzdaten <- st_read("mydockerdata/mergedgeojsonfile.geojson")
+  } else if (file.exists("mydockerdata/usertrainingspolygonegjson.geojson")) {
+    print("geojson")
     Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegjson.geojson")
   } else if (file.exists("mydockerdata/usertrainingspolygonegpkg.geojson")) {
+    print("gpkg")
     Referenzdaten <- st_read("mydockerdata/usertrainingspolygonegpkg.geojson")
-  } else {
-    stop("Neither mydockerdata/usertrainingspolygonegjson.geojson nor mydockerdata/usertrainingspolygonegpkg.geojson exists")
+  }
+  else {
+    stop("Neither mydockerdata/usertrainingspolygonegjson.geojson nor mydockerdata/usertrainingspolygonegpkg.geojson nor mydockerdata/usertrainingspolygonegpkg.geojson exists")
   }
 
   print(Referenzdaten)

@@ -15,8 +15,7 @@ block content
                 h2 Ergebnisse und Download
                   br
                   h4 Prediction
-                  #puff5.spinner-border.float-end(role='status' style= 'display:block')
-                  button#buttonAnzeig.btn.btn-success(style= 'display:none;' onclick='loadprediction()') Anzeigen der Prediction
+                  button#buttonAnzeig.btn.btn-success(onclick='loadprediction()') Anzeigen der Prediction
                   img(src= ueblink, alt='', width='100%', height="100%")
                   br
                   p Herunterladen der Prediction als GeoTIFF: 
@@ -79,7 +78,60 @@ block content
                     br
                     form(method='post', action='/zurueck' style='margin:auto;')
                       button.btn.btn-success() Zurück zu Anwendungsseite!
-                      p(style="font-size: small") Mit Klicken auf diesen Button gelangen Sie zur Anwendungsseite zurück und die gezeichneten Polygone werden auf der Karte angezeigt (Merged). Sie müssen die zusammengefügte Datei allerdings trotzdem erneut hochladen um sie für eine erneute Ausführung zu benutzen!
+                      p(style="font-size: small") Mit Klicken auf diesen Button gelangen Sie zur Anwendungsseite zurück und die gezeichneten Polygone werden auf der Karte angezeigt (Merged)
+                    h4 Bereich auf der Karte auswählen 
+                    p Hier wird das zuletzt gezeichnete Polygon/Rechteck gewertet!
+                    form(method='post', action='/anwendungsseite/ergebnisseitegjson')
+                          form-group
+                            label(for='algorithm-select') Trainingsalgorithmus:
+                                  select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                    option(value='rf' name="rf") Random Forest
+                                    option(value='svm' name="svm") SVM with Radial Kernel
+                                    option(value='dt' name="dt") Decision Trees (rpart)
+                                    option(value='knn' name="knn") k-Nearest Neighbors
+                                    textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
+                                    br
+                                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block';") Erneut Ausführen mit <br>
+                                      | zusammengefügter Datei
+
+  #warteseiteGanz(style= "display:none")
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    h3(style= "text-align: center; font-weight: bold;") Ergebnisse werden berechnet, bitte haben Sie Geduld.
+    #zentral(style= "left: 50%; position: absolute; transform: translate(-50%, 0);")
+      #puff8.spinner-border.float-end(role='status' style="width: 5rem; height: 5rem; margin: 0 auto;")
+    br
+    br
+    br
+    br
+    p(style= "text-align: center;") Nachdem die Berechnung abgeschlossen ist, werden Sie weitergeleitet.
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+    br
+
+
+
+
+
+
 
 
   #id11.w3-modal
@@ -98,7 +150,7 @@ block content
           i.fa.fa-remove
       .w3-container
          h3 Digitalisierungshilfe: 
-         p Benutzen Sie zum digialisieren und Labeln neuer Trainingspolygone die Zeichnen Funktion oben links auf der Karte! Orientieren Sie sich am besten an den "Sampling Locations" welche sie ebenfalls mit der Layerkontroll Funktion oben rechts ein- und ausblenden können! 
+         p Benutzen Sie zum digialisieren und Labeln neuer Trainingspolygone die Polygone zeichnen Funktion oben links auf der Karte (Die obere Option)! Orientieren Sie sich am besten an den "Sampling Locations" welche sie ebenfalls mit der Layerkontroll Funktion oben rechts ein- und ausblenden können! 
          table
           thead
             tr

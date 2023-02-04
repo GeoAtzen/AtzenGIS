@@ -20,6 +20,8 @@ block content
                   br
                   p Herunterladen der Prediction als GeoTIFF: 
                     a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/demodaten/demoprediction.tif', download='prediction.tif' style='float: right;')
+                  p Herunterladen der Prediction Metadaten: 
+                    a.i.fa.fa-download.btn.btndownload.btn-success(role='button', href='http://localhost:3000/demoprediction.tif.aux.xml', download='metadatenprediction.tif.aux.xml' style='float: right;')
                     br
                     h4 AOA
                     button#buttonAnzeig.btn.btn-success(onclick='loadaoa()') Anzeigen der AOA
@@ -72,7 +74,18 @@ block content
                     form(method='post', action='/zurueck' style='margin:auto;')
                       button.btn.btn-success() Zurück zu Anwendungsseite!
                       p(style="font-size: small") Mit Klicken auf diesen Button gelangen Sie zur Anwendungsseite zurück und die gezeichneten Polygone werden auf der Karte angezeigt (Merged). Sie müssen die zusammengefügte Datei allerdings trotzdem erneut hochladen um sie für eine erneute Ausführung zu benutzen!
-
+                    form(method='post', action='/erneut')
+                          form-group
+                            label(for='algorithm-select') Trainingsalgorithmus:
+                                  select#algorithm-select.form-control(multiple='multiple', name='algorithms')
+                                    option(value='rf' name="rf") Random Forest
+                                    option(value='svm' name="svm") SVM with Radial Kernel
+                                    option(value='dt' name="dt") Decision Trees (rpart)
+                                    option(value='knn' name="knn") k-Nearest Neighbors
+                                    textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
+                                    br
+                                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block';") Erneut Ausführen mit <br>
+                                      | zusammengefügter Datei
 
   #id11.w3-modal
     .w3-modal-content.w3-card-4.w3-animate-top

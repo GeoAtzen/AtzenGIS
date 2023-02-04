@@ -242,45 +242,43 @@ router.post("/mergegeojson", (req, res, next) => {
     console.log('The file has been saved!');
   });
 
-  fs.stat('mydockerdata/usertrainingspolygonegpkg.geojson', function (err, stat) {
+  // Check if mergedgeojsonfile.geojson exists
+  fs.stat('mydockerdata/mergedgeojsonfile.geojson', function (err, stat) {
     if (err == null) {
-      console.log('File exists: usertrainingspolygonegpkg.geojson');
-      var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
-        'mydockerdata/usertrainingspolygonegpkg.geojson',
-        'mydockerdata/drawnpolygonsformerge.geojson'
-      ]);
-  
-      var writeStream = fs.createWriteStream('mydockerdata/mergedgeojsonfile.geojson');
-  
-      mergedStream.pipe(writeStream);
-  
-      writeStream.on('finish', function () {
-        console.log('The merged file has been saved!');
-        var file = 'mydockerdata/mergedgeojsonfile.geojson';
-        res.download(file);
+      console.log('File exists: mergedgeojsonfile.geojson');
+
+      // Rename the file
+      var date = new Date();
+      var timestamp = date.getTime();
+      var oldPath = 'mydockerdata/mergedgeojsonfile.geojson';
+      var newPath = 'mydockerdata/mergedgeojsonfile_' + timestamp + '.geojson';
+      fs.rename(oldPath, newPath, function (err) {
+        if (err) throw err;
+        console.log('File renamed successfully');
+
+        mergeFiles(newPath, 'mydockerdata/drawnpolygonsformerge.geojson');
       });
     } else if (err.code === 'ENOENT') {
-      console.log('File does not exists: usertrainingspolygonegpkg.geojson');
-      fs.stat('mydockerdata/usertrainingspolygonegjson.geojson', function (err, stat) {
+      console.log('File does not exist: mergedgeojsonfile.geojson');
+
+      fs.stat('mydockerdata/usertrainingspolygonegpkg.geojson', function (err, stat) {
         if (err == null) {
-          console.log('File exists: usertrainingspolygonegjson.geojson');
-          var mergedStream = geojsonMerge.mergeFeatureCollectionStream([
-            'mydockerdata/usertrainingspolygonegjson.geojson',
-            'mydockerdata/drawnpolygonsformerge.geojson'
-          ]);
-      
-          var writeStream = fs.createWriteStream('mydockerdata/mergedgeojsonfile.geojson');
-      
-          mergedStream.pipe(writeStream);
-      
-          writeStream.on('finish', function () {
-            console.log('The merged file has been saved!');
-            var file = 'mydockerdata/mergedgeojsonfile.geojson';
-            res.download(file);
-          });
+          console.log('File exists: usertrainingspolygonegpkg.geojson');
+          mergeFiles('mydockerdata/usertrainingspolygonegpkg.geojson', 'mydockerdata/drawnpolygonsformerge.geojson');
         } else if (err.code === 'ENOENT') {
-          console.log('File does not exists: usertrainingspolygonegjson.geojson');
-          console.log('Error: Both files do not exists');
+          console.log('File does not exist: usertrainingspolygonegpkg.geojson');
+
+          fs.stat('mydockerdata/usertrainingspolygonegjson.geojson', function (err, stat) {
+            if (err == null) {
+              console.log('File exists: usertrainingspolygonegjson.geojson');
+              mergeFiles('mydockerdata/usertrainingspolygonegjson.geojson', 'mydockerdata/drawnpolygonsformerge.geojson');
+            } else if (err.code === 'ENOENT') {
+              console.log('File does not exist: usertrainingspolygonegjson.geojson');
+              console.log('Error: Both files do not exist');
+            } else {
+              console.log('Error:', err.code);
+            }
+          });
         } else {
           console.log('Error:', err.code);
         }
@@ -289,7 +287,32 @@ router.post("/mergegeojson", (req, res, next) => {
       console.log('Error:', err.code);
     }
   });
+
+
+function mergeFiles(file1, file2) {
+  var mergedStream = geojsonMerge.mergeFeatureCollectionStream([file1, file2]);
+  var writeStream = fs.createWriteStream('mydockerdata/mergedgeojsonfile.geojson');
+
+  mergedStream.pipe(writeStream);
+
+  writeStream.on('finish', function () {
+    console.log('The merged file has been saved!');
+    var file = 'mydockerdata/mergedgeojsonfile.geojson';
+    res.download(file);
+
+    if (file1.indexOf('_') !== -1) {
+      fs.unlink(
+        file1,
+        function (err) {
+          if (err) throw err;
+          console.log('File deleted successfully:', file1);
+        });
+    }
+  });
+
+  writeStream.on('error', function (err) {
+    console.log('Error:', err);
+  });
+}
 });
-
-
 module.exports = router;

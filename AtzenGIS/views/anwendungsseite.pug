@@ -52,7 +52,7 @@ block content
                         button.buttonFragezeichen(onclick="document.getElementById('id04').style.display='block'; modal = document.getElementById('id04')" title='Hilfe') ?
                       form(method='post', enctype='multipart/form-data', action='/uploadmodel')
                         input(type='file', name='file' accept=".rds" style="color:grey; font-size:large;")
-                        button.btn.btn-success(id='btn3' type= 'sumbit' onclick="document.getElementById('btn3').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                        button.btn.btn-success(id='btn3' type= 'sumbit') Hinzufügen
                         #puff4.spinner-border.float-end(role='status' style= 'display:none') 
 
 
@@ -62,7 +62,7 @@ block content
                           button.buttonFragezeichen(onclick="document.getElementById('id05').style.display='block'; modal = document.getElementById('id05')" title='Hilfe') ?
                         form(method='post', enctype='multipart/form-data', action='/uploadtrainingsdata' )
                           input(type='file', name='file', accept=".gpkg, .geojson, .zip" style="color:grey; font-size:large;")
-                          button.btn.btn-success(id='btn4' type= 'sumbit' onclick="document.getElementById('btn4').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                          button.btn.btn-success(id='btn4' type= 'sumbit') Hinzufügen
                           #puff2.spinner-border.float-end(role='status' style= 'display:none')
                         p(style="font-size: small") Bitte die .shp Datei als "usertrainingspolygoneshp.shp" benennen!            
 
@@ -71,9 +71,11 @@ block content
                     button.buttonFragezeichen(onclick="document.getElementById('id06').style.display='block'; modal = document.getElementById('id06')" title='Hilfe') ?
                   form(method='post', enctype='multipart/form-data', action='/uploadsentinel')
                     input(type='file', name='file' , accept=".tif" style="color:grey; font-size:large;")
-                    button.btn.btn-success(id='btn6' type= 'sumbit' onclick="document.getElementById('btn6').textContent = 'Hinzufügen erfolgreich!';") Hinzufügen
+                    button.btn.btn-success(id='btn6' type= 'sumbit') Hinzufügen
                     #puff1.spinner-border.float-end(role='status' style= 'display:none')
-                    p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
+                    br
+                  button.btn.btn-success(onclick="refreshMap()") Anzeigen der hochgeladenen Daten auf der Karte
+                  p(style="font-size: small") Das Anzeigen kann bis zu einer Minute dauern, bitte haben Sie Geduld!
                   h4 Bereich auf der Karte auswählen 
                     button.buttonFragezeichen(onclick="document.getElementById('id02').style.display='block'; modal = document.getElementById('id02')" title='Hilfe') ?
                   br
