@@ -91,7 +91,7 @@ block content
                                     option(value='knn' name="knn") k-Nearest Neighbors
                                     textarea#aoibbgjson.form-control.disabled(hidden='' name="aoibbgjson" readonly="readonly")
                                     br
-                                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block';") Erneut Ausführen mit <br>
+                                    button.btn.btn-success(style="margin-right: 2%; margin-left: 2%;" onclick="document.getElementById('warteseiteGanz').style.display='block'; window.scrollTo(0,document.body.scrollHeight);") Erneut Ausführen mit <br>
                                       | zusammengefügter Datei
 
   #warteseiteGanz(style= "display:none")
@@ -158,51 +158,50 @@ block content
               th ClassID
           tbody
             tr
-              td Acker
-              td 9
-            tr
-              td Acker_bepflanzt
-              td 10
-            tr
-              td Bahnschiene
-              td 18
-            tr
-              td Baumgruppe
-              td 7
-            tr
-              td Binnengewaesser
-              td 5
-            tr
-              td Industrie
-              td 11
-            tr
-              td Innenstadt
-              td 13
-            tr
-              td Kunstrasen
-              td 16
-            tr
               td Laubwald
               td 1
             tr
               td Mischwald
               td 3
             tr
-              td Parklandschaft
-              td 24
+              td Binnengewaesser
+              td 5
             tr
-              td Siedlung
-              td 12
+              td Wiese
+              td 6
             tr
-              td Strand
-              td 14
+              td Baumgruppe
+              td 7
             tr
               td Versiegelt
               td 8
             tr
-              td Wiese
-              td 6
-
+              td Acker
+              td 9
+            tr
+              td Acker_bepflanzt
+              td 10
+            tr
+              td Industrie
+              td 11
+            tr
+              td Siedlung
+              td 12
+            tr
+              td Innenstadt
+              td 13
+            tr
+              td Strand
+              td 14
+            tr
+              td Kunstrasen
+              td 16
+            tr
+              td Bahnschiene
+              td 18
+            tr
+              td Parklandschaft
+              td 24
 
 
   script(src="/javascripts/shp.js")
