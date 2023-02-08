@@ -1,3 +1,4 @@
+// required dependencies and libaries
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -11,22 +12,7 @@ var geojsonMerge = require('@mapbox/geojson-merge');
 var cors = require("cors");
 const archiver = require("archiver");
 var request = require("request");
-
-
 var app = express();
-
-// error handler
-const handleError = (err, res) => {
-    res
-        .status(500)
-        .contentType("text/plain")
-        .end("Oops! Something went wrong!");
-};
-
-const upload = multer({
-    dest: "mydockerdata"
-    // you might also want to set some limits: https://github.com/expressjs/multer#limits
-});
 
 app.post(
     "/zurueck",
@@ -45,6 +31,24 @@ app.post(
         });
     }
 );
+
+// error handler
+const handleError = (err, res) => {
+    res
+        .status(500)
+        .contentType("text/plain")
+        .end("Oops! Something went wrong!");
+};
+
+// Upload handling for all our used Data using Multer and fs:
+// Source: https://stackoverflow.com/questions/15772394/how-to-upload-display-and-save-images-using-node-js-and-express
+// Source: https://github.com/expressjs/multer#limits
+
+const upload = multer({
+    dest: "mydockerdata"
+});
+
+
 
 app.post(
   "/uploadsentinel",
@@ -67,10 +71,7 @@ app.post(
   }
 );
 
-
-
-
-// Uploading data handler for trainingsdata here
+// Uploading data handler for all trainingsdata 
 app.post(
     "/uploadtrainingsdata",
     upload.single("file"),
@@ -117,34 +118,9 @@ app.post(
         }
     }
 );
-/*
-// Uploading data handler for trainingsdata as shapefile (.zip)
-app.post(
-    "/uploadtrainingsdatashp",
-    upload.single("file"),
-    (req, res) => {
-        const tempPath = req.file.path;
-        const targetPath = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
 
-        if (path.extname(req.file.originalname).toLowerCase() === ".zip") {
-            fs.rename(tempPath, targetPath, err => {
-                if (err) return handleError(err, res);
 
-                res.status(200).send();
-            });
-        } else {
-            fs.unlink(tempPath, err => {
-                if (err) return handleError(err, res);
-
-                res.status(403).send();
-                    
-            });
-        }
-    }
-);
-*/
-
-// Uploading data handler for trained model here
+// Uploading data handler for trained model
 app.post(
     "/uploadmodel",
     upload.single("file"),
@@ -169,12 +145,13 @@ app.post(
 );
 
 
-
+// download route for shapefile as zip folder
 app.get("/downloadtrainingsdatashp", (req, res) => {
     const file = path.join(__dirname, "mydockerdata/usertrainingsdatashp.zip");
     res.download(file, "uploadedtrainingsdatashp.zip");
 });
 
+// download route for all data as zip folder
 app.get("/downloadmydockerdata", (req, res) => {
     res.setHeader("Content-Type", "application/zip");
     res.setHeader("Content-Disposition", "attachment; filename=mydockerdata.zip");
@@ -189,7 +166,7 @@ app.get("/downloadmydockerdata", (req, res) => {
 });
 
 
-
+// app.js route configurations
 app.post("/anwendungsseite", function (req, res, next) {
     res.render("anwendungsseite", {
         title: "Anwendungsseite"
