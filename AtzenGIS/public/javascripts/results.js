@@ -60,7 +60,7 @@ var polygonsgeojson = [];
 
 /** 
 Declaring your own features for the drawn polygon to store them in the geojson
-@author https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
+@source https://stackoverflow.com/questions/29736345/adding-properties-to-a-leaflet-layer-that-will-become-geojson-options
 */
 document.addEventListener('DOMContentLoaded', function () {
     // only add the label and classid when the polygon option is chosen
@@ -540,8 +540,8 @@ var mergedgeojson = new L.GeoJSON.AJAX("http://localhost:3000/mergedgeojsonfile.
 /**
 Adds the uploaded sentinel .tif file via georaster plugin and displays it on the map.
 The plugin is imported from the following sources:
-@author - https://github.com/GeoTIFF/georaster 
-@author - https://github.com/GeoTIFF/georaster-layer-for-leaflet
+@source - https://github.com/GeoTIFF/georaster 
+@source - https://github.com/GeoTIFF/georaster-layer-for-leaflet
 */
 fetch("http://localhost:3000/usersentineldata.tif")
     .then((response) => response.arrayBuffer())
@@ -595,7 +595,7 @@ fetch("http://localhost:3000/usersentineldata.tif")
  * fitted to the bounds of the prediction data. The legend of the prediction data is fetched and 
  * added to the HTML using the jQuery library.
  * 
- * @author (Source) GeoTIFF and GeoTIFF/georaster-layer-for-leaflet (https://github.com/GeoTIFF/georaster and 
+ * @Source GeoTIFF and GeoTIFF/georaster-layer-for-leaflet (https://github.com/GeoTIFF/georaster and 
  * https://github.com/GeoTIFF/georaster-layer-for-leaflet)
  */
 function loadprediction() {
@@ -646,7 +646,7 @@ function loadprediction() {
  * object, which is added to the map and to the layer control function of Leaflet. The map is then 
  * fitted to the bounds of the apa data.
  * 
- * @author (Source) GeoTIFF and GeoTIFF/georaster-layer-for-leaflet (https://github.com/GeoTIFF/georaster and 
+ * @Source GeoTIFF and GeoTIFF/georaster-layer-for-leaflet (https://github.com/GeoTIFF/georaster and 
  * https://github.com/GeoTIFF/georaster-layer-for-leaflet)
  */
 function loadaoa() {

@@ -21,7 +21,6 @@
     "geotiff.js": "^1.0.1",
     "http": "^0.0.1-security",
     "http-errors": "~1.6.3",
-    "jsonlint": "^1.6.3",
     "leaflet": "^1.8.0",
     "leaflet-draw": "^1.0.4",
     "mapbox": "^1.0.0-beta10",
@@ -41,10 +40,10 @@
   "description": "Geosoftware II Projekt der GeoAtzen",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoAtzen/frontend.git"
+    "url": "git+https://github.com/GeoAtzen/AtzenGIS.git"
   },
   "bugs": {
-    "url": "https://github.com/GeoAtzen/frontend/issues"
+    "url": "https://github.com/GeoAtzen/AtzenGIS/issues"
   },
-  "homepage": "https://github.com/GeoAtzen/frontend#readme"
+  "homepage": "https://github.com/GeoAtzen/AtzenGIS#readme"
 }

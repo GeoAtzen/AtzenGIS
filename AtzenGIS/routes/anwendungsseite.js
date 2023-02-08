@@ -232,7 +232,7 @@ router.post("/ergebnisseitegjson", function (req, res, next) {
 
 });
 
-// Zurück zur Anwendungsseite und im optimalfall mergen der beiden geojson FeatureCollections
+// checking for what file exists. Always checks if there is an already merged file first so it will be used first for the iterative process
 router.post("/mergegeojson", (req, res, next) => {
   drawnpolygons = req.body.polygons
   console.log(drawnpolygons)
@@ -247,7 +247,7 @@ router.post("/mergegeojson", (req, res, next) => {
     if (err == null) {
       console.log('File exists: mergedgeojsonfile.geojson');
 
-      // Rename the file
+      // Rename the file so it is unique and no conflicts happen, since the file that will be written has the same name as one of the files for the merge if it's not renamed
       var date = new Date();
       var timestamp = date.getTime();
       var oldPath = 'mydockerdata/mergedgeojsonfile.geojson';
@@ -288,7 +288,7 @@ router.post("/mergegeojson", (req, res, next) => {
     }
   });
 
-
+// merging two featureCollection, either an already merged one, an uploaded geojson or an uploaded geopackage as geojson, with the drawn polygons by a user
 function mergeFiles(file1, file2) {
   var mergedStream = geojsonMerge.mergeFeatureCollectionStream([file1, file2]);
   var writeStream = fs.createWriteStream('mydockerdata/mergedgeojsonfile.geojson');
@@ -315,4 +315,5 @@ function mergeFiles(file1, file2) {
   });
 }
 });
+
 module.exports = router;
