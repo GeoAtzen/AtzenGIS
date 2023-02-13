@@ -1,19 +1,19 @@
 version: "3"
 services:
   frontend:
+    image: geoatzen/atzengisfrontend
     container_name: frontendatzengis
-    image: geoatzen/frontendatzengis
     build: 
       dockerfile: ./Dockerfile
     ports:
-      - 3000:3000 # forward webserver on 3000-http port
+      - 3000:3000
     volumes:
      - dockerdata:/usr/src/app/mydockerdata
 
 #imagename://servicename:zweiterPort
 
   backendgeoatzen:
-    image: geoatzen/backendatzengis
+    image: geoatzen/atzengisbackend
     container_name: backendatzengis
     build: 
       dockerfile: ./backend/Dockerfile
