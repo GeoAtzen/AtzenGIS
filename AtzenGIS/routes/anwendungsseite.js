@@ -5,7 +5,6 @@ const multer = require("multer");
 const fs = require("fs");
 var request = require("request");
 const path = require("path");
-const jsonlint = require("jsonlint");
 const geojsonMerge = require('@mapbox/geojson-merge');
 // error handler
 const handleError = (err, res) => {
