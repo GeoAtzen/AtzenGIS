@@ -1,5 +1,5 @@
 # Area of Application by GeoAtzen
-A Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
+ Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
 <h2>Background</h2>
 Methoden des maschinellen Lernens werden immer mehr und mehr für räumliche Vorhersagen, wie etwa Klassifizerung und Fernerkundung, verwendet. Einer der Gründe hierfür ist u.a. die Fähigkeit hier nicht-lineare Beziehungen zu erlernen und dadurch Klassifizierungssaufgaben zu lösen.
 <br>Ein Problem hierbei ist jedoch, dass diese Algorithmen lediglich aussagekräftige Vorhersagen treffen können, wenn sie auf Daten angewendet werden, die den Ursprungsdaten ähnlich sind, auf denen Sie trainiert wurden. Um diese "Ähnlichkeiten" zu quantifizieren und darzustellen wurde die AOA (Meyer und Pebesma, 2021) entwickelt.
