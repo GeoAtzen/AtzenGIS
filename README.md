@@ -29,7 +29,7 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 <h5>Achtung!</h5>
 Beim ersten mal dauert es bis zu 70 minuten bis alles Installiert ist! Bitte haben Sie Geduld
 
-
+<h2>Anleitung</h2>
 <h3>Schritt 1</h3>
 WebApp öffnen und zum AtzenGIS navigieren
 <img width="1600" alt="step1" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg">
