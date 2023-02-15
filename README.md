@@ -49,7 +49,7 @@ Wählen Sie im Optimalfall eine Area of Interest (nicht zwingend notwenig!) und 
 
 <h3>Schritt 3.2.1 - Fall Trainingsdaten vorhanden</h3>
 Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. Daraufhin wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
-<img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.1.png">
+<img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.1.PNG">
 
 <h3>Schritt 3.2.2</h3>
 Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
