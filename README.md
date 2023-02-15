@@ -57,7 +57,7 @@ Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus 
 
 <h3>Schritt 4</h3>
 Anzeigen der Prediction auf Knopfdruck mit Legende
-<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_4.png">
+<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_4.PNG">
 
 <h3>Schritt 5</h3>
 Anzeigen der AOA mit Informationstext und den sampling locations (Dies sind die Gebiete, wo im Optimalfall neue Trainingspolygone gezeichnet werden sollten)
