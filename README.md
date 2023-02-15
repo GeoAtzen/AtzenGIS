@@ -1,5 +1,5 @@
 # Area of Application by GeoAtzen
- Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
+A Tool to calculate the Area of Applicability (Initial Paper by Meyer, H. and Pebesma, E.)
 <h2>Background</h2>
 Methoden des maschinellen Lernens werden immer mehr und mehr für räumliche Vorhersagen, wie etwa Klassifizerung und Fernerkundung, verwendet. Einer der Gründe hierfür ist u.a. die Fähigkeit hier nicht-lineare Beziehungen zu erlernen und dadurch Klassifizierungssaufgaben zu lösen.
 <br>Ein Problem hierbei ist jedoch, dass diese Algorithmen lediglich aussagekräftige Vorhersagen treffen können, wenn sie auf Daten angewendet werden, die den Ursprungsdaten ähnlich sind, auf denen Sie trainiert wurden. Um diese "Ähnlichkeiten" zu quantifizieren und darzustellen wurde die AOA (Meyer und Pebesma, 2021) entwickelt.
@@ -27,16 +27,16 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 <br>http://localhost:3000/
 <br>
 <h5>Achtung!</h5>
-Beim ersten mal dauert es bis zu 70 minuten bis alles Installiert ist! Bitte haben Sie Geduld
+Beim ersten mal dauert es bis zu 70 minuten bis alles Installiert ist! Bitte haben Sie Geduld.
 
 <h2>Anleitung</h2>
 <h3>Schritt 1</h3>
-WebApp öffnen und zum AtzenGIS navigieren
+WebApp öffnen und zum AtzenGIS navigieren.
 <img width="1600" alt="step1" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg">
 
 
 <h3>Schritt 2</h3>
-Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht - dementsprechend werden die entsprechenden Möglichkeiten eingeblendet
+Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht - dementsprechend werden die entsprechenden Möglichkeiten eingeblendet.
 <img width="1600" alt="step2" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/2_readme.jpeg">
 
 <h3>Schritt 3.1.1 - Fall trainiertes Modell vorhanden</h3>
@@ -48,19 +48,19 @@ Wählen Sie im Optimalfall eine Area of Interest (nicht zwingend notwenig!) und 
 <img width="1600" alt="step312" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.2.png">
 
 <h3>Schritt 3.2.1 - Fall Trainingsdaten vorhanden</h3>
-Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. Daraufhin wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
+Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. Daraufhin wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!).
 <img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.1.PNG">
 
 <h3>Schritt 3.2.2</h3>
-Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
+Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!).
 <img width="1600" alt="step322" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.2.png">
 
 <h3>Schritt 4</h3>
-Anzeigen der Prediction auf Knopfdruck mit Legende
+Anzeigen der Prediction auf Knopfdruck mit Legende.
 <img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_4.PNG">
 
 <h3>Schritt 5</h3>
-Anzeigen der AOA mit Informationstext und den sampling locations (Dies sind die Gebiete, wo im Optimalfall neue Trainingspolygone gezeichnet werden sollten)
+Anzeigen der AOA mit Informationstext und den sampling locations (Dies sind die Gebiete, wo im Optimalfall neue Trainingspolygone gezeichnet werden sollten).
 <img width="1600" alt="step5" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_5.png">
 
 
@@ -69,7 +69,7 @@ Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch s
 <img width="1600" alt="step6" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/6_readme.jpeg">
 
 <h3>Schritt 7</h3>
-Download aller einzelnen Daten und auf Knopfdruck entweder zurück zu Anwendungsseite um dort mit neuen Daten von vorne zu beginnen, oder mit der im vorherigen Schritt gemergten Datei einen erneuten Durchlauf mit den selbst gezeichneten Trainingsdaten durchzuführen um ein besseres Ergebniss zu erzielen. Hierbei haben Sie die selben Auswahlmöglichkeiten wie in Schritt 3.2
+Download aller einzelnen Daten und auf Knopfdruck entweder zurück zu Anwendungsseite um dort mit neuen Daten von vorne zu beginnen, oder mit der im vorherigen Schritt gemergten Datei einen erneuten Durchlauf mit den selbst gezeichneten Trainingsdaten durchzuführen um ein besseres Ergebniss zu erzielen. Hierbei haben Sie die selben Auswahlmöglichkeiten wie in Schritt 3.2.
 <img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_7.JPG">
 
 
