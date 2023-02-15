@@ -14,11 +14,9 @@ führt die Klassifizierung in dem betreffenden Gebiet durch und berechnet die AO
 Das System führt das Training und die Klassifizierung in dem betreffenden Gebiet durch
 Bereich von Interesse durch und berechnet die AOA.
 
-
 <br>
 <h2> Getting Started</h2>
 Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
-
 
 <h3>Docker</h3>
 1. Docker Desktop starten
@@ -32,45 +30,45 @@ Zur vereinfachten Nutzung haben wir Docker verwendet & bereitgestellt.
 Beim ersten mal dauert es bis zu 70 minuten bis alles Installiert ist! Bitte haben Sie Geduld
 
 
-<h3>Step 1</h3>
+<h3>Schritt 1</h3>
 WebApp öffnen und zum AtzenGIS navigieren
 <img width="1600" alt="step1" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/stylesheets/1_readme.jpeg">
 
 
-<h3>Step 2</h3>
+<h3>Schritt 2</h3>
 Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht - dementsprechend werden die entsprechenden Möglichkeiten eingeblendet
 <img width="1600" alt="step2" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/2_readme.jpeg">
 
-<h3>Step 3.1.1 - Fall trainiertes Modell vorhanden</h3>
+<h3>Schritt 3.1.1 - Fall trainiertes Modell vorhanden</h3>
 Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. 
 <img width="1600" alt="step311" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.png">
 
-<h3>Step 3.1.2</h3>
+<h3>Schritt 3.1.2</h3>
 Wählen Sie im Optimalfall eine Area of Interest (nicht zwingend notwenig!) und klicken auf "Ausführen mit trainiertem Modell".
 <img width="1600" alt="step312" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.2.png">
 
-<h3>Step 3.2.1 - Fall Trainingsdaten vorhanden</h3>
+<h3>Schritt 3.2.1 - Fall Trainingsdaten vorhanden</h3>
 Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. Daraufhin wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
 <img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.png">
 
-<h3>Step 3.2.2</h3>
+<h3>Schritt 3.2.2</h3>
 Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
 <img width="1600" alt="step322" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.2.png">
 
-<h3>Step 4</h3>
+<h3>Schritt 4</h3>
 Anzeigen der Prediction auf Knopfdruck mit Legende
 <img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/4_readme.jpeg">
 
-<h3>Step 5</h3>
+<h3>Schritt 5</h3>
 Anzeigen der AOA mit Informationstext und den sampling locations
 <img width="1600" alt="step5" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/5_readme.jpeg">
 
 
-<h3>Step 6</h3>
+<h3>Schritt 6</h3>
 Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch schriftlich anzupassen, mit dem bereits hochgeladenen GeoPackage oder GeoJSON zu verbinden und dann herunterzuladen.
 <img width="1600" alt="step6" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/6_readme.jpeg">
 
-<h3>Step 7</h3>
+<h3>Schritt 7</h3>
 Download aller einzelnen Daten und auf Knopfdruck entweder zurück zu Anwendungsseite um dort mit neuen Daten von vorne zu beginnen, oder mit der im vorherigen Schritt gemergten Datei einen erneuten Durchlauf mit den selbst gezeichneten Trainingsdaten durchzuführen um ein besseres Ergebniss zu erzielen. Hierbei haben Sie die selben Auswahlmöglichkeiten wie in Schritt 3.2
 <img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_7.JPG">
 
