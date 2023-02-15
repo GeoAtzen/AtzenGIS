@@ -38,16 +38,24 @@ WebApp öffnen und zum AtzenGIS navigieren
 
 
 <h3>Step 2</h3>
-Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht
+Auf der Anwedungsseite Auswählen, ob ein trainiertes Modell vorhanden ist oder nicht - dementsprechend werden die entsprechenden Möglichkeiten eingeblendet
 <img width="1600" alt="step2" src="https://raw.githubusercontent.com/GeoAtzen/AtzenGIS/main/AtzenGIS/public/images/2_readme.jpeg">
 
-<h3>Step 3.1</h3>
-Hochladen der Daten nach entsprechender Auswahl und im Optimalfall auswählen einer Area of Interest
-<img width="1600" alt="step31" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/4_readme.jpeg">
+<h3>Step 3.1.1 - Fall trainiertes Modell vorhanden</h3>
+Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. 
+<img width="1600" alt="step311" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.png">
 
-<h3>Step 3.2</h3>
-Hochladen der Daten nach entsprechender Auswahl und im Optimalfall auswählen einer Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten
-<img width="1600" alt="step32" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/3_2_readme.jpeg">
+<h3>Step 3.1.2</h3>
+Wählen Sie im Optimalfall eine Area of Interest (nicht zwingend notwenig!) und klicken auf "Ausführen mit trainiertem Modell".
+<img width="1600" alt="step312" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.2.png">
+
+<h3>Step 3.2.1 - Fall Trainingsdaten vorhanden</h3>
+Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. Daraufhin wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
+<img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.png">
+
+<h3>Step 3.2.2</h3>
+Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
+<img width="1600" alt="step322" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.2.png">
 
 <h3>Step 4</h3>
 Anzeigen der Prediction auf Knopfdruck mit Legende
