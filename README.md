@@ -49,7 +49,7 @@ Wählen Sie im Optimalfall eine Area of Interest (nicht zwingend notwenig!) und 
 
 <h3>Schritt 3.2.1 - Fall Trainingsdaten vorhanden</h3>
 Hochladen der Daten nach entsprechender Auswahl in Schitt 2. Um die Daten anzeigen zu lassen, klicken Sie auf den entsprechenden Knopf. Daraufhin wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
-<img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.1.png">
+<img width="1600" alt="step321" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_3.2.1.png">
 
 <h3>Schritt 3.2.2</h3>
 Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus zum trainieren der hochgeladenen Trainingsdaten (nicht zwingend notwenig!)
@@ -57,15 +57,15 @@ Wählen Sie im Optimalfall eine Area of Interest und einem Trainingsalgorithmus 
 
 <h3>Schritt 4</h3>
 Anzeigen der Prediction auf Knopfdruck mit Legende
-<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/4_readme.jpeg">
+<img width="1600" alt="step4" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_4.png">
 
 <h3>Schritt 5</h3>
 Anzeigen der AOA mit Informationstext und den sampling locations
-<img width="1600" alt="step5" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/5_readme.jpeg">
+<img width="1600" alt="step5" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/readme_5.png">
 
 
 <h3>Schritt 6</h3>
-Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch schriftlich anzupassen, mit dem bereits hochgeladenen GeoPackage oder GeoJSON zu verbinden und dann herunterzuladen.
+Digitalisieren und Labeln neuer Trainingsdaten mit der Möglichkeit diese noch schriftlich anzupassen, mit dem bereits hochgeladenen GeoPackage oder GeoJSON zu verbinden und herunterzuladen.
 <img width="1600" alt="step6" src="https://github.com/GeoAtzen/AtzenGIS/blob/main/AtzenGIS/public/images/6_readme.jpeg">
 
 <h3>Schritt 7</h3>
